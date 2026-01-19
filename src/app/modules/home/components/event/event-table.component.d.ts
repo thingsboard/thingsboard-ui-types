@@ -27,6 +27,9 @@ export declare class EventTableComponent implements OnInit, AfterViewInit, OnDes
     disabledEventTypes: Array<EventType | DebugEventType>;
     debugEventTypes: Array<DebugEventType>;
     hideClearEventAction: boolean;
+    private disableDebugEventActionValue;
+    get disableDebugEventAction(): boolean;
+    set disableDebugEventAction(value: boolean);
     activeValue: boolean;
     dirtyValue: boolean;
     entityIdValue: EntityId;
@@ -45,5 +48,5 @@ export declare class EventTableComponent implements OnInit, AfterViewInit, OnDes
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<EventTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EventTableComponent, "tb-event-table", never, { "tenantId": { "alias": "tenantId"; "required": false; }; "defaultEventType": { "alias": "defaultEventType"; "required": false; }; "disabledEventTypes": { "alias": "disabledEventTypes"; "required": false; }; "debugEventTypes": { "alias": "debugEventTypes"; "required": false; }; "hideClearEventAction": { "alias": "hideClearEventAction"; "required": false; }; "active": { "alias": "active"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "functionTestButtonLabel": { "alias": "functionTestButtonLabel"; "required": false; }; }, { "debugEventSelected": "debugEventSelected"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EventTableComponent, "tb-event-table", never, { "tenantId": { "alias": "tenantId"; "required": false; }; "defaultEventType": { "alias": "defaultEventType"; "required": false; }; "disabledEventTypes": { "alias": "disabledEventTypes"; "required": false; }; "debugEventTypes": { "alias": "debugEventTypes"; "required": false; }; "hideClearEventAction": { "alias": "hideClearEventAction"; "required": false; }; "disableDebugEventAction": { "alias": "disableDebugEventAction"; "required": false; }; "active": { "alias": "active"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "functionTestButtonLabel": { "alias": "functionTestButtonLabel"; "required": false; }; }, { "debugEventSelected": "debugEventSelected"; }, never, never, false, never>;
 }

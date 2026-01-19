@@ -61,6 +61,7 @@ export declare class WidgetService {
     putWidgetSettingsComponentToMap(selector: string, compType: Type<IWidgetSettingsComponent>): void;
     private widgetTypeUpdated;
     deleteWidgetInfoFromCache(fullFqn: string): void;
+    getWidgetsBundlesByIds(widgetsBundleIds: Array<string>, config?: RequestConfig): Observable<Array<WidgetsBundle>>;
     private loadWidgetsBundleCache;
     private invalidateWidgetsBundleCache;
     static ɵfac: i0.ɵɵFactoryDeclaration<WidgetService, never>;

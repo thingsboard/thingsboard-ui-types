@@ -19,6 +19,7 @@ export declare class DashboardService {
     getDashboard(dashboardId: string, config?: RequestConfig): Observable<Dashboard>;
     exportDashboard(dashboardId: string, includeResources?: boolean, config?: RequestConfig): Observable<Dashboard>;
     getDashboardInfo(dashboardId: string, config?: RequestConfig): Observable<DashboardInfo>;
+    getDashboards(dashboardIds: string[], config?: RequestConfig): Observable<Array<DashboardInfo>>;
     saveDashboard(dashboard: Dashboard, config?: RequestConfig): Observable<Dashboard>;
     deleteDashboard(dashboardId: string, config?: RequestConfig): Observable<Object>;
     assignDashboardToCustomer(customerId: string, dashboardId: string, config?: RequestConfig): Observable<Dashboard>;

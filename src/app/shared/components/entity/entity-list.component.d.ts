@@ -31,6 +31,7 @@ export declare class EntityListComponent implements ControlValueAccessor, OnInit
     syncIdsWithDB: boolean;
     inlineField: boolean;
     allowCreateNew: boolean;
+    useEntityDisplayName: boolean;
     createNew: EventEmitter<string>;
     entityInput: ElementRef<HTMLInputElement>;
     matAutocomplete: MatAutocomplete;
@@ -59,5 +60,5 @@ export declare class EntityListComponent implements ControlValueAccessor, OnInit
     private clear;
     textIsNotEmpty(text: string): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityListComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityListComponent, "tb-entity-list", never, { "entityType": { "alias": "entityType"; "required": false; }; "subType": { "alias": "subType"; "required": false; }; "labelText": { "alias": "labelText"; "required": false; }; "placeholderText": { "alias": "placeholderText"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "subscriptSizing": { "alias": "subscriptSizing"; "required": false; }; "hint": { "alias": "hint"; "required": false; }; "syncIdsWithDB": { "alias": "syncIdsWithDB"; "required": false; }; "inlineField": { "alias": "inlineField"; "required": false; }; "allowCreateNew": { "alias": "allowCreateNew"; "required": false; }; }, { "createNew": "createNew"; }, never, ["[matSuffix]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityListComponent, "tb-entity-list", never, { "entityType": { "alias": "entityType"; "required": false; }; "subType": { "alias": "subType"; "required": false; }; "labelText": { "alias": "labelText"; "required": false; }; "placeholderText": { "alias": "placeholderText"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "subscriptSizing": { "alias": "subscriptSizing"; "required": false; }; "hint": { "alias": "hint"; "required": false; }; "syncIdsWithDB": { "alias": "syncIdsWithDB"; "required": false; }; "inlineField": { "alias": "inlineField"; "required": false; }; "allowCreateNew": { "alias": "allowCreateNew"; "required": false; }; "useEntityDisplayName": { "alias": "useEntityDisplayName"; "required": false; }; }, { "createNew": "createNew"; }, never, ["[matSuffix]"], false, never>;
 }

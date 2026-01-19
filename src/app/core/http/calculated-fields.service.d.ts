@@ -2,7 +2,7 @@ import { RequestConfig } from './http-utils';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PageData } from '@shared/models/page/page-data';
-import { CalculatedField, CalculatedFieldTestScriptInputParams } from '@shared/models/calculated-field.models';
+import { CalculatedField, CalculatedFieldInfo, CalculatedFieldsQuery, CalculatedFieldTestScriptInputParams, CalculatedFieldType } from '@shared/models/calculated-field.models';
 import { PageLink } from '@shared/models/page/page-link';
 import { EntityId } from '@shared/models/id/entity-id';
 import { EntityTestScriptResult } from '@shared/models/entity.models';
@@ -14,9 +14,11 @@ export declare class CalculatedFieldsService {
     getCalculatedFieldById(calculatedFieldId: string, config?: RequestConfig): Observable<CalculatedField>;
     saveCalculatedField(calculatedField: CalculatedField, config?: RequestConfig): Observable<CalculatedField>;
     deleteCalculatedField(calculatedFieldId: string, config?: RequestConfig): Observable<boolean>;
-    getCalculatedFields({ entityType, id }: EntityId, pageLink: PageLink, config?: RequestConfig): Observable<PageData<CalculatedField>>;
+    getCalculatedFields(pageLink: PageLink, query: CalculatedFieldsQuery, config?: RequestConfig): Observable<PageData<CalculatedFieldInfo>>;
+    getCalculatedFieldsByEntityId({ entityType, id }: EntityId, pageLink: PageLink, type?: CalculatedFieldType, config?: RequestConfig): Observable<PageData<CalculatedField>>;
     testScript(inputParams: CalculatedFieldTestScriptInputParams, config?: RequestConfig): Observable<EntityTestScriptResult>;
     getLatestCalculatedFieldDebugEvent(id: string, config?: RequestConfig): Observable<CalculatedFieldEventBody>;
+    getCalculatedFieldNames(pageLink: PageLink, type: CalculatedFieldType, config?: RequestConfig): Observable<PageData<string>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldsService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<CalculatedFieldsService>;
 }

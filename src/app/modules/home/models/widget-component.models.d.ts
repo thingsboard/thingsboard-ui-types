@@ -76,6 +76,7 @@ export interface WidgetAction extends IWidgetAction {
 }
 export interface IDashboardWidget {
     updateWidgetParams(): void;
+    updateParamsFromData(detectChanges?: boolean): void;
 }
 export declare class WidgetContext {
     dashboard: IDashboardComponent;
@@ -148,6 +149,7 @@ export declare class WidgetContext {
     toastTargetId: string;
     widgetNamespace?: string;
     subscriptionApi?: WidgetSubscriptionApi;
+    widgetCssClass?: string;
     actionsApi?: WidgetActionsApi;
     activeEntityInfo?: SubscriptionEntityInfo;
     datasources?: Array<Datasource>;
@@ -359,6 +361,7 @@ export declare class WidgetContext {
     detectChanges(updateWidgetParams?: boolean): void;
     detectContainerChanges(): void;
     updateWidgetParams(): void;
+    updateParamsFromData(detectChanges?: boolean): void;
     updateAliases(aliasIds?: Array<string>): void;
     reset(): void;
     destroy(): void;

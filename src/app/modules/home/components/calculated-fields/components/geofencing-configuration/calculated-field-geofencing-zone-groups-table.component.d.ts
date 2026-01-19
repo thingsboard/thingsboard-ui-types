@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, DestroyRef, OnChanges, Renderer2, SimpleChanges, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, DestroyRef, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, ValidationErrors, Validator } from '@angular/forms';
-import { ArgumentEntityType, ArgumentType, CalculatedFieldArgument, CalculatedFieldArgumentValue, CalculatedFieldType } from '@shared/models/calculated-field.models';
+import { ArgumentEntityType, CalculatedFieldGeofencing, CalculatedFieldGeofencingValue } from '@shared/models/calculated-field.models';
 import { MatButton } from '@angular/material/button';
 import { TbPopoverService } from '@shared/components/popover.service';
 import { EntityId } from '@shared/models/id/entity-id';
@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import * as i0 from "@angular/core";
-export declare class CalculatedFieldArgumentsTableComponent implements ControlValueAccessor, Validator, OnChanges, AfterViewInit {
+export declare class CalculatedFieldGeofencingZoneGroupsTableComponent implements ControlValueAccessor, Validator, AfterViewInit {
     private fb;
     private popoverService;
     private viewContainerRef;
@@ -23,47 +23,48 @@ export declare class CalculatedFieldArgumentsTableComponent implements ControlVa
     entityId: EntityId;
     tenantId: string;
     entityName: string;
-    calculatedFieldType: CalculatedFieldType;
+    ownerId: EntityId;
+    isEditValue: boolean;
     sort: MatSort;
     errorText: string;
-    argumentsFormArray: import("@angular/forms").FormArray<import("@angular/forms").FormControl<CalculatedFieldArgumentValue>>;
+    zoneGroupsFormArray: import("@angular/forms").FormArray<import("@angular/forms").FormControl<CalculatedFieldGeofencingValue>>;
     entityNameMap: Map<string, string>;
     sortOrder: {
         direction: string;
         property: string;
     };
-    dataSource: CalculatedFieldArgumentDatasource;
+    dataSource: CalculatedFieldZoneDatasource;
+    disable: boolean;
+    readonly GeofencingReportStrategyTranslations: Map<import("@shared/models/calculated-field.models").GeofencingReportStrategy, string>;
     readonly entityTypeTranslations: Map<EntityType | import("@shared/models/entity-type.models").AliasEntityType, import("@shared/models/entity-type.models").EntityTypeTranslation>;
-    readonly ArgumentTypeTranslations: Map<ArgumentType, string>;
     readonly ArgumentEntityType: typeof ArgumentEntityType;
-    readonly ArgumentType: typeof ArgumentType;
-    readonly CalculatedFieldType: typeof CalculatedFieldType;
     readonly maxArgumentsPerCF: number;
     readonly NULL_UUID = "13814000-1dd2-11b2-8080-808080808080";
     private popoverComponent;
     private propagateChange;
     constructor(fb: FormBuilder, popoverService: TbPopoverService, viewContainerRef: ViewContainerRef, cd: ChangeDetectorRef, renderer: Renderer2, entityService: EntityService, destroyRef: DestroyRef, store: Store<AppState>);
-    ngOnChanges(changes: SimpleChanges): void;
     ngAfterViewInit(): void;
-    registerOnChange(fn: (argumentsObj: Record<string, CalculatedFieldArgument>) => void): void;
+    registerOnChange(fn: (zonesObj: Record<string, CalculatedFieldGeofencing>) => void): void;
     registerOnTouched(_: any): void;
     validate(): ValidationErrors | null;
-    onDelete($event: Event, argument: CalculatedFieldArgumentValue): void;
-    manageArgument($event: Event, matButton: MatButton, argument?: CalculatedFieldArgumentValue): void;
+    setDisabledState(isDisabled: boolean): void;
+    onDelete($event: Event, zone: CalculatedFieldGeofencingValue): void;
+    manageZone($event: Event, matButton: MatButton, zone?: CalculatedFieldGeofencingValue, readonly?: boolean): void;
     private updateDataSource;
     private updateErrorText;
-    private getArgumentsObject;
-    writeValue(argumentsObj: Record<string, CalculatedFieldArgument>): void;
+    private getZonesObject;
+    writeValue(zonesObj: Record<string, CalculatedFieldGeofencing>): void;
     getEntityDetailsPageURL(id: string, type: EntityType): string;
-    private populateArgumentsFormArray;
+    private populateZonesFormArray;
     private updateEntityNameMap;
     private fetchEntityNames;
     private getSortValue;
     private sortData;
-    static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldArgumentsTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldArgumentsTableComponent, "tb-calculated-field-arguments-table", never, { "entityId": { "alias": "entityId"; "required": false; }; "tenantId": { "alias": "tenantId"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; "calculatedFieldType": { "alias": "calculatedFieldType"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldGeofencingZoneGroupsTableComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldGeofencingZoneGroupsTableComponent, "tb-calculated-field-geofencing-zone-groups-table", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ngAcceptInputType_isEditValue: unknown;
 }
-declare class CalculatedFieldArgumentDatasource extends TbTableDatasource<CalculatedFieldArgumentValue> {
+declare class CalculatedFieldZoneDatasource extends TbTableDatasource<CalculatedFieldGeofencingValue> {
     constructor();
 }
 export {};

@@ -341,6 +341,7 @@ export declare enum NotificationType {
     ALARM_ASSIGNMENT = "ALARM_ASSIGNMENT",
     RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT = "RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT",
     ENTITIES_LIMIT = "ENTITIES_LIMIT",
+    ENTITIES_LIMIT_INCREASE_REQUEST = "ENTITIES_LIMIT_INCREASE_REQUEST",
     API_USAGE_LIMIT = "API_USAGE_LIMIT",
     NEW_PLATFORM_VERSION = "NEW_PLATFORM_VERSION",
     RULE_NODE = "RULE_NODE",
@@ -351,7 +352,6 @@ export declare enum NotificationType {
     RESOURCES_SHORTAGE = "RESOURCES_SHORTAGE"
 }
 export declare const NotificationTypeIcons: Map<NotificationType, string>;
-export declare const AlarmSeverityNotificationColors: Map<AlarmSeverity, string>;
 export declare enum ActionButtonLinkType {
     LINK = "LINK",
     DASHBOARD = "DASHBOARD"

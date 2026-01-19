@@ -30,6 +30,7 @@ import { TbPopoverService } from '@shared/components/popover.service';
 import { MatDrawer } from '@angular/material/sidenav';
 import { TbContextMenuEvent } from '@shared/models/jquery-event.models';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AdditionalDebugActionConfig } from '@home/components/entity/debug/entity-debug-settings.model';
 import * as i0 from "@angular/core";
 export declare class RuleChainPageComponent extends PageComponent implements AfterViewInit, OnInit, OnDestroy, HasDirtyFlag, ISearchableComponent, AfterViewChecked {
     protected store: Store<AppState>;
@@ -192,6 +193,9 @@ export declare class RuleChainPageComponent extends PageComponent implements Aft
         [label: string]: LinkLabel;
     }, allowCustomLabels: boolean, sourceRuleChainId: string): Observable<FcRuleEdge>;
     toggleVersionControl($event: Event, versionControlButton: MatMiniFabButton): void;
+    get additionalActionConfig(): AdditionalDebugActionConfig;
+    private switchToEventsTab;
+    private openDebugEventsDialog;
     private updateNodeErrorTooltip;
     private updateErrorTooltips;
     private displayTooltip;

@@ -12,3 +12,4 @@ export interface ExportableEntity<T extends EntityId> {
     externalId?: T;
 }
 export declare function hasIdEquals(id1: HasId, id2: HasId): boolean;
+export declare function getEntityDisplayName(entity: BaseData<EntityId>): string;

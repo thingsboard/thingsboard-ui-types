@@ -22,6 +22,7 @@ export declare class RuleChainService {
     private ruleNodeConfigComponents;
     constructor(http: HttpClient, componentDescriptorService: ComponentDescriptorService, resourcesService: ResourcesService, translate: TranslateService);
     getRuleChains(pageLink: PageLink, type?: RuleChainType, config?: RequestConfig): Observable<PageData<RuleChain>>;
+    getRuleChainsByIds(ruleChainIds: Array<string>, config?: RequestConfig): Observable<Array<RuleChain>>;
     getRuleChain(ruleChainId: string, config?: RequestConfig): Observable<RuleChain>;
     getRuleChainOutputLabels(ruleChainId: string, config?: RequestConfig): Observable<Array<string>>;
     createDefaultRuleChain(ruleChainName: string, config?: RequestConfig): Observable<RuleChain>;

@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { TbPopoverComponent } from '@shared/components/popover.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
+import { EntityType } from '@shared/models/entity-type.models';
 import * as i0 from "@angular/core";
 export declare class EntityVersionRestoreComponent extends PageComponent implements OnInit, OnDestroy {
     protected store: Store<AppState>;
@@ -26,6 +27,7 @@ export declare class EntityVersionRestoreComponent extends PageComponent impleme
     entityDataInfo: EntityDataInfo;
     restoreFormGroup: UntypedFormGroup;
     errorMessage: SafeHtml;
+    EntityType: typeof EntityType;
     versionLoadResult$: Observable<VersionLoadResult>;
     private versionLoadResultSubscription;
     constructor(store: Store<AppState>, entitiesVersionControlService: EntitiesVersionControlService, cd: ChangeDetectorRef, translate: TranslateService, sanitizer: DomSanitizer, fb: UntypedFormBuilder);

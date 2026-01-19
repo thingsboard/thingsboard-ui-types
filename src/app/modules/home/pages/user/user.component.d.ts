@@ -16,6 +16,8 @@ export declare class UserComponent extends EntityComponent<User> {
     protected cd: ChangeDetectorRef;
     protected translate: TranslateService;
     authority: typeof Authority;
+    languageList: any;
+    UnitSystems: import("@shared/models/unit.models").UnitSystem[];
     loginAsUserEnabled$: import("rxjs").Observable<boolean>;
     constructor(store: Store<AppState>, entityValue: User, entitiesTableConfigValue: EntityTableConfig<User>, fb: UntypedFormBuilder, cd: ChangeDetectorRef, translate: TranslateService);
     hideDelete(): boolean;

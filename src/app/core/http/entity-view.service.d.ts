@@ -5,6 +5,7 @@ import { PageLink } from '@shared/models/page/page-link';
 import { PageData } from '@shared/models/page/page-data';
 import { EntitySubtype } from '@app/shared/models/entity-type.models';
 import { EntityView, EntityViewInfo, EntityViewSearchQuery } from '@app/shared/models/entity-view.models';
+import { SaveEntityParams } from '@shared/models/entity.models';
 import * as i0 from "@angular/core";
 export declare class EntityViewService {
     private http;
@@ -12,8 +13,10 @@ export declare class EntityViewService {
     getTenantEntityViewInfos(pageLink: PageLink, type?: string, config?: RequestConfig): Observable<PageData<EntityViewInfo>>;
     getCustomerEntityViewInfos(customerId: string, pageLink: PageLink, type?: string, config?: RequestConfig): Observable<PageData<EntityViewInfo>>;
     getEntityView(entityViewId: string, config?: RequestConfig): Observable<EntityView>;
+    getEntityViews(entityViewIds: Array<string>, config?: RequestConfig): Observable<Array<EntityView>>;
     getEntityViewInfo(entityViewId: string, config?: RequestConfig): Observable<EntityViewInfo>;
     saveEntityView(entityView: EntityView, config?: RequestConfig): Observable<EntityView>;
+    saveEntityView(entityView: EntityView, saveParams: SaveEntityParams, config?: RequestConfig): Observable<EntityView>;
     deleteEntityView(entityViewId: string, config?: RequestConfig): Observable<Object>;
     getEntityViewTypes(config?: RequestConfig): Observable<Array<EntitySubtype>>;
     makeEntityViewPublic(entityViewId: string, config?: RequestConfig): Observable<EntityView>;

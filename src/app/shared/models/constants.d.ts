@@ -13,6 +13,7 @@ export declare const Constants: {
         itemNotFound: number;
         tooManyRequests: number;
         tooManyUpdates: number;
+        entitiesLimitExceeded: number;
         passwordViolation: number;
     };
     entryPoints: {
@@ -142,6 +143,7 @@ export declare const HelpLinks: {
         entitiesImport: string;
         rulechains: string;
         lwm2mResourceLibrary: string;
+        jsExtension: string;
         dashboards: string;
         otaUpdates: string;
         widgetTypes: string;
@@ -172,8 +174,10 @@ export declare const HelpLinks: {
         mobileQrCode: string;
         calculatedField: string;
         aiModels: string;
+        apiKeys: string;
         timewindowSettings: string;
         trendzSettings: string;
+        alarmRules: string;
     };
 };
 export interface ValueTypeData {

@@ -6,6 +6,7 @@ import { EntityAliasFilter } from '@app/shared/models/alias.models';
 import { EntityId } from '@app/shared/models/id/entity-id';
 import { TranslateService } from '@ngx-translate/core';
 import { DashboardPageLayout } from '@home/components/dashboard-page/dashboard-page.models';
+import { WidgetModelDefinition } from '@shared/models/widget/widget-model.definition';
 import * as i0 from "@angular/core";
 export declare class DashboardUtilsService {
     private utils;
@@ -18,6 +19,9 @@ export declare class DashboardUtilsService {
     validateAndUpdateWidget(widget: Widget): Widget;
     private validateAndUpdateWidgetTypeFqn;
     validateAndUpdateWidgetConfig(widgetConfig: WidgetConfig | undefined, type: widgetType): WidgetConfig;
+    validateAndUpdateWidgetConfigWithModelDefinition(widget: Widget, widgetDefinition: WidgetModelDefinition): WidgetConfig;
+    private removeTimewindowConfigIfUnused;
+    prepareWidgetForSaving(widget: Widget): Widget;
     prepareWidgetForScadaLayout(widget: Widget, isScada: boolean): Widget;
     validateAndUpdateDatasources(datasources?: Datasource[]): Datasource[];
     getWidgetDatasources(widget: Widget): Datasource[];

@@ -90,7 +90,8 @@ export declare enum HttpRequestType {
     GET = "GET",
     POST = "POST",
     PUT = "PUT",
-    DELETE = "DELETE"
+    DELETE = "DELETE",
+    PATCH = "PATCH"
 }
 export declare const ToByteStandartCharsetTypes: string[];
 export declare const ToByteStandartCharsetTypeTranslations: Map<string, string>;

@@ -61,7 +61,7 @@ export declare class ImportExportService {
     exportImage(type: ImageResourceType, key: string): void;
     importImage(): Observable<ImageResourceInfo>;
     exportCalculatedField(calculatedFieldId: string): void;
-    openCalculatedFieldImportDialog(): Observable<CalculatedField>;
+    openCalculatedFieldImportDialog(importTitle?: string, importFileLabel?: string): Observable<CalculatedField>;
     exportDashboard(dashboardId: string): void;
     importDashboard(onEditMissingAliases: editMissingAliasesFunction): Observable<Dashboard>;
     exportWidget(dashboard: Dashboard, sourceState: string, sourceLayout: DashboardLayoutId, widget: Widget, widgetTitle: string, breakpoint: BreakpointId): void;

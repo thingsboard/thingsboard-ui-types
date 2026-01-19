@@ -96,9 +96,9 @@ export interface EdgeInstructions {
     instructions: string;
 }
 export declare enum EdgeInstructionsMethod {
-    ubuntu = 0,
-    centos = 1,
-    docker = 2
+    docker = 0,
+    ubuntu = 1,
+    centos = 2
 }
 export declare const edgeVersionAttributeKey = "edgeVersion";
 export declare enum EdgeConnectionEvent {

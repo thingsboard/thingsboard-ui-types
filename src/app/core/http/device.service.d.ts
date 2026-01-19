@@ -3,11 +3,12 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PageLink } from '@shared/models/page/page-link';
 import { PageData } from '@shared/models/page/page-data';
-import { ClaimRequest, ClaimResult, Device, DeviceCredentials, DeviceInfo, DeviceInfoQuery, DeviceSearchQuery, PublishTelemetryCommand } from '@shared/models/device.models';
+import { ClaimRequest, ClaimResult, Device, DeviceCredentials, DeviceInfo, DeviceInfoQuery, DeviceSearchQuery, PublishTelemetryCommand, SaveDeviceParams } from '@shared/models/device.models';
 import { EntitySubtype } from '@shared/models/entity-type.models';
 import { BulkImportRequest, BulkImportResult } from '@shared/import-export/import-export.models';
 import { PersistentRpc, RpcStatus } from '@shared/models/rpc.models';
 import { ResourcesService } from '@core/services/resources.service';
+import { SaveEntityParams } from '@shared/models/entity.models';
 import * as i0 from "@angular/core";
 export declare class DeviceService {
     private http;
@@ -22,7 +23,9 @@ export declare class DeviceService {
     getDevices(deviceIds: Array<string>, config?: RequestConfig): Observable<Array<Device>>;
     getDeviceInfo(deviceId: string, config?: RequestConfig): Observable<DeviceInfo>;
     saveDevice(device: Device, config?: RequestConfig): Observable<Device>;
+    saveDevice(device: Device, saveParams?: SaveDeviceParams, config?: RequestConfig): Observable<Device>;
     saveDeviceWithCredentials(device: Device, credentials: DeviceCredentials, config?: RequestConfig): Observable<Device>;
+    saveDeviceWithCredentials(device: Device, credentials: DeviceCredentials, saveParams: SaveEntityParams, config?: RequestConfig): Observable<Device>;
     deleteDevice(deviceId: string, config?: RequestConfig): Observable<Object>;
     getDeviceTypes(config?: RequestConfig): Observable<Array<EntitySubtype>>;
     getDeviceCredentials(deviceId: string, sync?: boolean, config?: RequestConfig): Observable<DeviceCredentials>;
@@ -45,6 +48,11 @@ export declare class DeviceService {
     bulkImportDevices(entitiesData: BulkImportRequest, config?: RequestConfig): Observable<BulkImportResult>;
     getDevicePublishTelemetryCommands(deviceId: string, config?: RequestConfig): Observable<PublishTelemetryCommand>;
     downloadGatewayDockerComposeFile(deviceId: string): Observable<any>;
+    rebootDevice(deviceId: string, isBootstrapServer: boolean, config?: RequestConfig): Observable<{
+        result: string;
+        msg: string;
+    }>;
+    private rebootTrigger;
     static ɵfac: i0.ɵɵFactoryDeclaration<DeviceService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<DeviceService>;
 }

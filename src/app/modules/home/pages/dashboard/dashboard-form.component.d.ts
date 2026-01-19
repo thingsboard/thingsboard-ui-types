@@ -4,12 +4,13 @@ import { AppState } from '@core/core.state';
 import { EntityComponent } from '../../components/entity/entity.component';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Dashboard } from '@shared/models/dashboard.models';
+import { Dashboard, DashboardInfo } from '@shared/models/dashboard.models';
 import { DashboardService } from '@core/http/dashboard.service';
 import { EntityTableConfig } from '@home/models/entity/entities-table-config.models';
 import { EntityType } from '@shared/models/entity-type.models';
+import { PageLink } from "@shared/models/page/page-link";
 import * as i0 from "@angular/core";
-export declare class DashboardFormComponent extends EntityComponent<Dashboard> {
+export declare class DashboardFormComponent extends EntityComponent<Dashboard, PageLink, DashboardInfo> {
     protected store: Store<AppState>;
     protected translate: TranslateService;
     private dashboardService;

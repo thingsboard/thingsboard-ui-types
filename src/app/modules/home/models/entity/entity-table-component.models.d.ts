@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { EntityAction } from '@home/models/entity/entity-component.models';
 import { CellActionDescriptor, EntityActionTableColumn, EntityColumn, EntityTableColumn, EntityTableConfig, GroupActionDescriptor, HeaderActionDescriptor } from '@home/models/entity/entities-table-config.models';
 import { ActivatedRoute } from '@angular/router';
+import type { EntityDetailsPanelComponent } from '@home/components/entity/entity-details-panel.component';
 export type EntitiesTableAction = 'add';
 export interface IEntitiesTableComponent {
     entitiesTableConfig: EntityTableConfig<BaseData<HasId>>;
@@ -41,10 +42,11 @@ export interface IEntitiesTableComponent {
     paginator: MatPaginator;
     sort: MatSort;
     route: ActivatedRoute;
+    entityDetailsPanel: EntityDetailsPanelComponent;
     viewContainerRef: ViewContainerRef;
     addEnabled(): boolean;
     clearSelection(): void;
-    updateData(closeDetails?: boolean): void;
+    updateData(closeDetails?: boolean, reloadEntity?: boolean): void;
     onRowClick($event: Event, entity: any): void;
     toggleEntityDetails($event: Event, entity: any): any;
     addEntity($event: Event): void;

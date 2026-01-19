@@ -11,6 +11,8 @@ export declare class DeviceProfileTabsComponent extends EntityTabsComponent<Devi
     deviceTransportTypeTranslations: Map<import("@shared/models/device.models").TransportType, string>;
     deviceTransportTypeHints: Map<import("@shared/models/device.models").TransportType, string>;
     isTransportTypeChanged: boolean;
+    hasOldRules: boolean;
+    alarmRulesOldVersion: boolean;
     constructor(store: Store<AppState>, destroyRef: DestroyRef);
     ngOnInit(): void;
     protected setEntity(entity: DeviceProfile): void;

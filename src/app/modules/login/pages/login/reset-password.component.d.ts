@@ -1,27 +1,20 @@
-import { OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@core/auth/auth.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '@core/core.state';
-import { PageComponent } from '@shared/components/page.component';
-import { UntypedFormBuilder } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { UserPasswordPolicy } from '@shared/models/settings.models';
 import * as i0 from "@angular/core";
-export declare class ResetPasswordComponent extends PageComponent implements OnInit, OnDestroy {
-    protected store: Store<AppState>;
+export declare class ResetPasswordComponent {
     private route;
     private router;
     private authService;
-    private translate;
-    fb: UntypedFormBuilder;
+    private fb;
     isExpiredPassword: boolean;
-    resetToken: string;
-    sub: Subscription;
-    resetPassword: import("@angular/forms").UntypedFormGroup;
-    constructor(store: Store<AppState>, route: ActivatedRoute, router: Router, authService: AuthService, translate: TranslateService, fb: UntypedFormBuilder);
-    ngOnInit(): void;
-    ngOnDestroy(): void;
+    isLoading: boolean;
+    resetPassword: FormGroup;
+    passwordPolicy: UserPasswordPolicy;
+    private resetToken;
+    constructor(route: ActivatedRoute, router: Router, authService: AuthService, fb: FormBuilder);
+    private buildResetPasswordForm;
     onResetPassword(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ResetPasswordComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<ResetPasswordComponent, "tb-reset-password", never, {}, {}, never, never, false, never>;

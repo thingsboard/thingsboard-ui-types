@@ -131,8 +131,8 @@ export interface DashboardConfiguration {
     states?: {
         [id: string]: DashboardState;
     };
-    entityAliases?: EntityAliases;
-    filters?: Filters;
+    entityAliases: EntityAliases;
+    filters: Filters;
     [key: string]: any;
 }
 export interface Dashboard extends DashboardInfo {
