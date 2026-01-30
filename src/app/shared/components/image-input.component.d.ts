@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { ControlValueAccessor } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FlowDirective } from '@flowjs/ngx-flow';
+import { FlowConfig } from '@flowjs/ngx-flow';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { UtilsService } from '@core/services/utils.service';
 import { DialogService } from '@core/services/dialog.service';
@@ -40,7 +40,7 @@ export declare class ImageInputComponent extends PageComponent implements AfterV
     imageUrl: string;
     file: File;
     safeImageUrl: SafeUrl;
-    flow: FlowDirective;
+    flow: FlowConfig;
     autoUploadSubscription: Subscription;
     private propagateChange;
     constructor(store: Store<AppState>, utils: UtilsService, sanitizer: DomSanitizer, imagePipe: ImagePipe, dialog: DialogService, translate: TranslateService, fileSize: FileSizePipe, cd: ChangeDetectorRef);

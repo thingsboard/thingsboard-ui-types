@@ -26,5 +26,5 @@ export declare abstract class TemplateConfiguration<T, R = any> extends DialogCo
     atLeastOne(): (group: FormGroup) => ValidationErrors | null;
     protected getNotificationTemplateValue(): NotificationTemplate;
     static ɵfac: i0.ɵɵFactoryDeclaration<TemplateConfiguration<any, any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<TemplateConfiguration<any, any>, never, never, {}, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<TemplateConfiguration<any, any>, never, never, {}, {}, never, never, true, never>;
 }

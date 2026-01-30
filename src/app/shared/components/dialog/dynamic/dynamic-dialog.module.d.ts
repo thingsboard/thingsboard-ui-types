@@ -7,7 +7,7 @@ import * as i1 from "@angular/cdk/overlay";
 import * as i2 from "@angular/cdk/dialog";
 import * as i3 from "@angular/material/dialog";
 export declare const DYNAMIC_MAT_DIALOG_PROVIDERS: (typeof DynamicOverlayContainer | typeof DynamicOverlay | typeof DynamicMatDialog | typeof DynamicDialog | {
-    provide: import("@angular/core").InjectionToken<DialogConfig<unknown, unknown, import("@angular/cdk/portal").BasePortalOutlet>>;
+    provide: import("@angular/core").InjectionToken<DialogConfig<unknown, unknown, import("@angular/cdk/portal-directives.d").BasePortalOutlet>>;
     useValue: {
         viewContainerRef?: import("@angular/core").ViewContainerRef;
         injector?: import("@angular/core").Injector;
@@ -17,30 +17,31 @@ export declare const DYNAMIC_MAT_DIALOG_PROVIDERS: (typeof DynamicOverlayContain
         hasBackdrop?: boolean;
         backdropClass?: string | string[];
         disableClose?: boolean;
+        closePredicate?: <Result = unknown, Component = unknown, Config extends DialogConfig = DialogConfig>(result: Result | undefined, config: Config, componentInstance: Component | null) => boolean;
         width?: string;
         height?: string;
         minWidth?: number | string;
         minHeight?: number | string;
         maxWidth?: number | string;
         maxHeight?: number | string;
-        positionStrategy?: import("@angular/cdk/overlay").PositionStrategy;
+        positionStrategy?: import("@angular/cdk/overlay-module.d").PositionStrategy;
         data?: unknown;
-        direction?: import("@angular/cdk/bidi").Direction;
+        direction?: import("@angular/cdk/bidi-module.d").Direction;
         ariaDescribedBy?: string | null;
         ariaLabelledBy?: string | null;
         ariaLabel?: string | null;
         ariaModal?: boolean;
         autoFocus?: import("@angular/cdk/dialog").AutoFocusTarget | string | boolean;
         restoreFocus?: boolean | string | HTMLElement;
-        scrollStrategy?: import("@angular/cdk/overlay").ScrollStrategy;
+        scrollStrategy?: import("@angular/cdk/overlay-module.d").ScrollStrategy;
         closeOnNavigation?: boolean;
         closeOnDestroy?: boolean;
         closeOnOverlayDetachments?: boolean;
-        componentFactoryResolver?: import("@angular/core").ComponentFactoryResolver;
-        providers?: import("@angular/core").StaticProvider[] | ((dialogRef: unknown, config: DialogConfig<unknown, unknown, import("@angular/cdk/portal").BasePortalOutlet>, container: import("@angular/cdk/portal").BasePortalOutlet) => import("@angular/core").StaticProvider[]);
-        container?: import("@angular/core").Type<import("@angular/cdk/portal").BasePortalOutlet> | {
-            type: import("@angular/core").Type<import("@angular/cdk/portal").BasePortalOutlet>;
-            providers: (config: DialogConfig<unknown, unknown, import("@angular/cdk/portal").BasePortalOutlet>) => import("@angular/core").StaticProvider[];
+        disableAnimations?: boolean;
+        providers?: import("@angular/core").StaticProvider[] | ((dialogRef: unknown, config: DialogConfig<unknown, unknown, import("@angular/cdk/portal-directives.d").BasePortalOutlet>, container: import("@angular/cdk/portal-directives.d").BasePortalOutlet) => import("@angular/core").StaticProvider[]);
+        container?: import("@angular/core").Type<import("@angular/cdk/portal-directives.d").BasePortalOutlet> | {
+            type: import("@angular/core").Type<import("@angular/cdk/portal-directives.d").BasePortalOutlet>;
+            providers: (config: DialogConfig<unknown, unknown, import("@angular/cdk/portal-directives.d").BasePortalOutlet>) => import("@angular/core").StaticProvider[];
         };
         templateContext?: Record<string, any> | (() => Record<string, any>);
     };
