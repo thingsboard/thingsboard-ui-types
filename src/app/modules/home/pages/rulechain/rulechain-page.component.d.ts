@@ -132,6 +132,7 @@ export declare class RuleChainPageComponent extends PageComponent implements Aft
         rightConnectorClass: string;
         canvasResizeThreshold: number;
         canvasResizeStep: number;
+        noteClass: string;
     };
     updateBreadcrumbs: EventEmitter<any>;
     private destroy$;

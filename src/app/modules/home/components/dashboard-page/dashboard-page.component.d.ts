@@ -25,7 +25,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { DashboardWidgetSelectComponent } from '@home/components/dashboard-page/dashboard-widget-select.component';
 import { MobileService } from '@core/services/mobile.service';
 import { IAliasController } from '@core/api/widget-api.models';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { TbPopoverService } from '@shared/components/popover.service';
 import { TbPopoverComponent } from '@shared/components/popover.component';
 import { HasDirtyFlag } from '@core/guards/confirm-on-exit.guard';
@@ -225,7 +225,7 @@ export declare class DashboardPageComponent extends PageComponent implements IDa
     clearSelectedWidgetBundle(): void;
     editWidgetsTypesToDisplay($event: Event): void;
     updateDashboardImage($event: Event): void;
-    toggleVersionControl($event: Event, versionControlButton: MatButton): void;
+    toggleVersionControl($event: Event, versionControlButton: MatButton | MatIconButton): void;
     get showMainLayoutFiller(): boolean;
     get currentBreakpointValue(): string;
     private parseBreakpointsResponse;

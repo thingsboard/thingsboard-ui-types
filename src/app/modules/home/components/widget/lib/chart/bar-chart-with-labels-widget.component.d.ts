@@ -33,6 +33,7 @@ export declare class BarChartWithLabelsWidgetComponent implements OnInit, OnDest
     ngOnDestroy(): void;
     onInit(): void;
     onDataUpdated(): void;
+    onLatestDataUpdated(): void;
     onLegendKeyEnter(key: DataKey): void;
     onLegendKeyLeave(key: DataKey): void;
     toggleLegendKey(key: DataKey): void;
