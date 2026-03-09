@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { ControlValueAccessor } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FlowDirective } from '@flowjs/ngx-flow';
+import { FlowConfig } from '@flowjs/ngx-flow';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from '@core/services/utils.service';
 import { DialogService } from '@core/services/dialog.service';
@@ -38,10 +38,12 @@ export declare class FileInputComponent extends PageComponent implements AfterVi
     set multipleFile(value: boolean);
     get multipleFile(): boolean;
     fileNameChanged: EventEmitter<string | string[]>;
+    mediaTypeChanged: EventEmitter<string>;
     fileName: string | string[];
     fileContent: any;
     files: File[];
-    flow: FlowDirective;
+    mediaType: string;
+    flow: FlowConfig;
     flowInput: ElementRef;
     autoUploadSubscription: Subscription;
     private propagateChange;
@@ -60,5 +62,5 @@ export declare class FileInputComponent extends PageComponent implements AfterVi
     clearFile(): void;
     private updateMultipleFileMode;
     static ɵfac: i0.ɵɵFactoryDeclaration<FileInputComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<FileInputComponent, "tb-file-input", never, { "label": { "alias": "label"; "required": false; }; "hint": { "alias": "hint"; "required": false; }; "accept": { "alias": "accept"; "required": false; }; "noFileText": { "alias": "noFileText"; "required": false; }; "inputId": { "alias": "inputId"; "required": false; }; "allowedExtensions": { "alias": "allowedExtensions"; "required": false; }; "dropLabel": { "alias": "dropLabel"; "required": false; }; "maxSizeByte": { "alias": "maxSizeByte"; "required": false; }; "contentConvertFunction": { "alias": "contentConvertFunction"; "required": false; }; "required": { "alias": "required"; "required": false; }; "requiredAsError": { "alias": "requiredAsError"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "existingFileName": { "alias": "existingFileName"; "required": false; }; "readAsBinary": { "alias": "readAsBinary"; "required": false; }; "workFromFileObj": { "alias": "workFromFileObj"; "required": false; }; "asButton": { "alias": "asButton"; "required": false; }; "uploadButtonClass": { "alias": "uploadButtonClass"; "required": false; }; "uploadButtonText": { "alias": "uploadButtonText"; "required": false; }; "multipleFile": { "alias": "multipleFile"; "required": false; }; }, { "fileNameChanged": "fileNameChanged"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<FileInputComponent, "tb-file-input", never, { "label": { "alias": "label"; "required": false; }; "hint": { "alias": "hint"; "required": false; }; "accept": { "alias": "accept"; "required": false; }; "noFileText": { "alias": "noFileText"; "required": false; }; "inputId": { "alias": "inputId"; "required": false; }; "allowedExtensions": { "alias": "allowedExtensions"; "required": false; }; "dropLabel": { "alias": "dropLabel"; "required": false; }; "maxSizeByte": { "alias": "maxSizeByte"; "required": false; }; "contentConvertFunction": { "alias": "contentConvertFunction"; "required": false; }; "required": { "alias": "required"; "required": false; }; "requiredAsError": { "alias": "requiredAsError"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "existingFileName": { "alias": "existingFileName"; "required": false; }; "readAsBinary": { "alias": "readAsBinary"; "required": false; }; "workFromFileObj": { "alias": "workFromFileObj"; "required": false; }; "asButton": { "alias": "asButton"; "required": false; }; "uploadButtonClass": { "alias": "uploadButtonClass"; "required": false; }; "uploadButtonText": { "alias": "uploadButtonText"; "required": false; }; "multipleFile": { "alias": "multipleFile"; "required": false; }; }, { "fileNameChanged": "fileNameChanged"; "mediaTypeChanged": "mediaTypeChanged"; }, never, never, false, never>;
 }

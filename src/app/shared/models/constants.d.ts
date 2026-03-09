@@ -77,7 +77,13 @@ export declare const HelpLinks: {
         ruleNodeTenantAttributes: string;
         ruleNodeTenantDetails: string;
         ruleNodeChangeOriginator: string;
+        ruleNodeCopyKeyValuePairs: string;
+        ruleNodeDeduplication: string;
+        ruleNodeDeleteKeyValuePairs: string;
+        ruleNodeJsonPath: string;
+        ruleNodeRenameKeys: string;
         ruleNodeTransformMsg: string;
+        ruleNodeSplitArrayMsg: string;
         ruleNodeMsgToEmail: string;
         ruleNodeAssignToCustomer: string;
         ruleNodeUnassignFromCustomer: string;
@@ -108,6 +114,7 @@ export declare const HelpLinks: {
         ruleNodeKafka: string;
         ruleNodeMqtt: string;
         ruleNodeAzureIotHub: string;
+        ruleNodeGcpPubSub: string;
         ruleNodeRabbitMq: string;
         ruleNodeRestApiCall: string;
         ruleNodeSendEmail: string;

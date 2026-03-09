@@ -6,6 +6,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { SubscriptionEntityInfo } from '@core/api/widget-api.models';
 import { CompiledTbFunction, GenericFunction, TbFunction } from '@shared/models/js-function.models';
+import { DomSanitizer } from '@angular/platform-browser';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export declare function onParentScrollOrWindowResize(el: Node): Observable<Event>;
 export declare function isLocalUrl(url: string): boolean;
 export declare function animatedScroll(element: HTMLElement, scrollTop: number, delay?: number): void;
@@ -77,7 +79,7 @@ export declare function validateEntityId(entityId: EntityId | null): boolean;
 export declare function isMobileApp(): boolean;
 export declare function randomAlphanumeric(length: number): string;
 export declare function getEntityDetailsPageURL(id: string, entityType: EntityType): string;
-export declare function parseHttpErrorMessage(errorResponse: HttpErrorResponse, translate: TranslateService, responseType?: string): {
+export declare function parseHttpErrorMessage(errorResponse: HttpErrorResponse, translate: TranslateService, responseType?: string, sanitizer?: DomSanitizer): {
     message: string;
     timeout: number;
 };
@@ -89,3 +91,6 @@ export declare const isFirefox: () => boolean;
 export declare const camelCase: (str: string) => string;
 export declare const convertKeysToCamelCase: (obj: Record<string, any>) => Record<string, any>;
 export declare const unwrapModule: (module: any) => any;
+export declare const trimDefaultValues: (input: Record<string, any>, defaults: Record<string, any>) => Record<string, any>;
+export declare const validateEmail: (control: AbstractControl) => ValidationErrors | null;
+export declare const objectRequired: () => ValidatorFn;
