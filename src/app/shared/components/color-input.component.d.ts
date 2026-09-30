@@ -3,14 +3,13 @@ import { PageComponent } from '@shared/components/page.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@core/services/dialog.service';
 import { TbPopoverService } from '@shared/components/popover.service';
+import { MatFormFieldAppearance, SubscriptSizing } from '@angular/material/form-field';
 import * as i0 from "@angular/core";
 export declare class ColorInputComponent extends PageComponent implements OnInit, ControlValueAccessor {
     protected store: Store<AppState>;
     private dialogs;
-    private translate;
     private popoverService;
     private renderer;
     private viewContainerRef;
@@ -22,8 +21,16 @@ export declare class ColorInputComponent extends PageComponent implements OnInit
     label: string;
     requiredText: string;
     colorClearButton: boolean;
+    colorClearPicker: boolean;
+    useThemePalette: boolean;
+    disableAlpha: boolean;
     openOnInput: boolean;
     noBorder: boolean;
+    palettePreview: boolean;
+    pickerButtonIcon: string;
+    defaultColor: string;
+    appearance: MatFormFieldAppearance;
+    subscriptSizing: SubscriptSizing;
     private requiredValue;
     get required(): boolean;
     set required(value: boolean);
@@ -32,7 +39,7 @@ export declare class ColorInputComponent extends PageComponent implements OnInit
     private modelValue;
     private propagateChange;
     colorFormGroup: UntypedFormGroup;
-    constructor(store: Store<AppState>, dialogs: DialogService, translate: TranslateService, popoverService: TbPopoverService, renderer: Renderer2, viewContainerRef: ViewContainerRef, fb: UntypedFormBuilder, cd: ChangeDetectorRef, destroyRef: DestroyRef);
+    constructor(store: Store<AppState>, dialogs: DialogService, popoverService: TbPopoverService, renderer: Renderer2, viewContainerRef: ViewContainerRef, fb: UntypedFormBuilder, cd: ChangeDetectorRef, destroyRef: DestroyRef);
     ngOnInit(): void;
     updateValidators(): void;
     registerOnChange(fn: any): void;
@@ -44,5 +51,5 @@ export declare class ColorInputComponent extends PageComponent implements OnInit
     openColorPickerPopup($event: Event, element?: ElementRef): void;
     clear(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ColorInputComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<ColorInputComponent, "tb-color-input", never, { "asBoxInput": { "alias": "asBoxInput"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "label": { "alias": "label"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "colorClearButton": { "alias": "colorClearButton"; "required": false; }; "openOnInput": { "alias": "openOnInput"; "required": false; }; "noBorder": { "alias": "noBorder"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ColorInputComponent, "tb-color-input", never, { "asBoxInput": { "alias": "asBoxInput"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "label": { "alias": "label"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "colorClearButton": { "alias": "colorClearButton"; "required": false; }; "colorClearPicker": { "alias": "colorClearPicker"; "required": false; }; "useThemePalette": { "alias": "useThemePalette"; "required": false; }; "disableAlpha": { "alias": "disableAlpha"; "required": false; }; "openOnInput": { "alias": "openOnInput"; "required": false; }; "noBorder": { "alias": "noBorder"; "required": false; }; "palettePreview": { "alias": "palettePreview"; "required": false; }; "pickerButtonIcon": { "alias": "pickerButtonIcon"; "required": false; }; "defaultColor": { "alias": "defaultColor"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "subscriptSizing": { "alias": "subscriptSizing"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
 }

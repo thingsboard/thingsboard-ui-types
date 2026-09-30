@@ -7,10 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { EntityId } from '@shared/models/id/entity-id';
 import { EntityService } from '@core/http/entity.service';
 import { TruncatePipe } from '@shared/pipe/truncate.pipe';
-import { NotificationTemplate, NotificationType } from '@shared/models/notification.models';
+import { NotificationDeliveryMethod, NotificationTemplate, NotificationType } from '@shared/models/notification.models';
 import { NotificationService } from '@core/http/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import * as i0 from "@angular/core";
 export declare class TemplateAutocompleteComponent implements ControlValueAccessor, OnInit {
     private store;
@@ -20,11 +21,12 @@ export declare class TemplateAutocompleteComponent implements ControlValueAccess
     private notificationService;
     private fb;
     private dialog;
-    notificationDeliveryMethodInfoMap: Map<import("@shared/models/notification.models").NotificationDeliveryMethod, import("@shared/models/notification.models").NotificationDeliveryMethodInfo>;
+    notificationDeliveryMethodInfoMap: Map<NotificationDeliveryMethod, import("@shared/models/notification.models").NotificationDeliveryMethodInfo>;
     selectTemplateFormGroup: FormGroup;
     required: boolean;
     allowCreate: boolean;
     allowEdit: boolean;
+    appearance: MatFormFieldAppearance;
     disabled: boolean;
     private notificationTypeValue;
     get notificationTypes(): NotificationType;
@@ -52,6 +54,7 @@ export declare class TemplateAutocompleteComponent implements ControlValueAccess
     private updateView;
     private fetchTemplate;
     private reset;
+    getNotificationDeliveryMethodInfoMap(key: string): import("@shared/models/notification.models").NotificationDeliveryMethodInfo;
     static ɵfac: i0.ɵɵFactoryDeclaration<TemplateAutocompleteComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<TemplateAutocompleteComponent, "tb-template-autocomplete", never, { "required": { "alias": "required"; "required": false; }; "allowCreate": { "alias": "allowCreate"; "required": false; }; "allowEdit": { "alias": "allowEdit"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "notificationTypes": { "alias": "notificationTypes"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<TemplateAutocompleteComponent, "tb-template-autocomplete", never, { "required": { "alias": "required"; "required": false; }; "allowCreate": { "alias": "allowCreate"; "required": false; }; "allowEdit": { "alias": "allowEdit"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "notificationTypes": { "alias": "notificationTypes"; "required": false; }; }, {}, never, never, false, never>;
 }

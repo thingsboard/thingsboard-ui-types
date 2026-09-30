@@ -1,4 +1,4 @@
-import { BaseData, ExportableEntity } from '@shared/models/base-data';
+import { BaseData, ExportableEntity, GroupEntityInfo } from '@shared/models/base-data';
 import { AssetId } from './id/asset-id';
 import { TenantId } from '@shared/models/id/tenant-id';
 import { CustomerId } from '@shared/models/id/customer-id';
@@ -32,11 +32,7 @@ export interface Asset extends BaseData<AssetId>, HasTenantId, HasVersion, Expor
     assetProfileId?: AssetProfileId;
     additionalInfo?: any;
 }
-export interface AssetInfo extends Asset {
-    customerTitle: string;
-    customerIsPublic: boolean;
-    assetProfileName: string;
-}
+export type AssetInfo = Asset & GroupEntityInfo<AssetId>;
 export interface AssetSearchQuery extends EntitySearchQuery {
     assetTypes: Array<string>;
 }

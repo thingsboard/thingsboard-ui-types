@@ -17,12 +17,15 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { TbPopoverComponent } from '@shared/components/popover.component';
 import { AdminService } from '@core/http/admin.service';
 import { FormBuilder } from '@angular/forms';
+import { EntityType } from '@app/shared/models/entity-type.models';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class EntityVersionsTableComponent extends PageComponent implements OnInit, AfterViewInit, OnDestroy {
     protected store: Store<AppState>;
     private entitiesVersionControlService;
     private adminService;
     private popoverService;
+    private userPermissionsService;
     private renderer;
     private cd;
     private viewContainerRef;
@@ -43,6 +46,7 @@ export declare class EntityVersionsTableComponent extends PageComponent implemen
     dirtyValue: boolean;
     externalEntityIdValue: EntityId;
     viewsInited: boolean;
+    readonly: boolean;
     isReadOnly: Observable<boolean>;
     textSearch: import("@angular/forms").FormControl<string>;
     private componentResize$;
@@ -50,12 +54,13 @@ export declare class EntityVersionsTableComponent extends PageComponent implemen
     set active(active: boolean);
     set externalEntityId(externalEntityId: EntityId);
     entityId: EntityId;
+    groupType: EntityType;
     entityName: string;
     versionRestored: EventEmitter<void>;
     searchInputField: ElementRef;
     paginator: MatPaginator;
     sort: MatSort;
-    constructor(store: Store<AppState>, entitiesVersionControlService: EntitiesVersionControlService, adminService: AdminService, popoverService: TbPopoverService, renderer: Renderer2, cd: ChangeDetectorRef, viewContainerRef: ViewContainerRef, elementRef: ElementRef, fb: FormBuilder, zone: NgZone);
+    constructor(store: Store<AppState>, entitiesVersionControlService: EntitiesVersionControlService, adminService: AdminService, popoverService: TbPopoverService, userPermissionsService: UserPermissionsService, renderer: Renderer2, cd: ChangeDetectorRef, viewContainerRef: ViewContainerRef, elementRef: ElementRef, fb: FormBuilder, zone: NgZone);
     ngOnInit(): void;
     ngOnDestroy(): void;
     branchChanged(newBranch: string): void;
@@ -72,7 +77,7 @@ export declare class EntityVersionsTableComponent extends PageComponent implemen
     updateData(): void;
     private resetSortAndFilter;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityVersionsTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionsTableComponent, "tb-entity-versions-table", never, { "singleEntityMode": { "alias": "singleEntityMode"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; "onBeforeCreateVersion": { "alias": "onBeforeCreateVersion"; "required": false; }; "active": { "alias": "active"; "required": false; }; "externalEntityId": { "alias": "externalEntityId"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; }, { "versionRestored": "versionRestored"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionsTableComponent, "tb-entity-versions-table", never, { "singleEntityMode": { "alias": "singleEntityMode"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; "onBeforeCreateVersion": { "alias": "onBeforeCreateVersion"; "required": false; }; "active": { "alias": "active"; "required": false; }; "externalEntityId": { "alias": "externalEntityId"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "groupType": { "alias": "groupType"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; }, { "versionRestored": "versionRestored"; }, never, never, false, never>;
 }
 declare class EntityVersionsDatasource implements DataSource<EntityVersion> {
     private entitiesVersionControlService;
@@ -83,8 +88,8 @@ declare class EntityVersionsDatasource implements DataSource<EntityVersion> {
     constructor(entitiesVersionControlService: EntitiesVersionControlService);
     connect(collectionViewer: CollectionViewer): Observable<EntityVersion[] | ReadonlyArray<EntityVersion>>;
     disconnect(collectionViewer: CollectionViewer): void;
-    loadEntityVersions(singleEntityMode: boolean, branch: string, externalEntityId: EntityId, pageLink: PageLink): Observable<PageData<EntityVersion>>;
-    fetchEntityVersions(singleEntityMode: boolean, branch: string, externalEntityId: EntityId, pageLink: PageLink): Observable<PageData<EntityVersion>>;
+    loadEntityVersions(singleEntityMode: boolean, branch: string, externalEntityId: EntityId, internalEntityId: EntityId, pageLink: PageLink): Observable<PageData<EntityVersion>>;
+    fetchEntityVersions(singleEntityMode: boolean, branch: string, externalEntityId: EntityId, internalEntityId: EntityId, pageLink: PageLink): Observable<PageData<EntityVersion>>;
     isEmpty(): Observable<boolean>;
     total(): Observable<number>;
 }

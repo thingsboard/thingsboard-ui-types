@@ -13,8 +13,11 @@ import { CalculatedField, CalculatedFieldEventArguments, CalculatedFieldInfo, Ca
 import { ImportExportService } from '@shared/import-export/import-export.service';
 import { EntityDebugSettingsService } from '@home/components/entity/debug/entity-debug-settings.service';
 import { DatePipe } from '@angular/common';
+import { TbPopoverService } from '@shared/components/popover.service';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { UtilsService } from "@core/services/utils.service";
 import { Router } from '@angular/router';
+import { IotHubActionsService } from '@home/components/iot-hub/iot-hub-actions.service';
 export type CalculatedFieldsTableEntity = CalculatedField | CalculatedFieldInfo;
 export declare class CalculatedFieldsTableConfig extends EntityTableConfig<CalculatedFieldsTableEntity> {
     private calculatedFieldsService;
@@ -31,6 +34,11 @@ export declare class CalculatedFieldsTableConfig extends EntityTableConfig<Calcu
     private entityDebugSettingsService;
     private utilsService;
     private router;
+    private readonly;
+    private hideClearEventAction;
+    private popoverService;
+    private userPermissionsService;
+    private iotHubActions;
     pageMode: boolean;
     readonly tenantId: string;
     additionalDebugActionConfig: {
@@ -38,19 +46,22 @@ export declare class CalculatedFieldsTableConfig extends EntityTableConfig<Calcu
         action: (calculatedField: CalculatedFieldsTableEntity, openCalculatedFieldEdit?: boolean, afterCloseCallback?: (expression: string) => void) => any;
     };
     calculatedFieldFilterConfig: CalculatedFieldsQuery;
-    constructor(calculatedFieldsService: CalculatedFieldsService, translate: TranslateService, dialog: MatDialog, datePipe: DatePipe, entityId: EntityId, store: Store<AppState>, destroyRef: DestroyRef, renderer: Renderer2, entityName: string, ownerId: EntityId, importExportService: ImportExportService, entityDebugSettingsService: EntityDebugSettingsService, utilsService: UtilsService, router: Router, pageMode?: boolean);
+    constructor(calculatedFieldsService: CalculatedFieldsService, translate: TranslateService, dialog: MatDialog, datePipe: DatePipe, entityId: EntityId, store: Store<AppState>, destroyRef: DestroyRef, renderer: Renderer2, entityName: string, ownerId: EntityId, importExportService: ImportExportService, entityDebugSettingsService: EntityDebugSettingsService, utilsService: UtilsService, router: Router, readonly: boolean, hideClearEventAction: boolean, popoverService: TbPopoverService, userPermissionsService: UserPermissionsService, iotHubActions: IotHubActionsService, pageMode?: boolean);
     fetchCalculatedFields(pageLink: PageLink): Observable<PageData<CalculatedFieldsTableEntity>>;
     private onOpenDebugConfig;
     private openDebugTab;
     private editCalculatedField;
     private getCalculatedFieldDialog;
+    private allowWritePermission;
     private openDebugEventsDialog;
     private exportCalculatedField;
     private copyCalculatedField;
+    private addCalculatedFieldFromIotHub;
     private importCalculatedField;
     private updateImportedCalculatedField;
     private onDebugConfigChanged;
     getTestScriptDialog(calculatedField: CalculatedFieldsTableEntity, argumentsObj?: CalculatedFieldEventArguments, openCalculatedFieldEdit?: boolean, expression?: string): Observable<string>;
     private openCalculatedField;
     private onCFAction;
+    private openReprocessing;
 }

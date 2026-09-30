@@ -11,6 +11,7 @@ export declare enum SmtpProtocol {
     SMTPS = "smtps"
 }
 export interface MailServerSettings {
+    useSystemMailSettings: boolean;
     showChangePassword?: boolean;
     mailFrom: string;
     smtpProtocol: SmtpProtocol;
@@ -69,6 +70,26 @@ export interface DeviceConnectivityInfo {
     port: number;
 }
 export type DeviceConnectivitySettings = Record<DeviceConnectivityProtocol, DeviceConnectivityInfo>;
+export declare enum MailTemplate {
+    test = "test",
+    activation = "activation",
+    accountActivated = "accountActivated",
+    accountLockout = "accountLockout",
+    resetPassword = "resetPassword",
+    passwordWasReset = "passwordWasReset",
+    apiUsageStateEnabled = "apiUsageStateEnabled",
+    apiUsageStateWarning = "apiUsageStateWarning",
+    apiUsageStateDisabled = "apiUsageStateDisabled",
+    twoFaVerification = "twoFaVerification"
+}
+export declare const mailTemplateTranslations: Map<MailTemplate, string>;
+export interface MailTemplatesSettings {
+    useSystemMailSettings?: any;
+    [mailTemplate: string]: {
+        subject: string;
+        body: string;
+    };
+}
 export interface UserPasswordPolicy {
     minimumLength: number;
     maximumLength: number;
@@ -191,6 +212,7 @@ export declare enum CodingSchemes {
 export declare const codingSchemesMap: Map<CodingSchemes, TypeDescriptor>;
 export type SmsProviderConfigurations = Partial<SmppSmsProviderConfiguration> & AwsSnsSmsProviderConfiguration & TwilioSmsProviderConfiguration;
 export interface SmsProviderConfiguration extends SmsProviderConfigurations {
+    useSystemSmsSettings?: boolean;
     type: SmsProviderType;
 }
 export declare function smsProviderConfigurationValidator(required: boolean): ValidatorFn;
@@ -227,9 +249,25 @@ export type AutoCommitSettings = {
     [entityType: string]: AutoVersionCreateConfig;
 };
 export interface FeaturesInfo {
+    whiteLabelingEnabled: boolean;
     emailEnabled: boolean;
     smsEnabled: boolean;
     notificationEnabled: boolean;
     oauthEnabled: boolean;
     twoFaEnabled: boolean;
+}
+export interface LicenseInfo {
+    maxDevices: number;
+    maxAssets: number;
+    maxEdges: number;
+    whiteLabelingEnabled: boolean;
+    development: boolean;
+    plan: string;
+}
+export interface LicenseUsageInfo extends LicenseInfo {
+    devicesCount: number;
+    assetsCount: number;
+    edgesCount: number;
+    dashboardsCount: number;
+    integrationsCount: number;
 }

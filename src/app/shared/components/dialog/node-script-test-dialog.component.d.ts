@@ -10,6 +10,7 @@ import { ContentType } from '@shared/models/constants';
 import { JsonContentComponent } from '@shared/components/json-content.component';
 import { ScriptLanguage } from '@shared/models/rule-node.models';
 import { RuleChainService } from '@core/http/rule-chain.service';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 import * as i0 from "@angular/core";
 export interface NodeScriptTestDialogData {
     script: string;
@@ -32,6 +33,7 @@ export declare class NodeScriptTestDialogComponent extends DialogComponent<NodeS
     private errorStateMatcher;
     dialogRef: MatDialogRef<NodeScriptTestDialogComponent, string>;
     fb: UntypedFormBuilder;
+    wl: WhiteLabelingService;
     private ruleChainService;
     width: string;
     height: string;
@@ -48,7 +50,7 @@ export declare class NodeScriptTestDialogComponent extends DialogComponent<NodeS
     contentTypes: typeof ContentType;
     scriptLanguage: typeof ScriptLanguage;
     scriptLang: ScriptLanguage;
-    constructor(store: Store<AppState>, router: Router, data: NodeScriptTestDialogData, errorStateMatcher: ErrorStateMatcher, dialogRef: MatDialogRef<NodeScriptTestDialogComponent, string>, fb: UntypedFormBuilder, ruleChainService: RuleChainService);
+    constructor(store: Store<AppState>, router: Router, data: NodeScriptTestDialogData, errorStateMatcher: ErrorStateMatcher, dialogRef: MatDialogRef<NodeScriptTestDialogComponent, string>, fb: UntypedFormBuilder, wl: WhiteLabelingService, ruleChainService: RuleChainService);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     private initSplitLayout;
@@ -58,6 +60,6 @@ export declare class NodeScriptTestDialogComponent extends DialogComponent<NodeS
     private testNodeScript;
     private checkInputParamErrors;
     save(): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<NodeScriptTestDialogComponent, [null, null, null, { skipSelf: true; }, null, null, null]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NodeScriptTestDialogComponent, [null, null, null, { skipSelf: true; }, null, null, null, null]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<NodeScriptTestDialogComponent, "tb-node-script-test-dialog", never, {}, {}, never, never, false, never>;
 }

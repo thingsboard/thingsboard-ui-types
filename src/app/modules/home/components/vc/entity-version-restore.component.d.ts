@@ -8,9 +8,9 @@ import { EntitiesVersionControlService } from '@core/http/entities-version-contr
 import { EntityId } from '@shared/models/id/entity-id';
 import { TranslateService } from '@ngx-translate/core';
 import { TbPopoverComponent } from '@shared/components/popover.component';
+import { EntityType } from '@shared/models/entity-type.models';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
-import { EntityType } from '@shared/models/entity-type.models';
 import * as i0 from "@angular/core";
 export declare class EntityVersionRestoreComponent extends PageComponent implements OnInit, OnDestroy {
     protected store: Store<AppState>;
@@ -21,9 +21,12 @@ export declare class EntityVersionRestoreComponent extends PageComponent impleme
     private fb;
     versionName: string;
     versionId: string;
+    internalEntityId: EntityId;
     externalEntityId: EntityId;
+    groupType: EntityType;
     onClose: (result: VersionLoadResult | null) => void;
     popoverComponent: TbPopoverComponent;
+    entityTypes: typeof EntityType;
     entityDataInfo: EntityDataInfo;
     restoreFormGroup: UntypedFormGroup;
     errorMessage: SafeHtml;
@@ -36,5 +39,5 @@ export declare class EntityVersionRestoreComponent extends PageComponent impleme
     cancel(): void;
     restore(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityVersionRestoreComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionRestoreComponent, "tb-entity-version-restore", never, { "versionName": { "alias": "versionName"; "required": false; }; "versionId": { "alias": "versionId"; "required": false; }; "externalEntityId": { "alias": "externalEntityId"; "required": false; }; "onClose": { "alias": "onClose"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionRestoreComponent, "tb-entity-version-restore", never, { "versionName": { "alias": "versionName"; "required": false; }; "versionId": { "alias": "versionId"; "required": false; }; "internalEntityId": { "alias": "internalEntityId"; "required": false; }; "externalEntityId": { "alias": "externalEntityId"; "required": false; }; "groupType": { "alias": "groupType"; "required": false; }; "onClose": { "alias": "onClose"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, {}, never, never, false, never>;
 }

@@ -11,6 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@core/services/dialog.service';
 import { Filter, Filters } from '@shared/models/query/query.models';
 import { DashboardUtilsService } from '@core/services/dashboard-utils.service';
+import { ReportComponentConfig } from '@shared/models/report-component.models';
+import { MatTable } from '@angular/material/table';
 import * as i0 from "@angular/core";
 export interface FiltersDialogData {
     filters: Filters;
@@ -20,6 +22,9 @@ export interface FiltersDialogData {
     disableAdd?: boolean;
     singleFilter?: Filter;
     customTitle?: string;
+    disableUserEdit?: boolean;
+    reportMode?: boolean;
+    reportComponents?: ReportComponentConfig[];
 }
 export declare class FiltersDialogComponent extends DialogComponent<FiltersDialogComponent, Filters> implements ErrorStateMatcher {
     protected store: Store<AppState>;
@@ -33,13 +38,16 @@ export declare class FiltersDialogComponent extends DialogComponent<FiltersDialo
     private translate;
     private dialogs;
     private dialog;
+    table: MatTable<Filter>;
     title: string;
     disableAdd: boolean;
+    disableUserEdit: boolean;
     filterToWidgetsMap: {
         [filterId: string]: Array<string>;
     };
     filterNames: Set<string>;
     filtersFormGroup: UntypedFormGroup;
+    displayedColumns: string[];
     submitted: boolean;
     constructor(store: Store<AppState>, router: Router, data: FiltersDialogData, errorStateMatcher: ErrorStateMatcher, dialogRef: MatDialogRef<FiltersDialogComponent, Filters>, fb: UntypedFormBuilder, utils: UtilsService, dashboardUtils: DashboardUtilsService, translate: TranslateService, dialogs: DialogService, dialog: MatDialog);
     private createFilterFormControl;

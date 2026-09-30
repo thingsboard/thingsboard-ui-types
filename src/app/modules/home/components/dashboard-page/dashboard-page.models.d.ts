@@ -5,6 +5,7 @@ import { IAliasController, IStateController } from '@core/api/widget-api.models'
 import { ILayoutController } from './layout/layout.models';
 import { DashboardContextMenuItem, WidgetContextMenuItem } from '@home/models/dashboard-component.models';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { EntityGroupInfo } from '@shared/models/entity-group.models';
 import { ElementRef } from '@angular/core';
 export declare type DashboardPageScope = 'tenant' | 'customer';
 export interface DashboardPageInitData {
@@ -12,6 +13,8 @@ export interface DashboardPageInitData {
     currentDashboardId?: string;
     widgetEditMode?: boolean;
     singlePageMode?: boolean;
+    entityGroup?: EntityGroupInfo;
+    customerId?: string;
 }
 export interface DashboardContext {
     instanceId: string;
@@ -31,9 +34,11 @@ export interface IDashboardController {
     dashboardContainer: ElementRef;
     dashboardContent: ElementRef;
     elRef: ElementRef;
+    aiConfigurableForDashboard: boolean;
     openRightLayout(): any;
     openDashboardState(stateId: string, openRightLayout: boolean): any;
     addWidget($event: Event, layoutCtx: DashboardPageLayoutContext): any;
+    configureWithAi($event: Event): any;
     editWidget($event: Event, layoutCtx: DashboardPageLayoutContext, widget: Widget): any;
     replaceReferenceWithWidgetCopy($event: Event, layoutCtx: DashboardPageLayoutContext, widget: Widget): any;
     exportWidget($event: Event, layoutCtx: DashboardPageLayoutContext, widget: Widget, widgetTitle: string): any;

@@ -1,5 +1,5 @@
 import { DestroyRef, EventEmitter, OnInit } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validator } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validator } from '@angular/forms';
 import { TimeSeriesChartYAxes } from '@home/components/widget/lib/chart/time-series-chart.models';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { IAliasController } from '@app/core/public-api';
@@ -15,6 +15,8 @@ export declare class TimeSeriesChartYAxesPanelComponent implements ControlValueA
     disabled: boolean;
     advanced: boolean;
     supportsUnitConversion: boolean;
+    stroked: boolean;
+    reportMode: boolean;
     axisRemoved: EventEmitter<string>;
     yAxesFormGroup: UntypedFormGroup;
     get dragEnabled(): boolean;
@@ -32,10 +34,9 @@ export declare class TimeSeriesChartYAxesPanelComponent implements ControlValueA
     };
     axisDrop(event: CdkDragDrop<string[]>): void;
     axesFormArray(): UntypedFormArray;
-    trackByAxis(index: number, axisControl: AbstractControl): any;
     removeAxis(index: number): void;
     addAxis(): void;
     private prepareAxesFormArray;
     static ɵfac: i0.ɵɵFactoryDeclaration<TimeSeriesChartYAxesPanelComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<TimeSeriesChartYAxesPanelComponent, "tb-time-series-chart-y-axes-panel", never, { "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "advanced": { "alias": "advanced"; "required": false; }; "supportsUnitConversion": { "alias": "supportsUnitConversion"; "required": false; }; }, { "axisRemoved": "axisRemoved"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<TimeSeriesChartYAxesPanelComponent, "tb-time-series-chart-y-axes-panel", never, { "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "advanced": { "alias": "advanced"; "required": false; }; "supportsUnitConversion": { "alias": "supportsUnitConversion"; "required": false; }; "stroked": { "alias": "stroked"; "required": false; }; "reportMode": { "alias": "reportMode"; "required": false; }; }, { "axisRemoved": "axisRemoved"; }, never, never, false, never>;
 }

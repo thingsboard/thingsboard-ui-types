@@ -12,6 +12,8 @@ import { EntityType } from '@shared/models/entity-type.models';
 import { PlatformType } from '@shared/models/oauth2.models';
 import { MatStepper } from '@angular/material/stepper';
 import { MobileAppService } from '@core/http/mobile-app.service';
+import { Operation, Resource } from '@shared/models/security.models';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export interface MobileBundleDialogData {
     bundle?: MobileAppBundleInfo;
@@ -26,8 +28,11 @@ export declare class MobileBundleDialogComponent extends DialogComponent<MobileB
     private fb;
     private dialog;
     private mobileAppService;
+    private userPermissionsService;
     addMobileBundle: MatStepper;
     readonly entityType: typeof EntityType;
+    readonly resource: typeof Resource;
+    readonly operation: typeof Operation;
     selectedIndex: number;
     dialogTitle: string;
     stepperOrientation: Observable<StepperOrientation>;
@@ -45,8 +50,13 @@ export declare class MobileBundleDialogComponent extends DialogComponent<MobileB
     layoutForms: import("@angular/forms").FormGroup<{
         layoutConfig: import("@angular/forms").FormControl<any>;
     }>;
+    selfRegistrationForm: import("@angular/forms").FormGroup<{
+        selfRegistrationParams: import("@angular/forms").FormControl<any>;
+    }>;
     isAdd: boolean;
-    constructor(store: Store<AppState>, router: Router, dialogRef: MatDialogRef<MobileBundleDialogComponent, MobileAppBundle>, data: MobileBundleDialogData, breakpointObserver: BreakpointObserver, fb: FormBuilder, dialog: MatDialog, mobileAppService: MobileAppService);
+    readonly isSysAdmin: boolean;
+    readonly: boolean;
+    constructor(store: Store<AppState>, router: Router, dialogRef: MatDialogRef<MobileBundleDialogComponent, MobileAppBundle>, data: MobileBundleDialogData, breakpointObserver: BreakpointObserver, fb: FormBuilder, dialog: MatDialog, mobileAppService: MobileAppService, userPermissionsService: UserPermissionsService);
     cancel(): void;
     backStep(): void;
     nextStep(): void;

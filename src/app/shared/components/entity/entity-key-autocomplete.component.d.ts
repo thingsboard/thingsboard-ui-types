@@ -14,6 +14,7 @@ export declare class EntityKeyAutocompleteComponent implements ControlValueAcces
     placeholder: any;
     requiredText: any;
     enableAutocomplete: boolean;
+    hideNoKeyOption: boolean;
     entityFilter: import("@angular/core").InputSignal<EntityFilter>;
     dataKeyType: import("@angular/core").InputSignal<DataKeyType>;
     keyScopeType: import("@angular/core").InputSignal<AttributeScope>;
@@ -33,5 +34,5 @@ export declare class EntityKeyAutocompleteComponent implements ControlValueAcces
     writeValue(value: string): void;
     setDisabledState(isDisabled: boolean): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityKeyAutocompleteComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityKeyAutocompleteComponent, "tb-entity-key-autocomplete", never, { "placeholder": { "alias": "placeholder"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "enableAutocomplete": { "alias": "enableAutocomplete"; "required": false; }; "entityFilter": { "alias": "entityFilter"; "required": true; "isSignal": true; }; "dataKeyType": { "alias": "dataKeyType"; "required": true; "isSignal": true; }; "keyScopeType": { "alias": "keyScopeType"; "required": false; "isSignal": true; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityKeyAutocompleteComponent, "tb-entity-key-autocomplete", never, { "placeholder": { "alias": "placeholder"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "enableAutocomplete": { "alias": "enableAutocomplete"; "required": false; }; "hideNoKeyOption": { "alias": "hideNoKeyOption"; "required": false; }; "entityFilter": { "alias": "entityFilter"; "required": true; "isSignal": true; }; "dataKeyType": { "alias": "dataKeyType"; "required": true; "isSignal": true; }; "keyScopeType": { "alias": "keyScopeType"; "required": false; "isSignal": true; }; }, {}, never, never, false, never>;
 }

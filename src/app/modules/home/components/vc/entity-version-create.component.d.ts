@@ -19,6 +19,7 @@ export declare class EntityVersionCreateComponent extends PageComponent implemen
     private fb;
     branch: string;
     entityId: EntityId;
+    groupType: EntityType;
     entityName: string;
     onClose: (result: VersionCreationResult | null, branch: string | null) => void;
     onBeforeCreateVersion: () => Observable<any>;
@@ -36,5 +37,5 @@ export declare class EntityVersionCreateComponent extends PageComponent implemen
     cancel(): void;
     export(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityVersionCreateComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionCreateComponent, "tb-entity-version-create", never, { "branch": { "alias": "branch"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; "onClose": { "alias": "onClose"; "required": false; }; "onBeforeCreateVersion": { "alias": "onBeforeCreateVersion"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionCreateComponent, "tb-entity-version-create", never, { "branch": { "alias": "branch"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "groupType": { "alias": "groupType"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; "onClose": { "alias": "onClose"; "required": false; }; "onBeforeCreateVersion": { "alias": "onBeforeCreateVersion"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, {}, never, never, false, never>;
 }

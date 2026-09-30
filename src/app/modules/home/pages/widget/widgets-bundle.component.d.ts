@@ -10,7 +10,7 @@ export declare class WidgetsBundleComponent extends EntityComponent<WidgetsBundl
     protected store: Store<AppState>;
     protected entityValue: WidgetsBundle;
     protected entitiesTableConfigValue: EntityTableConfig<WidgetsBundle>;
-    fb: UntypedFormBuilder;
+    protected fb: UntypedFormBuilder;
     protected cd: ChangeDetectorRef;
     standalone: boolean;
     constructor(store: Store<AppState>, entityValue: WidgetsBundle, entitiesTableConfigValue: EntityTableConfig<WidgetsBundle>, fb: UntypedFormBuilder, cd: ChangeDetectorRef);

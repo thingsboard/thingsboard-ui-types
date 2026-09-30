@@ -7,6 +7,7 @@ export declare class MobileApplicationService {
     private http;
     constructor(http: HttpClient);
     getMobileAppSettings(config?: RequestConfig): Observable<QrCodeSettings>;
+    getMergedMobileAppSettings(config?: RequestConfig): Observable<QrCodeSettings>;
     saveMobileAppSettings(mobileAppSettings: QrCodeSettings, config?: RequestConfig): Observable<QrCodeSettings>;
     getMobileAppDeepLink(config?: RequestConfig): Observable<string>;
     static ɵfac: i0.ɵɵFactoryDeclaration<MobileApplicationService, never>;

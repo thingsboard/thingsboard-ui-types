@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AliasEntityType, EntityType } from '@shared/models/entity-type.models';
 import { EntityService } from '@core/http/entity.service';
 import { EntityId } from '@shared/models/id/entity-id';
+import { Operation } from '@shared/models/security.models';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { BaseData } from '@shared/models/base-data';
 import { EntityAutocompleteComponent } from '@shared/components/entity/entity-autocomplete.component';
@@ -21,6 +22,7 @@ export declare class EntitySelectComponent implements ControlValueAccessor, OnIn
     modelValue: EntityId;
     allowedEntityTypes: Array<EntityType | AliasEntityType>;
     useAliasEntityTypes: boolean;
+    operation: Operation;
     required: boolean;
     disabled: boolean;
     additionEntityTypes: {
@@ -46,5 +48,5 @@ export declare class EntitySelectComponent implements ControlValueAccessor, OnIn
     changeEntity(entity: BaseData<EntityId>): void;
     entityAutocompleteMarkAsTouched(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntitySelectComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntitySelectComponent, "tb-entity-select", never, { "allowedEntityTypes": { "alias": "allowedEntityTypes"; "required": false; }; "useAliasEntityTypes": { "alias": "useAliasEntityTypes"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "additionEntityTypes": { "alias": "additionEntityTypes"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "useEntityDisplayName": { "alias": "useEntityDisplayName"; "required": false; }; "filterAllowedEntityTypes": { "alias": "filterAllowedEntityTypes"; "required": false; }; "defaultEntityType": { "alias": "defaultEntityType"; "required": false; }; "entityTypeLabel": { "alias": "entityTypeLabel"; "required": false; }; }, { "entityChanged": "entityChanged"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntitySelectComponent, "tb-entity-select", never, { "allowedEntityTypes": { "alias": "allowedEntityTypes"; "required": false; }; "useAliasEntityTypes": { "alias": "useAliasEntityTypes"; "required": false; }; "operation": { "alias": "operation"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "additionEntityTypes": { "alias": "additionEntityTypes"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "useEntityDisplayName": { "alias": "useEntityDisplayName"; "required": false; }; "filterAllowedEntityTypes": { "alias": "filterAllowedEntityTypes"; "required": false; }; "defaultEntityType": { "alias": "defaultEntityType"; "required": false; }; "entityTypeLabel": { "alias": "entityTypeLabel"; "required": false; }; }, { "entityChanged": "entityChanged"; }, never, never, false, never>;
 }

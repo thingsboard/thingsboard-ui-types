@@ -11,6 +11,11 @@ import { Observable } from 'rxjs';
 import type { ValueFormatProcessor } from '@shared/models/widget-settings.models';
 type ColumnVisibilityOptions = 'visible' | 'hidden' | 'hidden-mobile';
 type ColumnSelectionOptions = 'enabled' | 'disabled';
+export declare enum columnExportOptions {
+    always = "always",
+    onlyVisible = "onlyVisible",
+    never = "never"
+}
 export interface TableWidgetSettings {
     enableSearch: boolean;
     enableSelectColumnDisplay: boolean;
@@ -31,9 +36,11 @@ export interface TableWidgetDataKeySettings {
     useCellStyleFunction: boolean;
     cellStyleFunction?: TbFunction;
     useCellContentFunction: boolean;
+    useCellContentFunctionOnExport: boolean;
     cellContentFunction?: TbFunction;
     defaultColumnVisibility?: ColumnVisibilityOptions;
     columnSelectionToDisplay?: ColumnSelectionOptions;
+    columnExportOption?: columnExportOptions;
     disableSorting?: boolean;
 }
 export type ShowCellButtonActionFunction = (ctx: WidgetContext, data: EntityData | AlarmDataInfo | FormattedData) => boolean;
@@ -61,10 +68,12 @@ export interface DisplayColumn {
     def: string;
     display: boolean;
     selectable: boolean;
+    includeToExport?: columnExportOptions;
 }
 export type CellContentFunction = (...args: any[]) => string;
 export interface CellContentFunctionInfo {
     useCellContentFunction: boolean;
+    useCellContentFunctionOnExport?: boolean;
     cellContentFunction?: CompiledTbFunction<CellContentFunction>;
 }
 export interface CellContentInfo {
@@ -107,7 +116,7 @@ export declare function getTableCellButtonActions(widgetContext: WidgetContext):
 export declare function checkHasActions(cellButtonActions: TableCellButtonActionDescriptor[]): boolean;
 export declare function prepareTableCellButtonActions(widgetContext: WidgetContext, cellButtonActions: TableCellButtonActionDescriptor[], data: EntityData | AlarmDataInfo | FormattedData, reserveSpaceForHiddenAction?: boolean): TableCellButtonActionDescriptor[];
 export declare function noDataMessage(noDataDisplayMessage: string, defaultMessage: string, utils: UtilsService, translate: TranslateService): string;
-export declare function constructTableCssString(widgetConfig: WidgetConfig): string;
+export declare function constructTableCssString(widgetConfig: WidgetConfig, isTabsEnabled?: boolean): string;
 export declare function getHeaderTitle(dataKey: DataKey, keySettings: TableWidgetDataKeySettings | undefined, utils: UtilsService): string;
 export declare function buildPageStepSizeValues(pageStepCount: number, pageStepIncrement: number): Array<number>;
 export declare function isValidPageStepIncrement(value: number): boolean;

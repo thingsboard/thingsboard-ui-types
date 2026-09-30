@@ -17,10 +17,13 @@ export interface WidgetActionDialogData {
     isAdd: boolean;
     callbacks: WidgetActionCallbacks;
     actionsData: WidgetActionsData;
+    actionTypes: WidgetActionType[];
+    customFunctionArgs: string[];
     action?: WidgetActionDescriptorInfo;
     widgetType: widgetType;
     defaultIconColor?: string;
     additionalWidgetActionTypes?: WidgetActionType[];
+    isEntityGroup?: boolean;
 }
 export declare class WidgetActionDialogComponent extends DialogComponent<WidgetActionDialogComponent, WidgetActionDescriptorInfo> implements OnInit, ErrorStateMatcher {
     protected store: Store<AppState>;
@@ -36,10 +39,13 @@ export declare class WidgetActionDialogComponent extends DialogComponent<WidgetA
     widgetActionFormGroup: FormGroup;
     isAdd: boolean;
     action: WidgetActionDescriptorInfo;
+    customFunctionArgs: string[];
+    widgetActionTypes: WidgetActionType[];
     defaultIconColor: string;
     customActionEditorCompleter: import("../../../../../shared/models/ace/completion.models").TbEditorCompleter;
     submitted: boolean;
     functionScopeVariables: string[];
+    private isEntityGroup;
     configuredColumns: Array<CellClickColumnInfo>;
     usedCellClickColumns: Array<number>;
     widgetHeaderActionButtonType: typeof WidgetHeaderActionButtonType;
@@ -51,6 +57,8 @@ export declare class WidgetActionDialogComponent extends DialogComponent<WidgetA
     ngOnInit(): void;
     private widgetHeaderButtonValidators;
     displayShowWidgetActionForm(): boolean;
+    customFunctionHelpId(): string;
+    entityGroupRowClickHint(): string;
     getWidgetActionFunctionHelpId(): string | undefined;
     private updateShowWidgetActionForm;
     private checkColumnIndex;

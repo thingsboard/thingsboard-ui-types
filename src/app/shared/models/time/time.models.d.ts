@@ -159,6 +159,7 @@ export declare const QuickTimeIntervalTranslationMap: Map<QuickTimeInterval, str
 export declare const IntervalTypeValuesMap: Map<IntervalType, number>;
 export declare const forAllTimeInterval: () => Timewindow;
 export declare const historyInterval: (timewindowMs: number) => Timewindow;
+export declare const historyQuickInterval: (interval: QuickTimeInterval) => Timewindow;
 export declare const defaultTimewindow: (timeService: TimeService, isDashboard?: boolean) => Timewindow;
 export declare const initModelFromDefaultTimewindow: (value: Timewindow, quickIntervalOnly: boolean, historyOnly: boolean, timeService: TimeService, hasAggregation: boolean, isDashboard?: boolean) => Timewindow;
 export declare const toHistoryTimewindow: (timewindow: Timewindow, startTimeMs: number, endTimeMs: number, interval: Interval, timeService: TimeService) => Timewindow;
@@ -172,6 +173,7 @@ export declare const realtimeDefaultAggInterval: (timewindow: Timewindow, advanc
 export declare const historyDefaultAggInterval: (timewindow: Timewindow, advancedParams: TimewindowAdvancedParams) => Interval;
 export declare const getTimezone: (tz: string) => moment_.Moment;
 export declare const calculateTsOffset: (timezone?: string) => number;
+export declare const toUtcDate: (ts: number | string) => Date;
 export declare const isHistoryTypeTimewindow: (timewindow: Timewindow) => boolean;
 export declare const getCurrentTime: (tz?: string) => moment_.Moment;
 export declare const calculateIntervalStartTime: (interval: QuickTimeInterval, currentDate: moment_.Moment) => moment_.Moment;
@@ -215,6 +217,7 @@ export declare const getTimezones: () => TimezoneInfo[];
 export declare const getDefaultTimezone: () => string;
 export declare const getTimezoneInfo: (timezoneId: string, defaultTimezoneId?: string, userTimezoneByDefault?: boolean) => TimezoneInfo;
 export declare const getDefaultTimezoneInfo: () => TimezoneInfo;
+export declare const getUserZone: () => moment_.MomentZone;
 export declare const getTime: (ts: number, tz?: string) => moment_.Moment;
 export declare const calculateIntervalsCount: (startTs: number, timewindow: number, interval: Interval, tz?: string) => number;
 export declare const startIntervalDate: (current: moment_.Moment, interval: IntervalType) => moment_.Moment;

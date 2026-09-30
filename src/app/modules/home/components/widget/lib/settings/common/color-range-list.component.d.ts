@@ -16,6 +16,7 @@ export declare class ColorRangeListComponent implements OnInit, ControlValueAcce
     dataKeyCallbacks: DataKeysCallbacks;
     datasource: Datasource;
     simpleRange: boolean;
+    useThemePalette: boolean;
     advancedMode: boolean;
     modelValue: any;
     colorRangeListFormGroup: UntypedFormGroup;
@@ -31,8 +32,6 @@ export declare class ColorRangeListComponent implements OnInit, ControlValueAcce
     private colorRangeControl;
     get rangeListFormArray(): UntypedFormArray;
     get rangeListFormGroups(): FormGroup[];
-    trackByRange(index: number, rangeControl: AbstractControl): any;
-    trackByAdvancedRange(index: number, advancedRangeControl: AbstractControl): any;
     removeAdvancedRange(index: number): void;
     get advancedRangeFormArray(): UntypedFormArray;
     get advancedRangeControls(): FormControl[];
@@ -42,5 +41,5 @@ export declare class ColorRangeListComponent implements OnInit, ControlValueAcce
     addRange(): void;
     updateModel(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ColorRangeListComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<ColorRangeListComponent, "tb-color-range-list", never, { "disabled": { "alias": "disabled"; "required": false; }; "popover": { "alias": "popover"; "required": false; }; "panelTitle": { "alias": "panelTitle"; "required": false; }; "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "simpleRange": { "alias": "simpleRange"; "required": false; }; "advancedMode": { "alias": "advancedMode"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ColorRangeListComponent, "tb-color-range-list", never, { "disabled": { "alias": "disabled"; "required": false; }; "popover": { "alias": "popover"; "required": false; }; "panelTitle": { "alias": "panelTitle"; "required": false; }; "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "simpleRange": { "alias": "simpleRange"; "required": false; }; "useThemePalette": { "alias": "useThemePalette"; "required": false; }; "advancedMode": { "alias": "advancedMode"; "required": false; }; }, {}, never, never, false, never>;
 }

@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { PageLink } from '@shared/models/page/page-link';
 import { EntityAction } from '@home/models/entity/entity-component.models';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { Observable } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogService } from "@core/services/dialog.service";
@@ -15,6 +16,7 @@ import * as i0 from "@angular/core";
 export declare class ResourcesLibraryTableConfigResolver {
     private store;
     private resourceService;
+    private userPermissionsService;
     private translate;
     private router;
     private dialog;
@@ -22,7 +24,7 @@ export declare class ResourcesLibraryTableConfigResolver {
     private datePipe;
     private readonly config;
     private readonly resourceTypesTranslationMap;
-    constructor(store: Store<AppState>, resourceService: ResourceService, translate: TranslateService, router: Router, dialog: MatDialog, dialogService: DialogService, datePipe: DatePipe);
+    constructor(store: Store<AppState>, resourceService: ResourceService, userPermissionsService: UserPermissionsService, translate: TranslateService, router: Router, dialog: MatDialog, dialogService: DialogService, datePipe: DatePipe);
     saveResource(resource: Resource & {
         data?: File | File[];
     }, originalResource: Resource): Observable<Resource>;

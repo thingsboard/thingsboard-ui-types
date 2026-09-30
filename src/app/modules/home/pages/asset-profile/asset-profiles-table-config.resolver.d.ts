@@ -8,17 +8,19 @@ import { ImportExportService } from '@shared/import-export/import-export.service
 import { AssetProfile } from '@shared/models/asset.models';
 import { AssetProfileService } from '@core/http/asset-profile.service';
 import { CustomTranslatePipe } from '@shared/pipe/custom-translate.pipe';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class AssetProfilesTableConfigResolver {
     private assetProfileService;
     private importExport;
+    private userPermissionsService;
     private translate;
     private datePipe;
     private dialogService;
     private router;
     private customTranslate;
     private readonly config;
-    constructor(assetProfileService: AssetProfileService, importExport: ImportExportService, translate: TranslateService, datePipe: DatePipe, dialogService: DialogService, router: Router, customTranslate: CustomTranslatePipe);
+    constructor(assetProfileService: AssetProfileService, importExport: ImportExportService, userPermissionsService: UserPermissionsService, translate: TranslateService, datePipe: DatePipe, dialogService: DialogService, router: Router, customTranslate: CustomTranslatePipe);
     resolve(): EntityTableConfig<AssetProfile>;
     configureAddActions(): Array<HeaderActionDescriptor>;
     setDefaultAssetProfile($event: Event, assetProfile: AssetProfile): void;

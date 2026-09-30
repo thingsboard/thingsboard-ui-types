@@ -12,7 +12,7 @@ export declare class RuleChainComponent extends EntityComponent<RuleChain> {
     protected translate: TranslateService;
     protected entityValue: RuleChain;
     protected entitiesTableConfigValue: EntityTableConfig<RuleChain>;
-    fb: UntypedFormBuilder;
+    protected fb: UntypedFormBuilder;
     protected cd: ChangeDetectorRef;
     ruleChainScope: 'tenant' | 'edges' | 'edge';
     constructor(store: Store<AppState>, translate: TranslateService, entityValue: RuleChain, entitiesTableConfigValue: EntityTableConfig<RuleChain>, fb: UntypedFormBuilder, cd: ChangeDetectorRef);

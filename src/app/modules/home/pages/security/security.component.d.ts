@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 import { ClipboardService } from 'ngx-clipboard';
 import { TwoFactorAuthenticationService } from '@core/http/two-factor-authentication.service';
 import { TwoFactorAuthProviderType } from '@shared/models/two-factor-auth.models';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { AuthService } from '@core/auth/auth.service';
 import { UserPasswordPolicy } from '@shared/models/settings.models';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -25,6 +26,7 @@ export declare class SecurityComponent extends PageComponent implements OnInit, 
     dialogService: DialogService;
     fb: UntypedFormBuilder;
     private datePipe;
+    private userPermissionsService;
     private authService;
     private clipboardService;
     private readonly destroy$;
@@ -40,8 +42,7 @@ export declare class SecurityComponent extends PageComponent implements OnInit, 
     activeSingleProvider: boolean;
     get jwtToken(): string;
     get jwtTokenExpiration(): string;
-    get expirationJwtData(): string;
-    constructor(store: Store<AppState>, route: ActivatedRoute, translate: TranslateService, twoFaService: TwoFactorAuthenticationService, dialog: MatDialog, dialogService: DialogService, fb: UntypedFormBuilder, datePipe: DatePipe, authService: AuthService, clipboardService: ClipboardService);
+    constructor(store: Store<AppState>, route: ActivatedRoute, translate: TranslateService, twoFaService: TwoFactorAuthenticationService, dialog: MatDialog, dialogService: DialogService, fb: UntypedFormBuilder, datePipe: DatePipe, userPermissionsService: UserPermissionsService, authService: AuthService, clipboardService: ClipboardService);
     ngOnInit(): void;
     ngOnDestroy(): void;
     private buildTwoFactorForm;
@@ -50,7 +51,6 @@ export declare class SecurityComponent extends PageComponent implements OnInit, 
     private buildChangePasswordForm;
     private loadPasswordPolicy;
     passwordNotSameAsOld(): ValidatorFn;
-    trackByProvider(i: number, provider: TwoFactorAuthProviderType): TwoFactorAuthProviderType;
     copyToken(): void;
     confirm2FAChange(event: MouseEvent, provider: TwoFactorAuthProviderType): void;
     private createdNewAuthConfig;

@@ -5,7 +5,7 @@ import { AggregationType, ComparisonDuration, Timewindow } from '@shared/models/
 import { EntityType } from '@shared/models/entity-type.models';
 import { DataKeyType } from './telemetry/telemetry.models';
 import { EntityId } from '@shared/models/id/entity-id';
-import { AlarmFilter, AlarmFilterConfig, EntityDataPageLink, EntityFilter, KeyFilter } from '@shared/models/query/query.models';
+import { AlarmFilter, AlarmFilterConfig, ComplexOperation, EntityDataPageLink, EntityFilter, KeyFilter } from '@shared/models/query/query.models';
 import { PopoverPlacement } from '@shared/components/popover.models';
 import { PageComponent } from '@shared/components/page.component';
 import { AfterViewInit, DestroyRef, EventEmitter, OnInit, Type } from '@angular/core';
@@ -24,6 +24,7 @@ import { TbFunction } from '@shared/models/js-function.models';
 import { FormProperty } from '@shared/models/dynamic-form.models';
 import { TbUnit } from '@shared/models/unit.models';
 import { ImageResourceInfo } from '@shared/models/resource.models';
+import { GetLocationDescriptor, MobileLocationResult, SaveBrowserLocationDescriptor, StartLiveLocationDescriptor } from '@shared/models/location.models';
 import * as i0 from "@angular/core";
 export declare enum widgetType {
     timeseries = "timeseries",
@@ -178,6 +179,7 @@ export declare const comparisonResultTypeTranslationMap: Map<ComparisonResultTyp
 export interface KeyInfo {
     name: string;
     aggregationType?: AggregationType;
+    timewindow?: Timewindow;
     comparisonEnabled?: boolean;
     timeForComparison?: ComparisonDuration;
     comparisonCustomIntervalValue?: number;
@@ -185,6 +187,7 @@ export interface KeyInfo {
     label?: string;
     color?: string;
     funcBody?: TbFunction;
+    builtInFunc?: (time: number, prevValue: any) => any;
     postFuncBody?: TbFunction;
     units?: TbUnit;
     decimals?: number;
@@ -193,6 +196,7 @@ export declare const dataKeyAggregationTypeHintTranslationMap: Map<AggregationTy
 export interface DataKey extends KeyInfo {
     type: DataKeyType;
     pattern?: string;
+    title?: string;
     settings?: any;
     usePostProcessing?: boolean;
     hidden?: boolean;
@@ -235,6 +239,7 @@ export interface Datasource {
     origDatasourceIndex?: number;
     pageLink?: EntityDataPageLink;
     keyFilters?: Array<KeyFilter>;
+    keyFiltersOperation?: ComplexOperation;
     entityFilter?: EntityFilter;
     alarmFilterConfig?: AlarmFilterConfig;
     alarmFilter?: AlarmFilter;
@@ -324,7 +329,8 @@ export declare enum WidgetActionType {
     customPretty = "customPretty",
     mobileAction = "mobileAction",
     openURL = "openURL",
-    placeMapItem = "placeMapItem"
+    placeMapItem = "placeMapItem",
+    saveBrowserLocation = "saveBrowserLocation"
 }
 export declare enum WidgetMobileActionType {
     takePictureFromGallery = "takePictureFromGallery",
@@ -334,6 +340,8 @@ export declare enum WidgetMobileActionType {
     scanQrCode = "scanQrCode",
     makePhoneCall = "makePhoneCall",
     getLocation = "getLocation",
+    startLiveLocation = "startLiveLocation",
+    stopLiveLocation = "stopLiveLocation",
     takeScreenshot = "takeScreenshot",
     deviceProvision = "deviceProvision"
 }
@@ -362,6 +370,15 @@ export declare const widgetActionTypes: WidgetActionType[];
 export declare const widgetActionTypeTranslationMap: Map<WidgetActionType, string>;
 export declare const widgetMobileActionTypeTranslationMap: Map<WidgetMobileActionType, string>;
 export declare const mapItemTypeTranslationMap: Map<MapItemType, string>;
+export type ExportRow = {
+    [key: string]: any;
+} | Map<string, any>;
+export declare enum WidgetExportType {
+    csv = "csv",
+    xls = "xls",
+    xlsx = "xlsx"
+}
+export declare const widgetExportTypeTranslationMap: Map<WidgetExportType, string>;
 export interface MobileLaunchResult {
     launched: boolean;
 }
@@ -372,10 +389,6 @@ export interface MobileImageResult {
 export interface MobileQrCodeResult {
     code: string;
     format: string;
-}
-export interface MobileLocationResult {
-    latitude: number;
-    longitude: number;
 }
 export interface MobileDeviceProvisionResult {
     deviceName: string;
@@ -407,10 +420,7 @@ export interface ScanQrCodeDescriptor {
 export interface MakePhoneCallDescriptor extends ProcessLaunchResultDescriptor {
     getPhoneNumberFunction: TbFunction;
 }
-export interface GetLocationDescriptor {
-    processLocationFunction: TbFunction;
-}
-export type WidgetMobileActionDescriptors = ProcessImageDescriptor & LaunchMapDescriptor & ScanQrCodeDescriptor & MakePhoneCallDescriptor & GetLocationDescriptor & ProvisionSuccessDescriptor;
+export type WidgetMobileActionDescriptors = ProcessImageDescriptor & LaunchMapDescriptor & ScanQrCodeDescriptor & MakePhoneCallDescriptor & GetLocationDescriptor & StartLiveLocationDescriptor & ProvisionSuccessDescriptor;
 export interface WidgetMobileActionDescriptor extends WidgetMobileActionDescriptors {
     type: WidgetMobileActionType;
     handleErrorFunction?: TbFunction;
@@ -451,6 +461,7 @@ export interface WidgetAction extends CustomActionDescriptor {
     url?: string;
     mapItemType?: MapItemType;
     mapItemTooltips?: MapItemTooltips;
+    saveBrowserLocation?: SaveBrowserLocationDescriptor;
 }
 export interface MapItemTooltips {
     placeMarker?: string;
@@ -482,8 +493,11 @@ export interface WidgetActionDescriptor extends WidgetAction {
     showWidgetActionFunction?: TbFunction;
     columnIndex?: number;
 }
+export type WidgetActionsMap = {
+    [actionSourceId: string]: Array<WidgetActionDescriptor>;
+};
 export declare const actionDescriptorToAction: (descriptor: WidgetActionDescriptor) => WidgetAction;
-export declare const defaultWidgetAction: (setEntityId?: boolean) => WidgetAction;
+export declare const defaultWidgetAction: (isEntityGroup?: boolean, setEntityId?: boolean) => WidgetAction;
 export interface WidgetComparisonSettings {
     comparisonEnabled?: boolean;
     timeForComparison?: ComparisonDuration;
@@ -518,6 +532,7 @@ export interface WidgetConfig {
     titleTooltip?: string;
     dropShadow?: boolean;
     enableFullscreen?: boolean;
+    enableDataExport?: boolean;
     useDashboardTimewindow?: boolean;
     displayTimewindow?: boolean;
     timewindow?: Timewindow;
@@ -540,9 +555,7 @@ export interface WidgetConfig {
     decimals?: number;
     noDataDisplayMessage?: string;
     pageSize?: number;
-    actions?: {
-        [actionSourceId: string]: Array<WidgetActionDescriptor>;
-    };
+    actions?: WidgetActionsMap;
     settings?: WidgetSettings;
     alarmSource?: Datasource;
     alarmFilterConfig?: AlarmFilterConfig;
@@ -571,6 +584,7 @@ export interface WidgetInfo extends BaseWidgetInfo {
 }
 export interface DynamicFormData {
     settingsForm?: FormProperty[];
+    settingsFormTrimDefaults?: boolean;
     model?: any;
     settingsDirective?: string;
 }
@@ -596,6 +610,7 @@ export interface IWidgetSettingsComponent {
     settings: WidgetSettings;
     settingsChanged: Observable<WidgetSettings>;
     validateSettings(): boolean;
+    reportMode: boolean;
     [key: string]: any;
 }
 export declare abstract class WidgetSettingsComponent extends PageComponent implements IWidgetSettingsComponent, OnInit, AfterViewInit {
@@ -606,6 +621,7 @@ export declare abstract class WidgetSettingsComponent extends PageComponent impl
     functionsOnly: boolean;
     dashboard: Dashboard;
     widget: Widget;
+    reportMode: boolean;
     widgetConfigValue: WidgetConfigComponentData;
     set widgetConfig(value: WidgetConfigComponentData);
     get widgetConfig(): WidgetConfigComponentData;

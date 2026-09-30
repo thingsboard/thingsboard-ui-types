@@ -20,9 +20,11 @@ export declare class ImageService {
     getImages(pageLink: PageLink, includeSystemImages?: boolean, imageSubType?: ResourceSubType, config?: RequestConfig): Observable<PageData<ImageResourceInfo>>;
     getImageInfo(type: ImageResourceType, key: string, config?: RequestConfig): Observable<ImageResourceInfo>;
     getImageDataUrl(imageUrl: string, preview?: boolean, asString?: boolean, emptyUrl?: string): Observable<SafeUrl | string>;
+    getLoginImageDataUrl(imageUrl: string, faviconElseLogo: boolean, asString?: boolean, emptyUrl?: string): Observable<SafeUrl | string>;
     private loadImageDataUrl;
     getImageString(imageUrl: string): Observable<string>;
     resolveImageUrl(imageUrl: string, preview?: boolean, asString?: boolean, emptyUrl?: string): Observable<SafeUrl | string>;
+    resolveLoginImageUrl(imageUrl: string, faviconElseLogo: boolean, asString?: boolean, emptyUrl?: string): Observable<SafeUrl | string>;
     downloadImage(type: ImageResourceType, key: string): Observable<any>;
     deleteImage(type: ImageResourceType, key: string, force?: boolean, config?: RequestConfig): Observable<Object>;
     exportImage(type: ImageResourceType, key: string, config?: RequestConfig): Observable<ImageExportData>;

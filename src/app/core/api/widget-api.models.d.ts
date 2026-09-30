@@ -11,6 +11,7 @@ import { RafService } from '@core/services/raf.service';
 import { EntityAliases } from '@shared/models/alias.models';
 import { EntityInfo } from '@app/shared/models/entity.models';
 import { IDashboardComponent } from '@home/models/dashboard-component.models';
+import { DatePipe } from '@angular/common';
 import { AlarmData, AlarmDataPageLink, EntityData, EntityDataPageLink, EntityFilter, Filter, FilterInfo, Filters, KeyFilter } from '@shared/models/query/query.models';
 import { EntityDataService } from '@core/api/entity-data.service';
 import { PageData } from '@shared/models/page/page-data';
@@ -24,6 +25,7 @@ import { DashboardUtilsService } from '@core/services/dashboard-utils.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TbUnit } from '@shared/models/unit.models';
 import { UnitService } from '@core/services/unit.service';
+import { HttpOptionsResult, HttpUploadOptionsResult, QueryParams, RequestConfig } from '@core/http/http-utils';
 export interface TimewindowFunctions {
     onUpdateTimewindow: (startTimeMs: number, endTimeMs: number, interval?: number) => void;
     onResetTimewindow: () => void;
@@ -42,6 +44,13 @@ export interface IWidgetUtils {
     formatValue: (value: any, dec?: number, units?: string, showZeroDecimals?: boolean) => string | undefined;
     getEntityDetailsPageURL: (id: string, entityType: EntityType) => string;
 }
+export interface IWidgetHttpUtils {
+    defaultHttpOptions: (ignoreLoading?: boolean, ignoreErrors?: boolean, resendRequest?: boolean, queryParams?: QueryParams) => HttpOptionsResult;
+    defaultHttpOptionsFromConfig: (config?: RequestConfig) => HttpOptionsResult;
+    defaultHttpOptionsFromParams: (queryParams?: QueryParams, config?: RequestConfig) => HttpOptionsResult;
+    defaultHttpUploadOptions: (ignoreLoading?: boolean, ignoreErrors?: boolean, resendRequest?: boolean, queryParams?: QueryParams) => HttpUploadOptionsResult;
+    createDefaultHttpOptions: (queryParamsOrConfig?: QueryParams | RequestConfig, config?: RequestConfig) => HttpOptionsResult;
+}
 export interface PlaceMapItemActionData {
     action: WidgetAction | WidgetActionDescriptor;
     additionalParams?: any;
@@ -57,6 +66,7 @@ export interface WidgetActionsApi {
     elementClick: ($event: Event) => void;
     cardClick: ($event: Event) => void;
     click: ($event: Event) => void;
+    invokeAction: ($event: Event, actionName: string, additionalParams?: any) => void;
     getActiveEntityInfo: () => SubscriptionEntityInfo;
     openDashboardStateInSeparateDialog: (targetDashboardStateId: string, params?: StateParams, dialogTitle?: string, hideDashboardToolbar?: boolean, dialogWidth?: number, dialogHeight?: number) => MatDialogRef<any>;
     openDashboardStateInPopover: ($event: Event, targetDashboardStateId: string, params?: StateParams, hideDashboardToolbar?: boolean, preferredPlacement?: PopoverPlacement, hideOnClickOutside?: boolean, popoverWidth?: string, popoverHeight?: string, popoverStyle?: {
@@ -109,6 +119,7 @@ export interface StateParams {
     entityLabel?: string;
     targetEntityParamName?: string;
     entityId?: EntityId;
+    entityGroupType?: EntityType;
     [key: string]: any | null;
 }
 export type StateControllerHolder = () => IStateController;
@@ -161,6 +172,7 @@ export declare class WidgetSubscriptionContext {
     entityDataService: EntityDataService;
     alarmDataService: AlarmDataService;
     utils: UtilsService;
+    datePipe: DatePipe;
     dashboardUtils: DashboardUtilsService;
     raf: RafService;
     unitService: UnitService;
@@ -188,6 +200,10 @@ export interface WidgetSubscriptionCallbacks {
     onRpcFailed?: (subscription: IWidgetSubscription) => void;
     onRpcErrorCleared?: (subscription: IWidgetSubscription) => void;
 }
+export interface WidgetDataGenerationOptions {
+    fixedGenDataPoints?: number;
+    generateLatestUpdates?: boolean;
+}
 export interface WidgetSubscriptionOptions {
     type?: widgetType;
     stateData?: boolean;
@@ -214,6 +230,7 @@ export interface WidgetSubscriptionOptions {
     decimals?: number;
     units?: TbUnit;
     callbacks?: WidgetSubscriptionCallbacks;
+    dataGenerationOptions?: WidgetDataGenerationOptions;
 }
 export interface SubscriptionEntityInfo {
     entityId: EntityId;
@@ -272,6 +289,9 @@ export interface IWidgetSubscription {
     paginatedDataSubscriptionUpdated: EventEmitter<void>;
     subscribeForAlarms(pageLink: AlarmDataPageLink, keyFilters: KeyFilter[]): void;
     isDataResolved(): boolean;
+    exportData(): {
+        [key: string]: any;
+    }[];
     destroy(): void;
     update(): void;
     [key: string]: any;

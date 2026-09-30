@@ -4,6 +4,8 @@ import { ExportableEntity } from '@shared/models/base-data';
 import { EntityRelation } from '@shared/models/relation.models';
 import { Device, DeviceCredentials } from '@shared/models/device.models';
 import { RuleChain, RuleChainMetaData } from '@shared/models/rule-chain.models';
+import { EntityGroup } from '@shared/models/entity-group.models';
+import { GroupPermission } from '@shared/models/group-permission.models';
 export declare const exportableEntityTypes: Array<EntityType>;
 export declare const entityTypesWithoutRelatedData: Set<EntityType | AliasEntityType>;
 export interface VersionCreateConfig {
@@ -11,6 +13,8 @@ export interface VersionCreateConfig {
     saveAttributes: boolean;
     saveCredentials: boolean;
     saveCalculatedFields: boolean;
+    savePermissions: boolean;
+    saveGroupEntities: boolean;
 }
 export declare enum VersionCreateRequestType {
     SINGLE_ENTITY = "SINGLE_ENTITY",
@@ -52,6 +56,9 @@ export interface VersionLoadConfig {
     loadAttributes: boolean;
     loadCredentials: boolean;
     loadCalculatedFields: boolean;
+    loadPermissions: boolean;
+    loadGroupEntities: boolean;
+    autoGenerateIntegrationKey: boolean;
 }
 export declare enum VersionLoadRequestType {
     SINGLE_ENTITY = "SINGLE_ENTITY",
@@ -62,6 +69,7 @@ export interface VersionLoadRequest {
     type: VersionLoadRequestType;
 }
 export interface SingleEntityVersionLoadRequest extends VersionLoadRequest {
+    internalEntityId: EntityId;
     externalEntityId: EntityId;
     config: VersionLoadConfig;
     type: VersionLoadRequestType.SINGLE_ENTITY;
@@ -103,10 +111,14 @@ export interface EntityTypeLoadResult {
     created: number;
     updated: number;
     deleted: number;
+    groupsCreated: number;
+    groupsUpdated: number;
+    groupsDeleted: number;
 }
 export declare enum EntityLoadErrorType {
     DEVICE_CREDENTIALS_CONFLICT = "DEVICE_CREDENTIALS_CONFLICT",
     MISSING_REFERENCED_ENTITY = "MISSING_REFERENCED_ENTITY",
+    INTEGRATION_ROUTING_KEY_CONFLICT = "INTEGRATION_ROUTING_KEY_CONFLICT",
     RUNTIME = "RUNTIME"
 }
 export declare const entityLoadErrorTranslationMap: Map<EntityLoadErrorType, string>;
@@ -144,6 +156,10 @@ export interface DeviceExportData extends EntityExportData<Device> {
 export interface RuleChainExportData extends EntityExportData<RuleChain> {
     metaData: RuleChainMetaData;
 }
+export interface EntityGroupExportData extends EntityExportData<EntityGroup> {
+    permissions: Array<GroupPermission>;
+    groupEntities: boolean;
+}
 export interface EntityDataDiff {
     currentVersion: EntityExportData<any>;
     otherVersion: EntityExportData<any>;
@@ -154,5 +170,8 @@ export interface EntityDataInfo {
     hasAttributes: boolean;
     hasCredentials: boolean;
     hasCalculatedFields: boolean;
+    hasPermissions: boolean;
+    hasGroupEntities: boolean;
 }
+export declare const overrideEntityTypeTranslations: Map<EntityType | AliasEntityType, string>;
 export declare const typesWithCalculatedFields: Set<EntityType | AliasEntityType>;

@@ -1,0 +1,32 @@
+import { EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, UntypedFormGroup, ValidationErrors, Validator } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ConverterLibraryService } from '@core/http/converter-library.service';
+import { IntegrationType } from '@shared/models/integration.models';
+import { Converter, ConverterLibraryInfo, ConverterType } from '@shared/models/converter.models';
+import * as i0 from "@angular/core";
+export declare class ConverterLibraryComponent implements ControlValueAccessor, Validator, OnChanges, OnDestroy, OnInit {
+    private fb;
+    private converterLibraryService;
+    converterType: ConverterType;
+    integrationType: IntegrationType;
+    set interacted(interacted: boolean);
+    converter: EventEmitter<Converter>;
+    libraryFormGroup: UntypedFormGroup;
+    converter$: Subscription;
+    private destroy$;
+    private modelValue;
+    private propagateChange;
+    constructor(fb: FormBuilder, converterLibraryService: ConverterLibraryService);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
+    setDisabledState(isDisabled: boolean): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(_: any): void;
+    private updateView;
+    writeValue(converterLibraryValue: ConverterLibraryInfo): void;
+    validate(): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ConverterLibraryComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ConverterLibraryComponent, "tb-converter-library", never, { "converterType": { "alias": "converterType"; "required": false; }; "integrationType": { "alias": "integrationType"; "required": false; }; "interacted": { "alias": "interacted"; "required": false; }; }, { "converter": "converter"; }, never, never, false, never>;
+}

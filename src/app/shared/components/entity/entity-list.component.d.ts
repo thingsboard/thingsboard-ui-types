@@ -9,6 +9,7 @@ import { EntityService } from '@core/http/entity.service';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipGrid } from '@angular/material/chips';
 import { MatFormFieldAppearance, SubscriptSizing } from '@angular/material/form-field';
+import { EntityInfoData } from '@shared/models/entity.models';
 import * as i0 from "@angular/core";
 export declare class EntityListComponent implements ControlValueAccessor, OnInit, OnChanges {
     private translate;
@@ -16,12 +17,16 @@ export declare class EntityListComponent implements ControlValueAccessor, OnInit
     private fb;
     entityListFormGroup: UntypedFormGroup;
     private modelValue;
+    fetchEntitiesFunction: (searchText?: string) => Observable<Array<BaseData<EntityId>>>;
+    appearance: MatFormFieldAppearance;
     entityType: EntityType;
-    subType: string;
+    entitySubType: string;
+    entityListText: string;
+    noEntitiesText: string;
+    entitiesRequiredText: string;
     labelText: string;
     placeholderText: any;
     requiredText: any;
-    appearance: MatFormFieldAppearance;
     private requiredValue;
     get required(): boolean;
     set required(value: boolean);
@@ -49,7 +54,7 @@ export declare class EntityListComponent implements ControlValueAccessor, OnInit
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     setDisabledState(isDisabled: boolean): void;
-    writeValue(value: Array<string> | null): void;
+    writeValue(value: Array<string> | Array<EntityInfoData> | null): void;
     validate(): ValidationErrors | null;
     private reset;
     private add;
@@ -58,7 +63,9 @@ export declare class EntityListComponent implements ControlValueAccessor, OnInit
     private fetchEntities;
     onFocus(): void;
     private clear;
+    get placeholder(): string;
+    get requiredLabel(): string;
     textIsNotEmpty(text: string): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityListComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityListComponent, "tb-entity-list", never, { "entityType": { "alias": "entityType"; "required": false; }; "subType": { "alias": "subType"; "required": false; }; "labelText": { "alias": "labelText"; "required": false; }; "placeholderText": { "alias": "placeholderText"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "subscriptSizing": { "alias": "subscriptSizing"; "required": false; }; "hint": { "alias": "hint"; "required": false; }; "syncIdsWithDB": { "alias": "syncIdsWithDB"; "required": false; }; "inlineField": { "alias": "inlineField"; "required": false; }; "allowCreateNew": { "alias": "allowCreateNew"; "required": false; }; "useEntityDisplayName": { "alias": "useEntityDisplayName"; "required": false; }; }, { "createNew": "createNew"; }, never, ["[matSuffix]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityListComponent, "tb-entity-list", never, { "fetchEntitiesFunction": { "alias": "fetchEntitiesFunction"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "entityType": { "alias": "entityType"; "required": false; }; "entitySubType": { "alias": "entitySubType"; "required": false; }; "entityListText": { "alias": "entityListText"; "required": false; }; "noEntitiesText": { "alias": "noEntitiesText"; "required": false; }; "entitiesRequiredText": { "alias": "entitiesRequiredText"; "required": false; }; "labelText": { "alias": "labelText"; "required": false; }; "placeholderText": { "alias": "placeholderText"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "subscriptSizing": { "alias": "subscriptSizing"; "required": false; }; "hint": { "alias": "hint"; "required": false; }; "syncIdsWithDB": { "alias": "syncIdsWithDB"; "required": false; }; "inlineField": { "alias": "inlineField"; "required": false; }; "allowCreateNew": { "alias": "allowCreateNew"; "required": false; }; "useEntityDisplayName": { "alias": "useEntityDisplayName"; "required": false; }; }, { "createNew": "createNew"; }, never, ["[matSuffix]"], false, never>;
 }

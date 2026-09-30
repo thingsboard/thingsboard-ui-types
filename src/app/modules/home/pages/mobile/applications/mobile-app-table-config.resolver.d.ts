@@ -6,6 +6,7 @@ import { MobileAppService } from '@core/http/mobile-app.service';
 import { MobileApp } from '@shared/models/mobile-app.models';
 import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 import { MatDialog } from '@angular/material/dialog';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class MobileAppTableConfigResolver {
     private translate;
@@ -13,8 +14,9 @@ export declare class MobileAppTableConfigResolver {
     private mobileAppService;
     private truncatePipe;
     private dialog;
+    private userPermissionsService;
     private readonly config;
-    constructor(translate: TranslateService, datePipe: DatePipe, mobileAppService: MobileAppService, truncatePipe: TruncatePipe, dialog: MatDialog);
+    constructor(translate: TranslateService, datePipe: DatePipe, mobileAppService: MobileAppService, truncatePipe: TruncatePipe, dialog: MatDialog, userPermissionsService: UserPermissionsService);
     resolve(_route: ActivatedRouteSnapshot): EntityTableConfig<MobileApp>;
     private configureCellActions;
     private deleteEntity;

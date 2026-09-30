@@ -1,10 +1,8 @@
-import { ActivatedRouteSnapshot } from '@angular/router';
-import { DashboardPageComponent } from '@home/components/dashboard-page/dashboard-page.component';
-import { BreadCrumbLabelFunction } from '@shared/components/breadcrumb';
-import { Observable } from 'rxjs';
-import { Dashboard } from '@app/shared/models/dashboard.models';
+import { ActivatedRouteSnapshot, Route } from '@angular/router';
+import { Dashboard } from '@shared/models/dashboard.models';
 import { DashboardService } from '@core/http/dashboard.service';
 import { DashboardUtilsService } from '@core/services/dashboard-utils.service';
+import { Observable } from 'rxjs';
 import { UserSettingsService } from '@core/http/user-settings.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
@@ -20,7 +18,8 @@ export declare class DashboardResolver {
     static ɵfac: i0.ɵɵFactoryDeclaration<DashboardResolver, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<DashboardResolver>;
 }
-export declare const dashboardBreadcumbLabelFunction: BreadCrumbLabelFunction<DashboardPageComponent>;
+export declare const dashboardGroupsRoute: Route;
+export declare const dashboardsRoute: (root?: boolean) => Route;
 export declare class DashboardRoutingModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<DashboardRoutingModule, never>;
     static ɵmod: i0.ɵɵNgModuleDeclaration<DashboardRoutingModule, never, [typeof i1.RouterModule], [typeof i1.RouterModule]>;

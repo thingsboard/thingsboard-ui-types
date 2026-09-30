@@ -1,6 +1,6 @@
 import { EntityField } from '@shared/models/entity.models';
-import { EntitySearchDirection } from '@shared/models/relation.models';
-import { EntityTypeFilter } from '@shared/models/alias.models';
+import { EntitySearchDirection, RelationEntityTypeFilter } from '@shared/models/relation.models';
+import { EntityType } from '@shared/models/entity-type.models';
 export declare enum OriginatorSource {
     CUSTOMER = "CUSTOMER",
     TENANT = "TENANT",
@@ -93,14 +93,53 @@ export declare enum HttpRequestType {
     DELETE = "DELETE",
     PATCH = "PATCH"
 }
+export declare enum OwnerType {
+    TENANT = "TENANT",
+    CUSTOMER = "CUSTOMER"
+}
+export declare const ownerTypeTranslations: Map<OwnerType, string>;
+export declare enum AggMathFunction {
+    MIN = "MIN",
+    MAX = "MAX",
+    SUM = "SUM",
+    AVG = "AVG",
+    COUNT = "COUNT",
+    COUNT_UNIQUE = "COUNT_UNIQUE"
+}
+export declare const aggMathFunctionTranslations: Map<AggMathFunction, string>;
+export declare const allowedEntityGroupTypes: Array<EntityType>;
+export declare enum AggIntervalType {
+    HOUR = "HOUR",
+    DAY = "DAY",
+    WEEK = "WEEK",
+    WEEK_SUN_SAT = "WEEK_SUN_SAT",
+    MONTH = "MONTH",
+    YEAR = "YEAR",
+    CUSTOM = "CUSTOM"
+}
+export declare const aggIntervalTypeTranslations: Map<AggIntervalType, string>;
+export declare enum IntervalPersistPolicy {
+    ON_EACH_CHECK = "ON_EACH_CHECK",
+    ON_EACH_CHECK_AFTER_INTERVAL_END = "ON_EACH_CHECK_AFTER_INTERVAL_END",
+    ON_EACH_MESSAGE = "ON_EACH_MESSAGE"
+}
+export declare const intervalPersistPolicyTranslations: Map<IntervalPersistPolicy, string>;
+export declare enum StatePersistPolicy {
+    ON_EACH_CHANGE = "ON_EACH_CHANGE",
+    PERIODICALLY = "PERIODICALLY"
+}
+export declare const statePersistPolicyTranslations: Map<StatePersistPolicy, string>;
 export declare const ToByteStandartCharsetTypes: string[];
 export declare const ToByteStandartCharsetTypeTranslations: Map<string, string>;
 export interface RelationsQuery {
     fetchLastLevelOnly: boolean;
     direction: EntitySearchDirection;
     maxLevel?: number;
-    filters?: EntityTypeFilter[];
+    filters?: RelationEntityTypeFilter[];
 }
+export declare const defaultRelationsQuery: RelationsQuery;
+export type ParentEntitiesQueryType = 'single' | 'group' | 'relationsQuery';
+export declare function prepareParentEntitiesQuery(parentEntitiesQuery: any): any;
 export interface FunctionData {
     value: MathFunction;
     name: string;
@@ -183,7 +222,7 @@ export declare enum AttributeScopeResult {
     SHARED_SCOPE = "SHARED_SCOPE",
     SERVER_SCOPE = "SERVER_SCOPE"
 }
-export declare const AttributeScopeMap: Map<AttributeScope, string>;
+export declare const AttributeScopeMap: Map<AttributeScope | AttributeScopeResult, string>;
 export declare enum PresenceMonitoringStrategy {
     ON_FIRST_MESSAGE = "ON_FIRST_MESSAGE",
     ON_EACH_MESSAGE = "ON_EACH_MESSAGE"

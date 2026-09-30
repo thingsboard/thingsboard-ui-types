@@ -12,6 +12,8 @@ export declare enum ColorType {
     cmyk = "cmyk"
 }
 export declare class ColorPickerComponent implements ControlValueAccessor, OnDestroy {
+    disableAlpha: boolean;
+    defaultColor: string;
     presentations: ColorType[];
     control: ColorPickerControl;
     presentationControl: UntypedFormControl;
@@ -29,5 +31,5 @@ export declare class ColorPickerComponent implements ControlValueAccessor, OnDes
     ngOnDestroy(): void;
     getValueByType(color: Color, type: ColorType): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<ColorPickerComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<ColorPickerComponent, "tb-color-picker", never, {}, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ColorPickerComponent, "tb-color-picker", never, { "disableAlpha": { "alias": "disableAlpha"; "required": false; }; "defaultColor": { "alias": "defaultColor"; "required": false; }; }, {}, never, never, false, never>;
 }

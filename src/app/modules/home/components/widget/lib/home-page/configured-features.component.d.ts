@@ -17,8 +17,7 @@ export declare class ConfiguredFeaturesComponent extends PageComponent implement
     featuresInfo: FeaturesInfo;
     rowHeight: string;
     gutterSize: string;
-    bottomColspan: number;
-    lastColspan: number;
+    colspan: number;
     private observeBreakpointSubscription;
     constructor(store: Store<AppState>, cd: ChangeDetectorRef, adminService: AdminService, translate: TranslateService, breakpointObserver: BreakpointObserver);
     ngOnInit(): void;

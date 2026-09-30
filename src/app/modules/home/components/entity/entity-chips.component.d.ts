@@ -1,13 +1,16 @@
 import { OnChanges, SimpleChanges } from '@angular/core';
-import { BaseData } from '@shared/models/base-data';
+import { BaseData, GroupEntityInfo } from '@shared/models/base-data';
 import { EntityId } from '@shared/models/id/entity-id';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class EntityChipsComponent implements OnChanges {
-    entity: BaseData<EntityId>;
+    private userPermissionsService;
+    entity: BaseData<EntityId> | GroupEntityInfo<EntityId>;
     key: string;
     detailsPagePrefixUrl: string;
     entityDetailsPrefixUrl: string;
     subEntities: Array<BaseData<EntityId>>;
+    constructor(userPermissionsService: UserPermissionsService);
     ngOnChanges(changes: SimpleChanges): void;
     private update;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityChipsComponent, never>;

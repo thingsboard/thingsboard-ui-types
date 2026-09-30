@@ -7,16 +7,25 @@ import { Router } from '@angular/router';
 import { Device, DeviceProfileInfo, DeviceTransportType } from '@shared/models/device.models';
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { EntityType } from '@shared/models/entity-type.models';
+import { EntityId } from '@shared/models/id/entity-id';
 import { Observable } from 'rxjs';
 import { DeviceService } from '@core/http/device.service';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
+import { EntityGroup } from '@shared/models/entity-group.models';
 import * as i0 from "@angular/core";
+export interface DeviceWizardDialogData {
+    customerId?: string;
+    entityGroup?: EntityGroup;
+}
 export declare class DeviceWizardDialogComponent extends DialogComponent<DeviceWizardDialogComponent, Device> {
     protected store: Store<AppState>;
     protected router: Router;
+    data: DeviceWizardDialogData;
     dialogRef: MatDialogRef<DeviceWizardDialogComponent, Device>;
     private deviceService;
+    private userPermissionsService;
     private breakpointObserver;
     private fb;
     addDeviceWizardStepper: MatStepper;
@@ -26,10 +35,14 @@ export declare class DeviceWizardDialogComponent extends DialogComponent<DeviceW
     credentialsOptionalStep: boolean;
     showNext: boolean;
     entityType: typeof EntityType;
+    readonly isTenantAdmin: boolean;
     deviceWizardFormGroup: FormGroup;
     credentialsFormGroup: FormGroup;
+    initialOwnerId: EntityId;
+    private entityGroup;
+    private customerId;
     private currentDeviceProfileTransportType;
-    constructor(store: Store<AppState>, router: Router, dialogRef: MatDialogRef<DeviceWizardDialogComponent, Device>, deviceService: DeviceService, breakpointObserver: BreakpointObserver, fb: FormBuilder);
+    constructor(store: Store<AppState>, router: Router, data: DeviceWizardDialogData, dialogRef: MatDialogRef<DeviceWizardDialogComponent, Device>, deviceService: DeviceService, userPermissionsService: UserPermissionsService, breakpointObserver: BreakpointObserver, fb: FormBuilder);
     cancel(): void;
     previousStep(): void;
     nextStep(): void;

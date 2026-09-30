@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { UnitSystem } from '@shared/models/unit.models';
 import { UnitService } from '@core/services/unit.service';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class ProfileComponent extends PageComponent implements OnInit, HasConfirmForm {
     protected store: Store<AppState>;
@@ -19,19 +20,20 @@ export declare class ProfileComponent extends PageComponent implements OnInit, H
     private authService;
     private unitService;
     private fb;
+    private userPermissionsService;
     authorities: typeof Authority;
     profile: UntypedFormGroup;
     user: User;
-    languageList: any;
+    languageList: [locelCode: string, localeLanguage: string];
     UnitSystems: UnitSystem[];
-    private readonly authUser;
-    constructor(store: Store<AppState>, route: ActivatedRoute, userService: UserService, authService: AuthService, unitService: UnitService, fb: UntypedFormBuilder);
+    authState: import("../../../../core/public-api").AuthState;
+    readonly: boolean;
+    constructor(store: Store<AppState>, route: ActivatedRoute, userService: UserService, authService: AuthService, unitService: UnitService, fb: UntypedFormBuilder, userPermissionsService: UserPermissionsService);
     ngOnInit(): void;
     private buildProfileForm;
     save(): void;
     private userLoaded;
     confirmForm(): UntypedFormGroup;
-    isSysAdmin(): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<ProfileComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<ProfileComponent, "tb-profile", never, {}, {}, never, never, false, never>;
 }

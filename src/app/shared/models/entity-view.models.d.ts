@@ -1,4 +1,4 @@
-import { BaseData, ExportableEntity } from '@shared/models/base-data';
+import { BaseData, ExportableEntity, GroupEntityInfo } from '@shared/models/base-data';
 import { TenantId } from '@shared/models/id/tenant-id';
 import { CustomerId } from '@shared/models/id/customer-id';
 import { EntityViewId } from '@shared/models/id/entity-view-id';
@@ -25,10 +25,7 @@ export interface EntityView extends BaseData<EntityViewId>, HasTenantId, HasVers
     endTimeMs: number;
     additionalInfo?: any;
 }
-export interface EntityViewInfo extends EntityView {
-    customerTitle: string;
-    customerIsPublic: boolean;
-}
+export type EntityViewInfo = EntityView & GroupEntityInfo<EntityViewId>;
 export interface EntityViewSearchQuery extends EntitySearchQuery {
     entityViewTypes: Array<string>;
 }

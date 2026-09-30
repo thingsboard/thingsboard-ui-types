@@ -11,19 +11,21 @@ import { WidgetTypeId } from '@shared/models/id/widget-type-id';
 import { Router } from '@angular/router';
 import { IBasicWidgetConfigComponent } from '@home/components/widget/config/widget-config.component.models';
 import { ResourcesService } from '@core/services/resources.service';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class WidgetService {
     private http;
+    private userPermissionsService;
     private router;
     private resourcesService;
     private allWidgetsBundles;
     private systemWidgetsBundles;
     private tenantWidgetsBundles;
     private widgetsInfoInMemoryCache;
-    private loadWidgetsBundleCacheSubject;
+    private widgetsBundleCacheSubject;
     private basicWidgetSettingsComponentsMap;
     private widgetSettingsComponentsMap;
-    constructor(http: HttpClient, router: Router, resourcesService: ResourcesService);
+    constructor(http: HttpClient, userPermissionsService: UserPermissionsService, router: Router, resourcesService: ResourcesService);
     getWidgetScopeVariables(): string[];
     getAllWidgetsBundles(config?: RequestConfig): Observable<Array<WidgetsBundle>>;
     getSystemWidgetsBundles(config?: RequestConfig): Observable<Array<WidgetsBundle>>;
@@ -31,6 +33,7 @@ export declare class WidgetService {
     getWidgetBundles(pageLink: PageLink, fullSearch?: boolean, tenantOnly?: boolean, scadaFirst?: boolean, config?: RequestConfig): Observable<PageData<WidgetsBundle>>;
     getWidgetsBundle(widgetsBundleId: string, config?: RequestConfig): Observable<WidgetsBundle>;
     exportWidgetsBundle(widgetsBundleId: string, config?: RequestConfig): Observable<WidgetsBundle>;
+    getWidgetsBundlesByIds(widgetsBundleIds: Array<string>, config?: RequestConfig): Observable<Array<WidgetsBundle>>;
     saveWidgetsBundle(widgetsBundle: WidgetsBundle, config?: RequestConfig): Observable<WidgetsBundle>;
     updateWidgetsBundleWidgetTypes(widgetsBundleId: string, widgetTypeIds: Array<string>, config?: RequestConfig): Observable<void>;
     updateWidgetsBundleWidgetFqns(widgetsBundleId: string, widgetTypeFqns: Array<string>, config?: RequestConfig): Observable<void>;
@@ -51,6 +54,7 @@ export declare class WidgetService {
     getWidgetTypes(pageLink: PageLink, tenantOnly?: boolean, fullSearch?: boolean, scadaFirst?: boolean, deprecatedFilter?: DeprecatedFilter, widgetTypes?: Array<widgetType>, config?: RequestConfig): Observable<PageData<WidgetTypeInfo>>;
     addWidgetFqnToWidgetBundle(widgetsBundleId: string, fqn: string, config?: RequestConfig): Observable<void>;
     getWidgetTemplate(widgetTypeParam: widgetType, config?: RequestConfig): Observable<WidgetInfo>;
+    clearWidgetInfoInMemoryCache(): void;
     getWidgetInfoFromCache(fullFqn: string): WidgetInfo | undefined;
     putWidgetInfoToCache(widgetInfo: WidgetInfo): void;
     registerBasicWidgetConfigComponents(module: any): void;
@@ -61,7 +65,6 @@ export declare class WidgetService {
     putWidgetSettingsComponentToMap(selector: string, compType: Type<IWidgetSettingsComponent>): void;
     private widgetTypeUpdated;
     deleteWidgetInfoFromCache(fullFqn: string): void;
-    getWidgetsBundlesByIds(widgetsBundleIds: Array<string>, config?: RequestConfig): Observable<Array<WidgetsBundle>>;
     private loadWidgetsBundleCache;
     private invalidateWidgetsBundleCache;
     static ɵfac: i0.ɵɵFactoryDeclaration<WidgetService, never>;

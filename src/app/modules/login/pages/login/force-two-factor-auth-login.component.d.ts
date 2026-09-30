@@ -9,6 +9,7 @@ import { AccountTwoFaSettings, BackupCodeTwoFactorAuthAccountConfig, TwoFactorAu
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from '@core/services/dialog.service';
 import { ImportExportService } from '@shared/import-export/import-export.service';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 import * as i0 from "@angular/core";
 declare enum ForceTwoFAState {
     SETUP = "setup",
@@ -34,6 +35,8 @@ export declare class ForceTwoFactorAuthLoginComponent extends PageComponent impl
     dialog: MatDialog;
     dialogService: DialogService;
     private fb;
+    wl: WhiteLabelingService;
+    class: string;
     TwoFactorAuthProviderType: typeof TwoFactorAuthProviderType;
     providersData: Map<TwoFactorAuthProviderType, import("@shared/models/two-factor-auth.models").TwoFactorAuthProviderLoginData>;
     allowProviders: TwoFactorAuthProviderType[];
@@ -58,7 +61,7 @@ export declare class ForceTwoFactorAuthLoginComponent extends PageComponent impl
     private authAccountConfig;
     private useByDefault;
     canvasRef: ElementRef<HTMLCanvasElement>;
-    constructor(store: Store<AppState>, authService: AuthService, twoFaService: TwoFactorAuthenticationService, importExportService: ImportExportService, dialog: MatDialog, dialogService: DialogService, fb: UntypedFormBuilder);
+    constructor(store: Store<AppState>, authService: AuthService, twoFaService: TwoFactorAuthenticationService, importExportService: ImportExportService, dialog: MatDialog, dialogService: DialogService, fb: UntypedFormBuilder, wl: WhiteLabelingService);
     ngOnInit(): void;
     goBackByType(type: TwoFactorAuthProviderType): void;
     get isAnyProviderAvailable(): boolean;

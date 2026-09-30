@@ -12,6 +12,7 @@ import { EntityRelationService } from '@core/http/entity-relation.service';
 import { EntityRelation, EntityRelationInfo, EntitySearchDirection } from '@shared/models/relation.models';
 import { EntityId } from '@shared/models/id/entity-id';
 import { RelationsDatasource } from '../../models/datasource/relation-datasource';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { FormBuilder } from '@angular/forms';
 import * as i0 from "@angular/core";
 export declare class RelationTableComponent extends PageComponent implements AfterViewInit, OnInit, OnDestroy {
@@ -19,6 +20,7 @@ export declare class RelationTableComponent extends PageComponent implements Aft
     private entityRelationService;
     translate: TranslateService;
     dialog: MatDialog;
+    private userPermissionsService;
     private dialogService;
     private cd;
     private elementRef;
@@ -39,13 +41,16 @@ export declare class RelationTableComponent extends PageComponent implements Aft
     viewsInited: boolean;
     set active(active: boolean);
     set entityId(entityId: EntityId);
+    private readonlyValue;
+    get readonly(): boolean;
+    set readonly(value: boolean);
     searchInputField: ElementRef;
     paginator: MatPaginator;
     sort: MatSort;
     textSearch: import("@angular/forms").FormControl<string>;
     private widgetResize$;
     private destroy$;
-    constructor(store: Store<AppState>, entityRelationService: EntityRelationService, translate: TranslateService, dialog: MatDialog, dialogService: DialogService, cd: ChangeDetectorRef, elementRef: ElementRef, fb: FormBuilder, zone: NgZone);
+    constructor(store: Store<AppState>, entityRelationService: EntityRelationService, translate: TranslateService, dialog: MatDialog, userPermissionsService: UserPermissionsService, dialogService: DialogService, cd: ChangeDetectorRef, elementRef: ElementRef, fb: FormBuilder, zone: NgZone);
     ngOnInit(): void;
     ngOnDestroy(): void;
     updateColumns(): void;
@@ -58,9 +63,12 @@ export declare class RelationTableComponent extends PageComponent implements Aft
     reloadRelations(): void;
     addRelation($event: Event): void;
     editRelation($event: Event, relation: EntityRelationInfo): void;
+    showRelation($event: Event, relation: EntityRelationInfo): void;
+    isRelationEditable(relation: EntityRelationInfo): boolean;
+    onRowClick($event: Event, groupPermission: any): void;
     deleteRelation($event: Event, relation: EntityRelationInfo): void;
     deleteRelations($event: Event): void;
-    openRelationDialog($event: Event, relation?: EntityRelation): void;
+    openRelationDialog($event: Event, relation?: EntityRelation, readonly?: boolean): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<RelationTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<RelationTableComponent, "tb-relation-table", never, { "active": { "alias": "active"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RelationTableComponent, "tb-relation-table", never, { "active": { "alias": "active"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
 }

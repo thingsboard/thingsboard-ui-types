@@ -1,4 +1,4 @@
-import { BaseData } from '@shared/models/base-data';
+import { BaseData, GroupEntityInfo } from '@shared/models/base-data';
 import { TenantId } from '@shared/models/id/tenant-id';
 import { CustomerId } from '@shared/models/id/customer-id';
 import { EdgeId } from '@shared/models/id/edge-id';
@@ -7,6 +7,8 @@ import { RuleChainId } from '@shared/models/id/rule-chain-id';
 import { BaseEventBody } from '@shared/models/event.models';
 import { EventId } from '@shared/models/id/event-id';
 import { HasTenantId, HasVersion } from '@shared/models/entity.models';
+import { EntityType } from '@shared/models/entity-type.models';
+import { AuthUser } from '@shared/models/user.model';
 export interface Edge extends BaseData<EdgeId>, HasTenantId, HasVersion {
     tenantId?: TenantId;
     customerId?: CustomerId;
@@ -14,14 +16,14 @@ export interface Edge extends BaseData<EdgeId>, HasTenantId, HasVersion {
     type: string;
     secret: string;
     routingKey: string;
+    cloudEndpoint: string;
+    edgeLicenseKey: string;
     label?: string;
     additionalInfo?: any;
     rootRuleChainId?: RuleChainId;
 }
-export interface EdgeInfo extends Edge {
-    customerTitle: string;
-    customerIsPublic: boolean;
-}
+export type EdgeInfo = Edge & GroupEntityInfo<EdgeId>;
+export declare const edgeCreationAllowed: (authUser: AuthUser) => boolean;
 export interface EdgeSearchQuery extends EntitySearchQuery {
     edgeTypes: Array<string>;
 }
@@ -45,7 +47,16 @@ export declare enum EdgeEventType {
     WIDGET_TYPE = "WIDGET_TYPE",
     ADMIN_SETTINGS = "ADMIN_SETTINGS",
     OTA_PACKAGE = "OTA_PACKAGE",
-    QUEUE = "QUEUE"
+    QUEUE = "QUEUE",
+    ENTITY_GROUP = "ENTITY_GROUP",
+    SCHEDULER_EVENT = "SCHEDULER_EVENT",
+    WHITE_LABELING = "WHITE_LABELING",
+    LOGIN_WHITE_LABELING = "LOGIN_WHITE_LABELING",
+    CUSTOM_TRANSLATION = "CUSTOM_TRANSLATION",
+    ROLE = "ROLE",
+    GROUP_PERMISSION = "GROUP_PERMISSION",
+    INTEGRATION = "INTEGRATION",
+    CONVERTER = "CONVERTER"
 }
 export declare enum EdgeEventActionType {
     ADDED = "ADDED",
@@ -56,8 +67,6 @@ export declare enum EdgeEventActionType {
     ATTRIBUTES_DELETED = "ATTRIBUTES_DELETED",
     TIMESERIES_UPDATED = "TIMESERIES_UPDATED",
     CREDENTIALS_UPDATED = "CREDENTIALS_UPDATED",
-    ASSIGNED_TO_CUSTOMER = "ASSIGNED_TO_CUSTOMER",
-    UNASSIGNED_FROM_CUSTOMER = "UNASSIGNED_FROM_CUSTOMER",
     RELATION_ADD_OR_UPDATE = "RELATION_ADD_OR_UPDATE",
     RELATION_DELETED = "RELATION_DELETED",
     RPC_CALL = "RPC_CALL",
@@ -68,7 +77,10 @@ export declare enum EdgeEventActionType {
     ASSIGNED_TO_EDGE = "ASSIGNED_TO_EDGE",
     UNASSIGNED_FROM_EDGE = "UNASSIGNED_FROM_EDGE",
     CREDENTIALS_REQUEST = "CREDENTIALS_REQUEST",
-    ENTITY_MERGE_REQUEST = "ENTITY_MERGE_REQUEST"
+    ENTITY_MERGE_REQUEST = "ENTITY_MERGE_REQUEST",
+    ADDED_TO_ENTITY_GROUP = "ADDED_TO_ENTITY_GROUP",
+    REMOVED_FROM_ENTITY_GROUP = "REMOVED_FROM_ENTITY_GROUP",
+    CHANGE_OWNER = "CHANGE_OWNER"
 }
 export declare enum EdgeEventStatus {
     DEPLOYED = "DEPLOYED",
@@ -100,6 +112,7 @@ export declare enum EdgeInstructionsMethod {
     ubuntu = 1,
     centos = 2
 }
+export declare const edgeEntityGroupTypes: EntityType[];
 export declare const edgeVersionAttributeKey = "edgeVersion";
 export declare enum EdgeConnectionEvent {
     CONNECTED = "CONNECTED",

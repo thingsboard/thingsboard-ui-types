@@ -2,6 +2,7 @@ import { ElementRef, OnChanges, Renderer2, SimpleChanges, ViewContainerRef } fro
 import { TbPopoverService } from '@shared/components/popover.service';
 import { PopoverPlacement } from '@shared/components/popover.models';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import * as i0 from "@angular/core";
@@ -11,6 +12,7 @@ export declare class HelpPopupComponent implements OnChanges {
     private renderer;
     private popoverService;
     private translate;
+    wl: WhiteLabelingService;
     toggleHelpButton: ElementRef;
     toggleHelpTextButton: ElementRef;
     helpId: string;
@@ -32,7 +34,7 @@ export declare class HelpPopupComponent implements OnChanges {
     hintMode: boolean;
     triggerSafeHtml: SafeHtml;
     textMode: boolean;
-    constructor(viewContainerRef: ViewContainerRef, sanitizer: DomSanitizer, renderer: Renderer2, popoverService: TbPopoverService, translate: TranslateService);
+    constructor(viewContainerRef: ViewContainerRef, sanitizer: DomSanitizer, renderer: Renderer2, popoverService: TbPopoverService, translate: TranslateService, wl: WhiteLabelingService);
     ngOnChanges(_changes: SimpleChanges): void;
     disabled(): boolean;
     toggleHelp(): void;

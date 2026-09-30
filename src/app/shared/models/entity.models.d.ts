@@ -1,5 +1,5 @@
 import { EntityType } from '@shared/models/entity-type.models';
-import { AttributeData } from './telemetry/telemetry.models';
+import { AttributeData, AttributeScope } from './telemetry/telemetry.models';
 import { EntityId } from '@shared/models/id/entity-id';
 import { DeviceCredentialMQTTBasic } from '@shared/models/device.models';
 import { Lwm2mSecurityConfigModels } from '@shared/models/lwm2m-security-config.models';
@@ -38,6 +38,8 @@ export interface ImportEntityData {
 export interface EdgeImportEntityData extends ImportEntityData {
     secret: string;
     routingKey: string;
+    cloudEndpoint: string;
+    edgeLicenseKey: string;
 }
 export interface ImportEntitiesResultInfo {
     create?: {
@@ -61,6 +63,19 @@ export interface EntitiesKeysByQuery {
     attribute: Array<string>;
     timeseries: Array<string>;
     entityTypes: EntityType[];
+}
+export interface EntityKeySample {
+    key: string;
+    sample?: {
+        ts: number;
+        value: any;
+    };
+}
+export interface EntitiesKeysByQueryV2 {
+    totalEntities: number;
+    entityTypes: EntityType[];
+    timeseries: EntityKeySample[];
+    attributes: Partial<Record<AttributeScope, EntityKeySample[]>>;
 }
 export declare const entityFields: {
     [fieldName: string]: EntityField;
@@ -97,3 +112,8 @@ export interface SaveEntityParams {
     uniquifyStrategy?: UniquifyStrategy;
     uniquifySeparator?: string;
 }
+export interface SaveEntityWithGroupParams extends SaveEntityParams {
+    entityGroupId?: string;
+    entityGroupIds?: string[];
+}
+export declare function toSaveParams<T extends SaveEntityWithGroupParams>(params: string | string[] | T): T;

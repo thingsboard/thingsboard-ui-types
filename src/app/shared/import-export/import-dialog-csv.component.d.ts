@@ -9,14 +9,17 @@ import { EntityType } from '@shared/models/entity-type.models';
 import { TranslateService } from '@ngx-translate/core';
 import { MatStepper } from '@angular/material/stepper';
 import { BulkImportResult, CSVDelimiter } from '@shared/import-export/import-export.models';
+import { CustomerId } from '@shared/models/id/customer-id';
 import { ImportExportService } from '@shared/import-export/import-export.service';
 import { TableColumnsAssignmentComponent } from '@shared/import-export/table-columns-assignment.component';
 import { Ace } from 'ace-builds';
 import * as i0 from "@angular/core";
 export interface ImportDialogCsvData {
     entityType: EntityType;
+    customerId: CustomerId;
     importTitle: string;
     importFileLabel: string;
+    entityGroupId: string;
 }
 export declare class ImportDialogCsvComponent extends DialogComponent<ImportDialogCsvComponent, boolean> implements AfterViewInit, OnDestroy {
     protected store: Store<AppState>;
@@ -33,6 +36,8 @@ export declare class ImportDialogCsvComponent extends DialogComponent<ImportDial
     entityType: EntityType;
     importTitle: string;
     importFileLabel: string;
+    customerId: CustomerId;
+    entityGroupId: string;
     delimiters: {
         key: CSVDelimiter;
         value: string;

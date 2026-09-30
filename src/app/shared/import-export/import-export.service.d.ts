@@ -3,12 +3,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { BreakpointId, Dashboard, DashboardLayoutId } from '@shared/models/dashboard.models';
+import { DatePipe } from '@angular/common';
 import { EntityAliases } from '@shared/models/alias.models';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { DashboardUtilsService } from '@core/services/dashboard-utils.service';
 import { EntityService } from '@core/http/entity.service';
-import { Widget, WidgetTypeDetails } from '@shared/models/widget.models';
+import { ExportRow, Widget, WidgetActionsMap, WidgetTypeDetails } from '@shared/models/widget.models';
 import { ItemBufferService } from '@core/services/item-buffer.service';
 import { BulkImportRequest, BulkImportResult, ImportWidgetResult } from './import-export.models';
 import { EntityType } from '@shared/models/entity-type.models';
@@ -19,6 +20,9 @@ import { ImportEntitiesResultInfo, ImportEntityData, VersionedEntity } from '@sh
 import { RequestConfig } from '@core/http/http-utils';
 import { RuleChainImport, RuleChainType } from '@shared/models/rule-chain.models';
 import { RuleChainService } from '@core/http/rule-chain.service';
+import { CustomerId } from '@shared/models/id/customer-id';
+import { ConverterService } from '@core/http/converter.service';
+import { Converter } from '@shared/models/converter.models';
 import { DeviceProfileService } from '@core/http/device-profile.service';
 import { DeviceProfile } from '@shared/models/device.models';
 import { TenantProfile } from '@shared/models/tenant.model';
@@ -33,6 +37,9 @@ import { ImageResourceInfo, ImageResourceType } from '@shared/models/resource.mo
 import { FormProperty } from '@shared/models/dynamic-form.models';
 import { CalculatedFieldsService } from '@core/http/calculated-fields.service';
 import { CalculatedField } from '@shared/models/calculated-field.models';
+import { ReportTemplateService } from '@core/http/report-template.service';
+import { ReportTemplate } from '@shared/models/report.models';
+import { DevelopmentService } from '@core/http/development.service';
 import * as i0 from "@angular/core";
 export type editMissingAliasesFunction = (widgets: Array<Widget>, isSingleWidget: boolean, customTitle: string, missingEntityAliases: EntityAliases) => Observable<EntityAliases>;
 export declare class ImportExportService {
@@ -47,6 +54,7 @@ export declare class ImportExportService {
     private tenantProfileService;
     private entityService;
     private ruleChainService;
+    private converterService;
     private deviceService;
     private assetService;
     private edgeService;
@@ -54,16 +62,23 @@ export declare class ImportExportService {
     private utils;
     private itembuffer;
     private calculatedFieldsService;
+    private reportTemplateService;
+    private developmentService;
+    private datePipe;
     private dialog;
-    constructor(document: Document, store: Store<AppState>, translate: TranslateService, dashboardService: DashboardService, dashboardUtils: DashboardUtilsService, widgetService: WidgetService, deviceProfileService: DeviceProfileService, assetProfileService: AssetProfileService, tenantProfileService: TenantProfileService, entityService: EntityService, ruleChainService: RuleChainService, deviceService: DeviceService, assetService: AssetService, edgeService: EdgeService, imageService: ImageService, utils: UtilsService, itembuffer: ItemBufferService, calculatedFieldsService: CalculatedFieldsService, dialog: MatDialog);
+    constructor(document: Document, store: Store<AppState>, translate: TranslateService, dashboardService: DashboardService, dashboardUtils: DashboardUtilsService, widgetService: WidgetService, deviceProfileService: DeviceProfileService, assetProfileService: AssetProfileService, tenantProfileService: TenantProfileService, entityService: EntityService, ruleChainService: RuleChainService, converterService: ConverterService, deviceService: DeviceService, assetService: AssetService, edgeService: EdgeService, imageService: ImageService, utils: UtilsService, itembuffer: ItemBufferService, calculatedFieldsService: CalculatedFieldsService, reportTemplateService: ReportTemplateService, developmentService: DevelopmentService, datePipe: DatePipe, dialog: MatDialog);
     exportFormProperties(properties: FormProperty[], fileName: string): void;
     importFormProperties(): Observable<FormProperty[]>;
+    exportWidgetActions(actionsMap: WidgetActionsMap, fileName: string): void;
+    importWidgetActions(): Observable<WidgetActionsMap>;
     exportImage(type: ImageResourceType, key: string): void;
     importImage(): Observable<ImageResourceInfo>;
+    exportReportTemplate(reportTemplateId: string): void;
+    importReportTemplate(): Observable<ReportTemplate>;
     exportCalculatedField(calculatedFieldId: string): void;
     openCalculatedFieldImportDialog(importTitle?: string, importFileLabel?: string): Observable<CalculatedField>;
     exportDashboard(dashboardId: string): void;
-    importDashboard(onEditMissingAliases: editMissingAliasesFunction): Observable<Dashboard>;
+    importDashboard(customerId: CustomerId, onEditMissingAliases: editMissingAliasesFunction, entityGroupId?: string): Observable<Dashboard>;
     exportWidget(dashboard: Dashboard, sourceState: string, sourceLayout: DashboardLayoutId, widget: Widget, widgetTitle: string, breakpoint: BreakpointId): void;
     importWidget(dashboard: Dashboard, targetState: string, onEditMissingAliases: editMissingAliasesFunction, targetLayoutFunction: () => Observable<DashboardLayoutId>, onAliasesUpdateFunction: () => void, onFiltersUpdateFunction: () => void): Observable<ImportWidgetResult>;
     exportWidgetType(widgetTypeId: string): void;
@@ -78,21 +93,35 @@ export declare class ImportExportService {
     importWidgetsBundle(): Observable<WidgetsBundle>;
     private prepareWidgetType;
     bulkImportEntities(entitiesData: BulkImportRequest, entityType: EntityType, config?: RequestConfig): Observable<BulkImportResult>;
-    importEntities(entitiesData: ImportEntityData[], entityType: EntityType, updateData: boolean, importEntityCompleted?: () => void, config?: RequestConfig): Observable<ImportEntitiesResultInfo>;
+    importEntities(entitiesData: ImportEntityData[], customerId: CustomerId, entityType: EntityType, entityGroupId: string, updateData: boolean, importEntityCompleted?: () => void, config?: RequestConfig): Observable<ImportEntitiesResultInfo>;
     exportRuleChain(ruleChainId: string): void;
     private onRuleChainExported;
     importRuleChain(expectedRuleChainType: RuleChainType): Observable<RuleChainImport>;
     private processOldRuleChainConnections;
+    exportConverter(converterId: string): void;
+    importConverter(): Observable<Converter>;
+    exportTenantProfile(tenantProfileId: string): void;
+    importTenantProfile(): Observable<TenantProfile>;
     exportDeviceProfile(deviceProfileId: string): void;
     importDeviceProfile(): Observable<DeviceProfile>;
     exportAssetProfile(assetProfileId: string): void;
     importAssetProfile(): Observable<AssetProfile>;
-    exportTenantProfile(tenantProfileId: string): void;
-    importTenantProfile(): Observable<TenantProfile>;
+    private clearMissingRuleChainsAndSave;
+    private clearMissingProfileRuleChains;
     private processCSVCell;
-    exportCsv(data: {
-        [key: string]: any;
-    }[], filename: string, normalizeFileName?: boolean): void;
+    /**
+     * Resolves the deployment mode, then lets the export place the notice where its own format wants it.
+     *
+     * IF THE MODE CANNOT BE ESTABLISHED, NO FILE IS PRODUCED - the same choice the thumbnail capture makes. These
+     * files are saved and mailed on, so an unmarked one leaks a development deployment and a wrongly marked one
+     * lies about a production system. Declining asserts neither, and retrying re-probes because failures are not cached.
+     */
+    private withDevelopmentMode;
+    exportCsv(data: ExportRow[], filename: string, normalizeFileName?: boolean, dateFormat?: string): void;
+    exportXls(data: ExportRow[], filename: string, normalizeFileName?: boolean, dateFormat?: string): void;
+    exportXlsx(data: ExportRow[], filename: string, dateFormat?: string, normalizeFileName?: boolean): void;
+    private formatTimestampColumn;
+    private validateImportedConverter;
     exportText(data: string | Array<string>, filename: string, normalizeFileName?: boolean): void;
     exportJSZip(data: object, filename: string, normalizeFileName?: boolean): Observable<void>;
     private prepareRuleChain;
@@ -104,7 +133,9 @@ export declare class ImportExportService {
     private sumObject;
     private handleExportError;
     private validateImportedFormProperties;
+    private validateImportedWidgetActions;
     private validateImportedImage;
+    private validateImportedReportTemplate;
     private validateImportedDashboard;
     private validateImportedWidget;
     private validateImportedWidgetTypeDetails;
@@ -114,16 +145,17 @@ export declare class ImportExportService {
     private processEntityAliases;
     private prepareAliasesInfo;
     private prepareEntityAlias;
+    private prepareDashboardExport;
+    private prepareExport;
+    private prepareImport;
     private openImportDialog;
     private exportToPc;
     exportJson(data: any, filename: string, normalizeFileName?: boolean): void;
     private prepareFilename;
     private downloadFile;
-    private prepareDashboardExport;
     private prepareProfileExport;
     private prepareCalculatedFieldExport;
-    private prepareExport;
-    private prepareImport;
+    private prepareReportTemplateExport;
     private getIncludeResourcesPreference;
     private openExportDialog;
     private updateUserSettingsIncludeResourcesIfNeeded;

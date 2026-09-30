@@ -19,6 +19,7 @@ export interface TemplateNotificationDialogData {
     isAdd?: boolean;
     isCopy?: boolean;
     name?: string;
+    readonly?: boolean;
 }
 export declare class TemplateNotificationDialogComponent extends TemplateConfiguration<TemplateNotificationDialogComponent, NotificationTemplate> implements OnDestroy {
     protected store: Store<AppState>;
@@ -37,7 +38,6 @@ export declare class TemplateNotificationDialogComponent extends TemplateConfigu
     hideSelectType: boolean;
     notificationTemplateConfigurationForm: FormGroup;
     private readonly templateNotification;
-    private authUser;
     constructor(store: Store<AppState>, router: Router, dialogRef: MatDialogRef<TemplateNotificationDialogComponent, NotificationTemplate>, data: TemplateNotificationDialogData, breakpointObserver: BreakpointObserver, fb: FormBuilder, notificationService: NotificationService, translate: TranslateService);
     ngOnDestroy(): void;
     cancel(): void;
@@ -45,10 +45,9 @@ export declare class TemplateNotificationDialogComponent extends TemplateConfigu
     backStep(): void;
     nextStep(): void;
     nextStepLabel(): string;
-    private get maxStepperIndex();
+    get maxStepperIndex(): number;
     private add;
     private allValid;
-    private isSysAdmin;
     private allowNotificationType;
     static ɵfac: i0.ɵɵFactoryDeclaration<TemplateNotificationDialogComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<TemplateNotificationDialogComponent, "tb-template-notification-dialog", never, {}, {}, never, never, false, never>;

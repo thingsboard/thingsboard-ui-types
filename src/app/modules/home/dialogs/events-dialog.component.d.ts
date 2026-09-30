@@ -18,6 +18,8 @@ export interface EventsDialogData {
     functionTestButtonLabel?: string;
     onDebugEventSelected?: (event: any, dialogRef: MatDialogRef<EventsDialogComponent, string>) => void;
     debugActionDisabled?: boolean;
+    hideClearEventAction?: boolean;
+    isReadOnly?: boolean;
 }
 export declare class EventsDialogComponent extends DialogComponent<EventsDialogComponent, string> implements AfterViewInit {
     protected store: Store<AppState>;

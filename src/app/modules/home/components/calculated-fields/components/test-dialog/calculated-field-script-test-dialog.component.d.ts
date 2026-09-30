@@ -17,6 +17,7 @@ export interface CalculatedFieldTestScriptDialogData extends CalculatedFieldTest
     argumentsEditorCompleter: TbEditorCompleter;
     argumentsHighlightRules: AceHighlightRules;
     openCalculatedFieldEdit?: boolean;
+    readonly: boolean;
 }
 export declare class CalculatedFieldScriptTestDialogComponent extends DialogComponent<CalculatedFieldScriptTestDialogComponent, string> implements AfterViewInit, OnDestroy {
     protected store: Store<AppState>;

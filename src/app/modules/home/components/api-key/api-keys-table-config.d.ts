@@ -8,6 +8,7 @@ import { ApiKeyService } from '@core/http/api-key.service';
 import { CustomTranslatePipe } from '@shared/pipe/custom-translate.pipe';
 import { TbPopoverService } from '@shared/components/popover.service';
 import { UserId } from '@shared/models/id/user-id';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class ApiKeysTableConfig extends EntityTableConfig<ApiKeyInfo> {
     private apiKeyService;
@@ -19,7 +20,8 @@ export declare class ApiKeysTableConfig extends EntityTableConfig<ApiKeyInfo> {
     private renderer;
     private viewContainerRef;
     private userId;
-    constructor(apiKeyService: ApiKeyService, translate: TranslateService, customTranslate: CustomTranslatePipe, dialog: MatDialog, datePipe: DatePipe, popoverService: TbPopoverService, renderer: Renderer2, viewContainerRef: ViewContainerRef, userId: UserId);
+    private userPermissionsService;
+    constructor(apiKeyService: ApiKeyService, translate: TranslateService, customTranslate: CustomTranslatePipe, dialog: MatDialog, datePipe: DatePipe, popoverService: TbPopoverService, renderer: Renderer2, viewContainerRef: ViewContainerRef, userId: UserId, userPermissionsService: UserPermissionsService);
     private configureCellActions;
     private addApiKey;
     private apiKeyGenerated;

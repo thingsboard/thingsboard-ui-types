@@ -24,6 +24,7 @@ export declare class CalculatedFieldGeofencingZoneGroupsTableComponent implement
     tenantId: string;
     entityName: string;
     ownerId: EntityId;
+    readonly: boolean;
     isEditValue: boolean;
     sort: MatSort;
     errorText: string;
@@ -61,7 +62,8 @@ export declare class CalculatedFieldGeofencingZoneGroupsTableComponent implement
     private getSortValue;
     private sortData;
     static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldGeofencingZoneGroupsTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldGeofencingZoneGroupsTableComponent, "tb-calculated-field-geofencing-zone-groups-table", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldGeofencingZoneGroupsTableComponent, "tb-calculated-field-geofencing-zone-groups-table", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "readonly": { "alias": "readonly"; "required": false; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ngAcceptInputType_readonly: unknown;
     static ngAcceptInputType_isEditValue: unknown;
 }
 declare class CalculatedFieldZoneDatasource extends TbTableDatasource<CalculatedFieldGeofencingValue> {

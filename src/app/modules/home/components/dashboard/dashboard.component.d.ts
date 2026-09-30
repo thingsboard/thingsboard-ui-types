@@ -14,6 +14,7 @@ import { IAliasController, IStateController } from '@app/core/api/widget-api.mod
 import { Widget, WidgetPosition } from '@app/shared/models/widget.models';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SafeStyle } from '@angular/platform-browser';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 import { UtilsService } from '@core/services/utils.service';
 import { WidgetComponentAction } from '@home/components/widget/widget-container.component';
 import { TbPopoverComponent } from '@shared/components/popover.component';
@@ -26,8 +27,10 @@ export declare class DashboardComponent extends PageComponent implements IDashbo
     private breakpointObserver;
     private differs;
     private kvDiffers;
+    private whiteLabelingService;
     private ngZone;
     authUser: AuthUser;
+    get backgroundColor(): string;
     widgets: Iterable<Widget>;
     widgetLayouts: WidgetLayouts;
     callbacks: DashboardCallbacks;
@@ -60,8 +63,10 @@ export declare class DashboardComponent extends PageComponent implements IDashbo
     dashboardClass: string;
     ignoreLoading: boolean;
     dashboardTimewindow: Timewindow;
+    embedded: boolean;
     parentDashboard?: IDashboardComponent;
     popoverComponent?: TbPopoverComponent;
+    embeddedDashboardBackground: string;
     dashboardTimewindowChangedSubject: Subject<Timewindow>;
     dashboardTimewindowChanged: import("rxjs").Observable<Timewindow>;
     originalDashboardTimewindow: Timewindow;
@@ -85,7 +90,7 @@ export declare class DashboardComponent extends PageComponent implements IDashbo
     breakpointObserverSubscription: Subscription;
     private optionsChangeNotificationsPaused;
     private gridsterResize$;
-    constructor(store: Store<AppState>, utils: UtilsService, timeService: TimeService, breakpointObserver: BreakpointObserver, differs: IterableDiffers, kvDiffers: KeyValueDiffers, ngZone: NgZone);
+    constructor(store: Store<AppState>, utils: UtilsService, timeService: TimeService, breakpointObserver: BreakpointObserver, differs: IterableDiffers, kvDiffers: KeyValueDiffers, whiteLabelingService: WhiteLabelingService, ngZone: NgZone);
     ngOnInit(): void;
     ngOnDestroy(): void;
     ngDoCheck(): void;
@@ -125,5 +130,5 @@ export declare class DashboardComponent extends PageComponent implements IDashbo
     private detectRowSize;
     private checkIsMobileSize;
     static ɵfac: i0.ɵɵFactoryDeclaration<DashboardComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<DashboardComponent, "tb-dashboard", never, { "widgets": { "alias": "widgets"; "required": false; }; "widgetLayouts": { "alias": "widgetLayouts"; "required": false; }; "callbacks": { "alias": "callbacks"; "required": false; }; "aliasController": { "alias": "aliasController"; "required": false; }; "stateController": { "alias": "stateController"; "required": false; }; "columns": { "alias": "columns"; "required": false; }; "setGridSize": { "alias": "setGridSize"; "required": false; }; "margin": { "alias": "margin"; "required": false; }; "outerMargin": { "alias": "outerMargin"; "required": false; }; "displayGrid": { "alias": "displayGrid"; "required": false; }; "gridType": { "alias": "gridType"; "required": false; }; "centerVertical": { "alias": "centerVertical"; "required": false; }; "centerHorizontal": { "alias": "centerHorizontal"; "required": false; }; "isEdit": { "alias": "isEdit"; "required": false; }; "isEditingWidget": { "alias": "isEditingWidget"; "required": false; }; "isPreview": { "alias": "isPreview"; "required": false; }; "autofillHeight": { "alias": "autofillHeight"; "required": false; }; "mobileAutofillHeight": { "alias": "mobileAutofillHeight"; "required": false; }; "mobileRowHeight": { "alias": "mobileRowHeight"; "required": false; }; "isMobile": { "alias": "isMobile"; "required": false; }; "isMobileDisabled": { "alias": "isMobileDisabled"; "required": false; }; "isEditActionEnabled": { "alias": "isEditActionEnabled"; "required": false; }; "isExportActionEnabled": { "alias": "isExportActionEnabled"; "required": false; }; "isRemoveActionEnabled": { "alias": "isRemoveActionEnabled"; "required": false; }; "disableWidgetInteraction": { "alias": "disableWidgetInteraction"; "required": false; }; "dashboardStyle": { "alias": "dashboardStyle"; "required": false; }; "backgroundImage": { "alias": "backgroundImage"; "required": false; }; "dashboardClass": { "alias": "dashboardClass"; "required": false; }; "ignoreLoading": { "alias": "ignoreLoading"; "required": false; }; "dashboardTimewindow": { "alias": "dashboardTimewindow"; "required": false; }; "parentDashboard": { "alias": "parentDashboard"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DashboardComponent, "tb-dashboard", never, { "widgets": { "alias": "widgets"; "required": false; }; "widgetLayouts": { "alias": "widgetLayouts"; "required": false; }; "callbacks": { "alias": "callbacks"; "required": false; }; "aliasController": { "alias": "aliasController"; "required": false; }; "stateController": { "alias": "stateController"; "required": false; }; "columns": { "alias": "columns"; "required": false; }; "setGridSize": { "alias": "setGridSize"; "required": false; }; "margin": { "alias": "margin"; "required": false; }; "outerMargin": { "alias": "outerMargin"; "required": false; }; "displayGrid": { "alias": "displayGrid"; "required": false; }; "gridType": { "alias": "gridType"; "required": false; }; "centerVertical": { "alias": "centerVertical"; "required": false; }; "centerHorizontal": { "alias": "centerHorizontal"; "required": false; }; "isEdit": { "alias": "isEdit"; "required": false; }; "isEditingWidget": { "alias": "isEditingWidget"; "required": false; }; "isPreview": { "alias": "isPreview"; "required": false; }; "autofillHeight": { "alias": "autofillHeight"; "required": false; }; "mobileAutofillHeight": { "alias": "mobileAutofillHeight"; "required": false; }; "mobileRowHeight": { "alias": "mobileRowHeight"; "required": false; }; "isMobile": { "alias": "isMobile"; "required": false; }; "isMobileDisabled": { "alias": "isMobileDisabled"; "required": false; }; "isEditActionEnabled": { "alias": "isEditActionEnabled"; "required": false; }; "isExportActionEnabled": { "alias": "isExportActionEnabled"; "required": false; }; "isRemoveActionEnabled": { "alias": "isRemoveActionEnabled"; "required": false; }; "disableWidgetInteraction": { "alias": "disableWidgetInteraction"; "required": false; }; "dashboardStyle": { "alias": "dashboardStyle"; "required": false; }; "backgroundImage": { "alias": "backgroundImage"; "required": false; }; "dashboardClass": { "alias": "dashboardClass"; "required": false; }; "ignoreLoading": { "alias": "ignoreLoading"; "required": false; }; "dashboardTimewindow": { "alias": "dashboardTimewindow"; "required": false; }; "embedded": { "alias": "embedded"; "required": false; }; "parentDashboard": { "alias": "parentDashboard"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, {}, never, never, false, never>;
 }

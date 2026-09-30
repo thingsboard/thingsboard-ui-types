@@ -4,18 +4,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { WidgetConfigComponent } from '@home/components/widget/widget-config.component';
 import { DataKey, DatasourceType, Widget, widgetType } from '@shared/models/widget.models';
 import { DataKeyType } from '@shared/models/telemetry/telemetry.models';
-import { DataKeySettingsFunction } from '@home/components/widget/lib/settings/common/key/data-keys.component.models';
+import { DataKeySettingsFormFunction, DataKeySettingsFunction } from '@home/components/widget/lib/settings/common/key/data-keys.component.models';
 import { Dashboard } from '@shared/models/dashboard.models';
 import { IAliasController } from '@core/api/widget-api.models';
 import { TimeSeriesChartSeriesType, TimeSeriesChartYAxisId } from '@home/components/widget/lib/chart/time-series-chart.models';
 import { WidgetConfigCallbacks } from '@home/components/widget/config/widget-config.component.models';
 import { FormProperty } from '@shared/models/dynamic-form.models';
+import { DataKeysPanelComponent } from '@home/components/widget/config/basic/common/data-keys-panel.component';
 import * as i0 from "@angular/core";
 export declare const dataKeyValid: (key: DataKey) => boolean;
 export declare const dataKeyRowValidator: (control: AbstractControl) => ValidationErrors | null;
 export declare class DataKeyRowComponent implements ControlValueAccessor, OnInit, OnChanges {
     private fb;
     private dialog;
+    private dataKeysPanelComponent;
     private cd;
     private widgetConfigComponent;
     private destroyRef;
@@ -27,6 +29,7 @@ export declare class DataKeyRowComponent implements ControlValueAccessor, OnInit
     datasourceType: DatasourceType;
     entityAliasId: string;
     deviceId: string;
+    reportMode: boolean;
     hasAdditionalLatestDataKeys: boolean;
     hideDataKeyLabel: boolean;
     hideDataKeyColor: boolean;
@@ -52,8 +55,12 @@ export declare class DataKeyRowComponent implements ControlValueAccessor, OnInit
     get dashboard(): Dashboard;
     get aliasController(): IAliasController;
     get dataKeySettingsForm(): FormProperty[];
+    get dataKeySettingsFormFunction(): DataKeySettingsFormFunction;
+    get dataKeySettingsFormTrimDefaults(): boolean;
     get dataKeySettingsDirective(): string;
     get latestDataKeySettingsForm(): FormProperty[];
+    get latestDataKeySettingsFormFunction(): DataKeySettingsFormFunction;
+    get latestDataKeySettingsFormTrimDefaults(): boolean;
     get latestDataKeySettingsDirective(): string;
     get dataKeySettingsFunction(): DataKeySettingsFunction;
     get isEntityDatasource(): boolean;
@@ -61,7 +68,7 @@ export declare class DataKeyRowComponent implements ControlValueAccessor, OnInit
     get isLatestDataKeys(): boolean;
     get supportsUnitConversion(): boolean;
     private propagateChange;
-    constructor(fb: UntypedFormBuilder, dialog: MatDialog, cd: ChangeDetectorRef, widgetConfigComponent: WidgetConfigComponent, destroyRef: DestroyRef);
+    constructor(fb: UntypedFormBuilder, dialog: MatDialog, dataKeysPanelComponent: DataKeysPanelComponent, cd: ChangeDetectorRef, widgetConfigComponent: WidgetConfigComponent, destroyRef: DestroyRef);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     registerOnChange(fn: any): void;
@@ -71,6 +78,6 @@ export declare class DataKeyRowComponent implements ControlValueAccessor, OnInit
     editKey(advanced?: boolean): void;
     private _generateDataKey;
     private updateModel;
-    static ɵfac: i0.ɵɵFactoryDeclaration<DataKeyRowComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<DataKeyRowComponent, "tb-data-key-row", never, { "disabled": { "alias": "disabled"; "required": false; }; "required": { "alias": "required"; "required": false; }; "datasourceType": { "alias": "datasourceType"; "required": false; }; "entityAliasId": { "alias": "entityAliasId"; "required": false; }; "deviceId": { "alias": "deviceId"; "required": false; }; "hasAdditionalLatestDataKeys": { "alias": "hasAdditionalLatestDataKeys"; "required": false; }; "hideDataKeyLabel": { "alias": "hideDataKeyLabel"; "required": false; }; "hideDataKeyColor": { "alias": "hideDataKeyColor"; "required": false; }; "hideDataKeyUnits": { "alias": "hideDataKeyUnits"; "required": false; }; "hideDataKeyDecimals": { "alias": "hideDataKeyDecimals"; "required": false; }; "hideUnits": { "alias": "hideUnits"; "required": false; }; "hideDecimals": { "alias": "hideDecimals"; "required": false; }; "timeSeriesChart": { "alias": "timeSeriesChart"; "required": false; }; "showTimeSeriesType": { "alias": "showTimeSeriesType"; "required": false; }; "yAxisIds": { "alias": "yAxisIds"; "required": false; }; "singleRow": { "alias": "singleRow"; "required": false; }; "dataKeyType": { "alias": "dataKeyType"; "required": false; }; "keySettingsTitle": { "alias": "keySettingsTitle"; "required": false; }; "removeKeyTitle": { "alias": "removeKeyTitle"; "required": false; }; }, { "keyRemoved": "keyRemoved"; }, never, never, false, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DataKeyRowComponent, [null, null, { optional: true; }, null, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DataKeyRowComponent, "tb-data-key-row", never, { "disabled": { "alias": "disabled"; "required": false; }; "required": { "alias": "required"; "required": false; }; "datasourceType": { "alias": "datasourceType"; "required": false; }; "entityAliasId": { "alias": "entityAliasId"; "required": false; }; "deviceId": { "alias": "deviceId"; "required": false; }; "reportMode": { "alias": "reportMode"; "required": false; }; "hasAdditionalLatestDataKeys": { "alias": "hasAdditionalLatestDataKeys"; "required": false; }; "hideDataKeyLabel": { "alias": "hideDataKeyLabel"; "required": false; }; "hideDataKeyColor": { "alias": "hideDataKeyColor"; "required": false; }; "hideDataKeyUnits": { "alias": "hideDataKeyUnits"; "required": false; }; "hideDataKeyDecimals": { "alias": "hideDataKeyDecimals"; "required": false; }; "hideUnits": { "alias": "hideUnits"; "required": false; }; "hideDecimals": { "alias": "hideDecimals"; "required": false; }; "timeSeriesChart": { "alias": "timeSeriesChart"; "required": false; }; "showTimeSeriesType": { "alias": "showTimeSeriesType"; "required": false; }; "yAxisIds": { "alias": "yAxisIds"; "required": false; }; "singleRow": { "alias": "singleRow"; "required": false; }; "dataKeyType": { "alias": "dataKeyType"; "required": false; }; "keySettingsTitle": { "alias": "keySettingsTitle"; "required": false; }; "removeKeyTitle": { "alias": "removeKeyTitle"; "required": false; }; }, { "keyRemoved": "keyRemoved"; }, never, never, false, never>;
 }

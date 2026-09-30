@@ -1,0 +1,38 @@
+import { DestroyRef, EventEmitter, OnInit } from '@angular/core';
+import { CMScope, DefaultMenuItem, HomeMenuItemType } from '@shared/models/custom-menu.models';
+import { TbPopoverComponent } from '@shared/components/popover.component';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '@core/core.state';
+import * as i0 from "@angular/core";
+export declare class DefaultMenuItemPanelComponent implements OnInit {
+    private fb;
+    private store;
+    private translate;
+    private destroyRef;
+    HomeMenuItemType: typeof HomeMenuItemType;
+    homeMenuItemTypes: HomeMenuItemType[];
+    homeMenuItemTypeTranslations: Map<HomeMenuItemType, string>;
+    disabled: boolean;
+    scope: CMScope;
+    menuItem: DefaultMenuItem;
+    popover: TbPopoverComponent<DefaultMenuItemPanelComponent>;
+    defaultMenuItemApplied: EventEmitter<DefaultMenuItem>;
+    menuItemFormGroup: UntypedFormGroup;
+    defaultItemName: string;
+    isHomeMenuItem: boolean;
+    isHomeTypeEditable: boolean;
+    isCleanupEnabled: boolean;
+    private defaultMenuSection;
+    constructor(fb: UntypedFormBuilder, store: Store<AppState>, translate: TranslateService, destroyRef: DestroyRef);
+    ngOnInit(): void;
+    cancel(): void;
+    apply(): void;
+    cleanup(): void;
+    private updateModel;
+    private updateCleanupState;
+    private homeTypeChanged;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DefaultMenuItemPanelComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DefaultMenuItemPanelComponent, "tb-default-menu-item-panel", never, { "disabled": { "alias": "disabled"; "required": false; }; "scope": { "alias": "scope"; "required": false; }; "menuItem": { "alias": "menuItem"; "required": false; }; "popover": { "alias": "popover"; "required": false; }; }, { "defaultMenuItemApplied": "defaultMenuItemApplied"; }, never, never, false, never>;
+}

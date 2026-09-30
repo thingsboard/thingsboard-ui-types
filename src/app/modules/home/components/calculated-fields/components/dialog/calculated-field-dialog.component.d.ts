@@ -13,6 +13,7 @@ import { AdditionalDebugActionConfig } from '@home/components/entity/debug/entit
 import { BaseData } from '@shared/models/base-data';
 import { CalculatedFieldFormService } from '@core/services/calculated-field-form.service';
 import { FormGroup } from '@angular/forms';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export interface CalculatedFieldDialogData {
     value?: CalculatedField;
@@ -25,6 +26,7 @@ export interface CalculatedFieldDialogData {
     getTestScriptDialogFn: CalculatedFieldTestScriptFn;
     isDirty?: boolean;
     disabledSelectType?: boolean;
+    readonly: boolean;
 }
 export declare class CalculatedFieldDialogComponent extends DialogComponent<CalculatedFieldDialogComponent, CalculatedField> {
     protected store: Store<AppState>;
@@ -34,6 +36,7 @@ export declare class CalculatedFieldDialogComponent extends DialogComponent<Calc
     private calculatedFieldsService;
     private destroyRef;
     private cfFormService;
+    private userPermissionsService;
     fieldFormGroup: FormGroup;
     additionalDebugActionConfig: {
         action: () => void;
@@ -41,6 +44,7 @@ export declare class CalculatedFieldDialogComponent extends DialogComponent<Calc
     };
     entityName: string;
     ownerId: EntityId;
+    defaultEntityType: EntityType;
     disabledConfiguration: boolean;
     isLoading: boolean;
     readonly EntityType: typeof EntityType;
@@ -48,7 +52,7 @@ export declare class CalculatedFieldDialogComponent extends DialogComponent<Calc
     readonly CalculatedFieldType: typeof CalculatedFieldType;
     readonly fieldTypes: (CalculatedFieldType.SIMPLE | CalculatedFieldType.SCRIPT | CalculatedFieldType.GEOFENCING | CalculatedFieldType.PROPAGATION | CalculatedFieldType.RELATED_ENTITIES_AGGREGATION | CalculatedFieldType.ENTITY_AGGREGATION)[];
     readonly CalculatedFieldTypeTranslations: Map<CalculatedFieldType, import("@shared/models/calculated-field.models").CalculatedFieldTypeTranslate>;
-    constructor(store: Store<AppState>, router: Router, data: CalculatedFieldDialogData, dialogRef: MatDialogRef<CalculatedFieldDialogComponent, CalculatedField>, calculatedFieldsService: CalculatedFieldsService, destroyRef: DestroyRef, cfFormService: CalculatedFieldFormService);
+    constructor(store: Store<AppState>, router: Router, data: CalculatedFieldDialogData, dialogRef: MatDialogRef<CalculatedFieldDialogComponent, CalculatedField>, calculatedFieldsService: CalculatedFieldsService, destroyRef: DestroyRef, cfFormService: CalculatedFieldFormService, userPermissionsService: UserPermissionsService);
     get fromGroupValue(): CalculatedField;
     cancel(): void;
     add(): void;
@@ -56,7 +60,6 @@ export declare class CalculatedFieldDialogComponent extends DialogComponent<Calc
     changeEntity(entity: BaseData<EntityId>): void;
     get entityId(): EntityId;
     private applyDialogData;
-    private isAssignedToCustomer;
     static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldDialogComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldDialogComponent, "tb-calculated-field-dialog", never, {}, {}, never, never, false, never>;
 }

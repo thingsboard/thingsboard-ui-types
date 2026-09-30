@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Injector, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Injector, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { EntityTableConfig } from '@home/models/entity/entities-table-config.models';
@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BroadcastService } from '@core/services/broadcast.service';
 import { EntityDetailsPanelComponent } from '@home/components/entity/entity-details-panel.component';
 import { DialogService } from '@core/services/dialog.service';
+import { EntityGroupStateInfo } from '@home/models/group/group-entities-table-config.models';
 import { IEntityDetailsPageComponent } from '@home/models/entity/entity-details-page-component.models';
 import * as i0 from "@angular/core";
 export declare class EntityDetailsPageComponent extends EntityDetailsPanelComponent implements IEntityDetailsPageComponent, OnInit, OnDestroy {
@@ -23,9 +24,11 @@ export declare class EntityDetailsPageComponent extends EntityDetailsPanelCompon
     headerTitle: string;
     headerSubtitle: string;
     isReadOnly: boolean;
+    entityGroup: EntityGroupStateInfo<BaseData<HasId>>;
     backNavigationCommands?: any[];
     set entitiesTableConfig(entitiesTableConfig: EntityTableConfig<BaseData<HasId>>);
     get entitiesTableConfig(): EntityTableConfig<BaseData<HasId>>;
+    get headerExtensionTemplate(): TemplateRef<unknown> | null;
     'tb-absolute-fill': any;
     constructor(route: ActivatedRoute, router: Router, injector: Injector, cd: ChangeDetectorRef, broadcast: BroadcastService, translate: TranslateService, dialogService: DialogService, store: Store<AppState>);
     ngOnInit(): void;

@@ -54,6 +54,7 @@ export declare abstract class TbMap<S extends BaseMapSettings> {
     protected addCircleDataLayers: TbLatestMapDataLayer<any>[];
     protected addPolylineDataLayers: TbLatestMapDataLayer<any>[];
     protected shapePatternStorage: ShapePatternStorage;
+    protected mapUuid: string;
     private readonly mapResize$;
     private tooltipInstances;
     private currentPopover;
@@ -61,6 +62,8 @@ export declare abstract class TbMap<S extends BaseMapSettings> {
     private dragMode;
     private createMapItemActionId;
     private get isPlacingItem();
+    private dataLayersSubscription;
+    private tripDataLayersSubscription;
     protected constructor(ctx: WidgetContext, inputSettings: DeepPartial<S>, containerElement: HTMLElement);
     private setupControls;
     private initMap;
@@ -88,6 +91,7 @@ export declare abstract class TbMap<S extends BaseMapSettings> {
     private prepareDrawMode;
     private updatePlaceItemState;
     private createdControlButtonTooltip;
+    private customDataExport;
     private update;
     private updateTrips;
     private updateTripsWithLatestData;

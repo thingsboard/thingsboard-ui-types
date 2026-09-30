@@ -1,24 +1,42 @@
 import { PageComponent } from '@shared/components/page.component';
-import { EventEmitter, OnInit } from '@angular/core';
+import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
-import { UntypedFormControl } from '@angular/forms';
 import { TbPopoverComponent } from '@shared/components/popover.component';
+import { UntypedFormControl } from '@angular/forms';
 import * as i0 from "@angular/core";
-export declare class ColorPickerPanelComponent extends PageComponent implements OnInit {
+type ColorMode = 'color' | 'primary' | 'accent';
+export declare class ColorPickerPanelComponent extends PageComponent implements OnInit, OnDestroy {
     protected store: Store<AppState>;
     color: string;
+    defaultColor: string;
     colorClearButton: boolean;
+    useThemePalette: boolean;
+    disableAlpha: boolean;
     colorCancelButton: boolean;
     popover: TbPopoverComponent<ColorPickerPanelComponent>;
     colorSelected: EventEmitter<string>;
     colorCancelDialog: EventEmitter<any>;
-    colorPickerControl: UntypedFormControl;
+    colorMode: ColorMode;
+    plainColorControl: UntypedFormControl;
+    primaryColor: string;
+    accentColor: string;
+    dirty: boolean;
+    valid: boolean;
+    private destroy$;
     constructor(store: Store<AppState>);
     ngOnInit(): void;
+    ngOnDestroy(): void;
+    onPrimaryColorChange(color: string): void;
+    onAccentColorChange(color: string): void;
+    onPlainColorChange(): void;
+    selectedIndexChange(index: number): void;
+    private updateValidity;
     selectColor(): void;
+    getColor(): any;
     clearColor(): void;
     cancelColor(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ColorPickerPanelComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<ColorPickerPanelComponent, "tb-color-picker-panel", never, { "color": { "alias": "color"; "required": false; }; "colorClearButton": { "alias": "colorClearButton"; "required": false; }; "colorCancelButton": { "alias": "colorCancelButton"; "required": false; }; "popover": { "alias": "popover"; "required": false; }; }, { "colorSelected": "colorSelected"; "colorCancelDialog": "colorCancelDialog"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ColorPickerPanelComponent, "tb-color-picker-panel", never, { "color": { "alias": "color"; "required": false; }; "defaultColor": { "alias": "defaultColor"; "required": false; }; "colorClearButton": { "alias": "colorClearButton"; "required": false; }; "useThemePalette": { "alias": "useThemePalette"; "required": false; }; "disableAlpha": { "alias": "disableAlpha"; "required": false; }; "colorCancelButton": { "alias": "colorCancelButton"; "required": false; }; "popover": { "alias": "popover"; "required": false; }; }, { "colorSelected": "colorSelected"; "colorCancelDialog": "colorCancelDialog"; }, never, never, false, never>;
 }
+export {};

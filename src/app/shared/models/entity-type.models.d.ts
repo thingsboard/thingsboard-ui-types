@@ -11,15 +11,25 @@ export declare enum EntityType {
     DEVICE_PROFILE = "DEVICE_PROFILE",
     ASSET_PROFILE = "ASSET_PROFILE",
     ALARM = "ALARM",
+    ENTITY_GROUP = "ENTITY_GROUP",
+    CONVERTER = "CONVERTER",
+    INTEGRATION = "INTEGRATION",
     RULE_CHAIN = "RULE_CHAIN",
     RULE_NODE = "RULE_NODE",
-    EDGE = "EDGE",
+    SCHEDULER_EVENT = "SCHEDULER_EVENT",
+    BLOB_ENTITY = "BLOB_ENTITY",
+    REPORT_TEMPLATE = "REPORT_TEMPLATE",
+    REPORT = "REPORT",
     ENTITY_VIEW = "ENTITY_VIEW",
     WIDGETS_BUNDLE = "WIDGETS_BUNDLE",
     WIDGET_TYPE = "WIDGET_TYPE",
+    ROLE = "ROLE",
+    GROUP_PERMISSION = "GROUP_PERMISSION",
     API_USAGE_STATE = "API_USAGE_STATE",
     TB_RESOURCE = "TB_RESOURCE",
+    EDGE = "EDGE",
     OTA_PACKAGE = "OTA_PACKAGE",
+    JOB = "JOB",
     RPC = "RPC",
     QUEUE = "QUEUE",
     QUEUE_STATS = "QUEUE_STATS",
@@ -33,8 +43,17 @@ export declare enum EntityType {
     MOBILE_APP_BUNDLE = "MOBILE_APP_BUNDLE",
     MOBILE_APP = "MOBILE_APP",
     CALCULATED_FIELD = "CALCULATED_FIELD",
+    ADMIN_SETTINGS = "ADMIN_SETTINGS",
+    SECRET = "SECRET",
     AI_MODEL = "AI_MODEL",
-    API_KEY = "API_KEY"
+    API_KEY = "API_KEY",
+    AGENT = "AGENT",
+    AGENT_PROFILE = "AGENT_PROFILE",
+    AGENT_APPLICATION = "AGENT_APPLICATION",
+    AGENT_APP_EVENT = "AGENT_APP_EVENT",
+    AGENT_APP_UNIT = "AGENT_APP_UNIT",
+    AGENT_APP_PROFILE = "AGENT_APP_PROFILE",
+    AGENT_BULK_ACTION = "AGENT_BULK_ACTION"
 }
 export declare enum AliasEntityType {
     CURRENT_CUSTOMER = "CURRENT_CUSTOMER",
@@ -52,6 +71,12 @@ export interface EntityTypeTranslation {
     noEntities?: string;
     selectedEntities?: string;
     search?: string;
+    selectGroupToAdd?: string;
+    selectGroupToMove?: string;
+    removeFromGroup?: string;
+    group?: string;
+    groupList?: string;
+    groupNameStartsWith?: string;
 }
 export interface EntityTypeResource<T> {
     helpLinkId: string;
@@ -60,6 +85,7 @@ export interface EntityTypeResource<T> {
 export declare const entityTypeTranslations: Map<EntityType | AliasEntityType, EntityTypeTranslation>;
 export declare const entityTypeResources: Map<EntityType, EntityTypeResource<BaseData<HasId>>>;
 export declare const baseDetailsPageByEntityType: Map<EntityType, string>;
+export declare const groupUrlPrefixByEntityType: Map<EntityType, string>;
 export interface EntitySubtype {
     tenantId: TenantId;
     entityType: EntityType;

@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare class MobileBundleTableConfigResolver {
     private datePipe;
@@ -15,9 +16,10 @@ export declare class MobileBundleTableConfigResolver {
     private dialog;
     private router;
     private store;
+    private userPermissionsService;
     private readonly config;
     private openingEditDialog;
-    constructor(datePipe: DatePipe, mobileAppService: MobileAppService, translate: TranslateService, dialog: MatDialog, router: Router, store: Store<AppState>);
+    constructor(datePipe: DatePipe, mobileAppService: MobileAppService, translate: TranslateService, dialog: MatDialog, router: Router, store: Store<AppState>, userPermissionsService: UserPermissionsService);
     resolve(_route: ActivatedRouteSnapshot): EntityTableConfig<MobileAppBundleInfo>;
     private configureCellActions;
     private editBundle;

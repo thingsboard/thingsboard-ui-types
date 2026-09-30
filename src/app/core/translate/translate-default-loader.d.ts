@@ -4,8 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import * as i0 from "@angular/core";
 export declare class TranslateDefaultLoader implements TranslateLoader {
     private http;
+    isSetupCompleted: boolean;
+    isAuthenticated: boolean;
     constructor(http: HttpClient);
     getTranslation(lang: string): Observable<TranslationObject>;
+    private loadSystemLang;
     static ɵfac: i0.ɵɵFactoryDeclaration<TranslateDefaultLoader, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<TranslateDefaultLoader>;
 }

@@ -9,6 +9,7 @@ import { EntityService } from '@core/http/entity.service';
 import { TruncatePipe } from '@shared/pipe/truncate.pipe';
 import { OtaPackageInfo, OtaUpdateType } from '@shared/models/ota-package.models';
 import { OtaPackageService } from '@core/http/ota-package.service';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import * as i0 from "@angular/core";
 export declare class OtaPackageAutocompleteComponent implements ControlValueAccessor, OnInit, OnDestroy {
     private store;
@@ -25,10 +26,15 @@ export declare class OtaPackageAutocompleteComponent implements ControlValueAcce
     private deviceProfileIdValue;
     get deviceProfileId(): string;
     set deviceProfileId(value: string);
+    deviceGroupId: string;
     labelText: string;
     requiredText: string;
     useFullEntityId: boolean;
+    private deviceGroupAllValue;
+    get deviceGroupAll(): boolean;
+    set deviceGroupAll(value: boolean);
     showDetailsPageLink: boolean;
+    appearance: MatFormFieldAppearance;
     private requiredValue;
     get required(): boolean;
     set required(value: boolean);
@@ -64,5 +70,5 @@ export declare class OtaPackageAutocompleteComponent implements ControlValueAcce
     get hintText(): string;
     packageTitleText(firpackageInfomware: OtaPackageInfo): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<OtaPackageAutocompleteComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<OtaPackageAutocompleteComponent, "tb-ota-package-autocomplete", never, { "type": { "alias": "type"; "required": false; }; "deviceProfileId": { "alias": "deviceProfileId"; "required": false; }; "labelText": { "alias": "labelText"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "useFullEntityId": { "alias": "useFullEntityId"; "required": false; }; "showDetailsPageLink": { "alias": "showDetailsPageLink"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<OtaPackageAutocompleteComponent, "tb-ota-package-autocomplete", never, { "type": { "alias": "type"; "required": false; }; "deviceProfileId": { "alias": "deviceProfileId"; "required": false; }; "deviceGroupId": { "alias": "deviceGroupId"; "required": false; }; "labelText": { "alias": "labelText"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "useFullEntityId": { "alias": "useFullEntityId"; "required": false; }; "deviceGroupAll": { "alias": "deviceGroupAll"; "required": false; }; "showDetailsPageLink": { "alias": "showDetailsPageLink"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, {}, never, never, false, never>;
 }

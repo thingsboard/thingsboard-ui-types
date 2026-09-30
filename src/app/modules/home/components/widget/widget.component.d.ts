@@ -5,6 +5,7 @@ import { PageComponent } from '@shared/components/page.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { UtilsService } from '@core/services/utils.service';
+import { LocationService } from '@core/services/location.service';
 import { IDynamicWidgetComponent, WidgetContext, WidgetInfo, WidgetTypeInstance } from '@home/models/widget-component.models';
 import { SubscriptionMessage, WidgetSubscriptionContext } from '@core/api/widget-api.models';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,6 +19,8 @@ import { CancelAnimationFrame, RafService } from '@core/services/raf.service';
 import { UnitService } from '@core/services/unit.service';
 import { DashboardService } from '@core/http/dashboard.service';
 import { EntityService } from '@core/http/entity.service';
+import { DatePipe } from '@angular/common';
+import { ImportExportService } from '@shared/import-export/import-export.service';
 import { EntityDataService } from '@core/api/entity-data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AlarmDataService } from '@core/api/alarm-data.service';
@@ -47,10 +50,13 @@ export declare class WidgetComponent extends PageComponent implements OnInit, On
     private deviceService;
     private entityService;
     private dashboardService;
+    private importExport;
     private entityDataService;
     private alarmDataService;
     private translate;
+    private locationService;
     private utils;
+    private datePipe;
     private dashboardUtils;
     private mobileService;
     private raf;
@@ -93,7 +99,7 @@ export declare class WidgetComponent extends PageComponent implements OnInit, On
     private widgetResize$;
     private cssParser;
     private rxSubscriptions;
-    constructor(store: Store<AppState>, route: ActivatedRoute, router: Router, widgetComponentService: WidgetComponentService, elementRef: ElementRef, injector: Injector, dialog: MatDialog, renderer: Renderer2, popoverService: TbPopoverService, embedDashboardDialogComponent: ComponentType<any>, dashboardPageComponent: ComponentType<any>, modulesMap: IModulesMap, resources: ResourcesService, timeService: TimeService, deviceService: DeviceService, entityService: EntityService, dashboardService: DashboardService, entityDataService: EntityDataService, alarmDataService: AlarmDataService, translate: TranslateService, utils: UtilsService, dashboardUtils: DashboardUtilsService, mobileService: MobileService, raf: RafService, unitService: UnitService, ngZone: NgZone, cd: ChangeDetectorRef, http: HttpClient);
+    constructor(store: Store<AppState>, route: ActivatedRoute, router: Router, widgetComponentService: WidgetComponentService, elementRef: ElementRef, injector: Injector, dialog: MatDialog, renderer: Renderer2, popoverService: TbPopoverService, embedDashboardDialogComponent: ComponentType<any>, dashboardPageComponent: ComponentType<any>, modulesMap: IModulesMap, resources: ResourcesService, timeService: TimeService, deviceService: DeviceService, entityService: EntityService, dashboardService: DashboardService, importExport: ImportExportService, entityDataService: EntityDataService, alarmDataService: AlarmDataService, translate: TranslateService, locationService: LocationService, utils: UtilsService, datePipe: DatePipe, dashboardUtils: DashboardUtilsService, mobileService: MobileService, raf: RafService, unitService: UnitService, ngZone: NgZone, cd: ChangeDetectorRef, http: HttpClient);
     ngOnInit(): void;
     headerButtonStyle(buttonType: WidgetHeaderActionButtonType, customButtonStyle: {
         [key: string]: string;
@@ -125,6 +131,7 @@ export declare class WidgetComponent extends PageComponent implements OnInit, On
     private getActionDescriptors;
     private handleWidgetAction;
     private handleMobileAction;
+    private executeProcessLocationFunction;
     private handleWidgetMobileActionError;
     private openDashboardStateInPopover;
     private openDashboardStateInSeparateDialog;
@@ -132,12 +139,17 @@ export declare class WidgetComponent extends PageComponent implements OnInit, On
     private cardClick;
     private click;
     private onClick;
+    private invokeAction;
     private onWidgetAction;
     private executeCustomPrettyAction;
     private loadCustomActionResources;
     private processResourcesLoadErrors;
+    private exportWidgetData;
+    private doExportWidgetData;
+    private prepareWidgetExportData;
+    private widgetExportDateFormat;
     private getActiveEntityInfo;
     private checkSize;
-    static ɵfac: i0.ɵɵFactoryDeclaration<WidgetComponent, [null, null, null, null, null, null, null, null, null, null, null, { optional: true; }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<WidgetComponent, [null, null, null, null, null, null, null, null, null, null, null, { optional: true; }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<WidgetComponent, "tb-widget", never, { "widgetTitlePanel": { "alias": "widgetTitlePanel"; "required": false; }; "widgetHeaderActionsPanel": { "alias": "widgetHeaderActionsPanel"; "required": false; }; "isEdit": { "alias": "isEdit"; "required": false; }; "isPreview": { "alias": "isPreview"; "required": false; }; "isMobile": { "alias": "isMobile"; "required": false; }; "dashboardWidget": { "alias": "dashboardWidget"; "required": false; }; "widget": { "alias": "widget"; "required": false; }; }, {}, never, never, false, never>;
 }

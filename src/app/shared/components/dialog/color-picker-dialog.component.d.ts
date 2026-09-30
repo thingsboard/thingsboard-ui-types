@@ -6,7 +6,10 @@ import { DialogComponent } from '@shared/components/dialog.component';
 import * as i0 from "@angular/core";
 export interface ColorPickerDialogData {
     color: string;
+    defaultColor: string;
     colorClearButton: boolean;
+    useThemePalette?: boolean;
+    disableAlpha?: boolean;
 }
 export interface ColorPickerDialogResult {
     color?: string;
@@ -18,7 +21,10 @@ export declare class ColorPickerDialogComponent extends DialogComponent<ColorPic
     data: ColorPickerDialogData;
     dialogRef: MatDialogRef<ColorPickerDialogComponent, ColorPickerDialogResult>;
     color: string;
+    defaultColor: string;
     colorClearButton: boolean;
+    useThemePalette: boolean;
+    disableAlpha: boolean;
     constructor(store: Store<AppState>, router: Router, data: ColorPickerDialogData, dialogRef: MatDialogRef<ColorPickerDialogComponent, ColorPickerDialogResult>);
     selectColor(color: string): void;
     cancel(): void;

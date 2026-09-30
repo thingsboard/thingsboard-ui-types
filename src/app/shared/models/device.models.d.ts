@@ -1,4 +1,4 @@
-import { BaseData, ExportableEntity } from '@shared/models/base-data';
+import { BaseData, ExportableEntity, GroupEntityInfo } from '@shared/models/base-data';
 import { DeviceId } from './id/device-id';
 import { TenantId } from '@shared/models/id/tenant-id';
 import { CustomerId } from '@shared/models/id/customer-id';
@@ -6,16 +6,21 @@ import { DeviceCredentialsId } from '@shared/models/id/device-credentials-id';
 import { EntitySearchQuery } from '@shared/models/relation.models';
 import { DeviceProfileId } from '@shared/models/id/device-profile-id';
 import { RuleChainId } from '@shared/models/id/rule-chain-id';
-import { EntityInfoData, HasTenantId, HasVersion, SaveEntityParams } from '@shared/models/entity.models';
+import { EntityInfoData, HasTenantId, HasVersion, SaveEntityWithGroupParams } from '@shared/models/entity.models';
 import { FilterPredicateValue, KeyFilter } from '@shared/models/query/query.models';
 import { TimeUnit } from '@shared/models/time/time.models';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { OtaPackageId } from '@shared/models/id/ota-package-id';
 import { DashboardId } from '@shared/models/id/dashboard-id';
+import { EntityId } from '@shared/models/id/entity-id';
 import { DataType } from '@shared/models/constants';
 import { PowerMode } from '@home/components/profile/device/lwm2m/lwm2m-profile-config.models';
 import { PageLink } from '@shared/models/page/page-link';
-import { EdgeId } from '@shared/models/id/edge-id';
+import type { Store } from '@ngrx/store';
+import type { AppState } from '@core/core.state';
+import type { TranslateService } from '@ngx-translate/core';
+import type { UserPermissionsService } from '@core/http/user-permissions.service';
+import { AiAssistantPanelConfig, AiAssistantViewType } from '@shared/models/ai-chat.models';
 export declare enum DeviceProfileType {
     DEFAULT = "DEFAULT",
     SNMP = "SNMP"
@@ -199,6 +204,7 @@ export interface DeviceProfileAlarm {
     clearRule?: AlarmRule;
     propagate?: boolean;
     propagateToOwner?: boolean;
+    propagateToOwnerHierarchy?: boolean;
     propagateToTenant?: boolean;
     propagateRelationTypes?: Array<string>;
 }
@@ -227,7 +233,7 @@ export interface DeviceProfile extends BaseData<DeviceProfileId>, HasTenantId, H
     profileData: DeviceProfileData;
     defaultEdgeRuleChainId?: RuleChainId;
 }
-export interface DeviceProfileInfo extends EntityInfoData, HasTenantId {
+export interface DeviceProfileInfo extends EntityInfoData {
     tenantId?: TenantId;
     type: DeviceProfileType;
     transportType: DeviceTransportType;
@@ -305,29 +311,25 @@ export interface DeviceData {
 export interface Device extends BaseData<DeviceId>, HasTenantId, HasVersion, ExportableEntity<DeviceId> {
     tenantId?: TenantId;
     customerId?: CustomerId;
-    name: string;
+    name?: string;
     type?: string;
-    label: string;
+    label?: string;
     firmwareId?: OtaPackageId;
     softwareId?: OtaPackageId;
     deviceProfileId?: DeviceProfileId;
     deviceData?: DeviceData;
     additionalInfo?: any;
 }
-export interface DeviceInfo extends Device {
-    customerTitle: string;
-    customerIsPublic: boolean;
-    deviceProfileName: string;
+export interface DeviceInfo extends Device, GroupEntityInfo<DeviceId> {
     active: boolean;
 }
 export interface DeviceInfoFilter {
     customerId?: CustomerId;
-    edgeId?: EdgeId;
-    type?: string;
+    includeCustomers?: boolean;
     deviceProfileId?: DeviceProfileId;
     active?: boolean;
 }
-export interface SaveDeviceParams extends SaveEntityParams {
+export interface SaveDeviceParams extends SaveEntityWithGroupParams {
     accessToken?: string;
 }
 export declare class DeviceInfoQuery {
@@ -400,3 +402,4 @@ export declare const dayOfWeekTranslations: string[];
 export declare const timeOfDayToUTCTimestamp: (date: Date | number) => number;
 export declare const utcTimestampToTimeOfDay: (time?: number) => Date;
 export declare const getAlarmScheduleRangeText: (startsOn: Date | number, endsOn: Date | number) => string;
+export declare function deviceAiAssistantConfig(store: Store<AppState>, userPermissionsService: UserPermissionsService, translate: TranslateService, hasDevicePermission: boolean, entityView?: AiAssistantViewType, listView?: AiAssistantViewType, listEntityId?: EntityId): AiAssistantPanelConfig | null;

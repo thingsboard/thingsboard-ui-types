@@ -1,7 +1,7 @@
 import { BaseData, ExportableEntity, HasId } from '@shared/models/base-data';
 import { TenantId } from '@shared/models/id/tenant-id';
 import { TbResourceId } from '@shared/models/id/tb-resource-id';
-import { HasTenantId } from '@shared/models/entity.models';
+import { WhiteLabeling } from '@shared/models/white-labeling.models';
 export declare enum ResourceType {
     LWM2M_MODEL = "LWM2M_MODEL",
     PKCS_12 = "PKCS_12",
@@ -19,7 +19,7 @@ export declare const ResourceTypeMIMETypes: Map<ResourceType, string>;
 export declare const ResourceTypeExtension: Map<ResourceType, string>;
 export declare const ResourceTypeTranslationMap: Map<ResourceType, string>;
 export declare const ResourceSubTypeTranslationMap: Map<ResourceSubType, string>;
-export interface TbResourceInfo<D> extends Omit<BaseData<TbResourceId>, 'name' | 'label'>, HasTenantId, ExportableEntity<TbResourceId> {
+export interface TbResourceInfo<D> extends Omit<BaseData<TbResourceId>, 'name' | 'label'>, ExportableEntity<TbResourceId> {
     tenantId?: TenantId;
     resourceKey?: string;
     title?: string;
@@ -61,9 +61,7 @@ export interface ImageExportData {
 }
 export type ImageResourceType = 'tenant' | 'system';
 export type TBResourceScope = 'tenant' | 'system';
-export type ResourceReferences = {
-    [entityType: string]: Array<BaseData<HasId> & HasTenantId>;
-};
+export type ResourceReferences = Array<BaseData<HasId> | WhiteLabeling>;
 export interface ResourceInfoWithReferences extends ResourceInfo {
     references: ResourceReferences;
 }

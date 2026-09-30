@@ -20,10 +20,10 @@ export declare class EntitiesVersionControlService {
     constructor(http: HttpClient, translate: TranslateService, sanitizer: DomSanitizer, store: Store<AppState>);
     clearBranchList(): void;
     listBranches(): Observable<Array<BranchInfo>>;
-    getEntityDataInfo(externalEntityId: EntityId, versionId: string, config?: RequestConfig): Observable<EntityDataInfo>;
+    getEntityDataInfo(externalEntityId: EntityId, internalEntityId: EntityId, versionId: string, config?: RequestConfig): Observable<EntityDataInfo>;
     saveEntitiesVersion(request: VersionCreateRequest, config?: RequestConfig): Observable<VersionCreationResult>;
     private getVersionCreateRequestStatus;
-    listEntityVersions(pageLink: PageLink, branch: string, externalEntityId: EntityId, config?: RequestConfig): Observable<PageData<EntityVersion>>;
+    listEntityVersions(pageLink: PageLink, branch: string, externalEntityId: EntityId, internalEntityId: EntityId, config?: RequestConfig): Observable<PageData<EntityVersion>>;
     listEntityTypeVersions(pageLink: PageLink, branch: string, entityType: EntityType, config?: RequestConfig): Observable<PageData<EntityVersion>>;
     listVersions(pageLink: PageLink, branch: string, config?: RequestConfig): Observable<PageData<EntityVersion>>;
     loadEntitiesVersion(request: VersionLoadRequest, config?: RequestConfig): Observable<VersionLoadResult>;

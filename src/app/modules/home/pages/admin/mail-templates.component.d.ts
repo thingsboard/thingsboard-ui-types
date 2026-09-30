@@ -1,0 +1,35 @@
+import { OnInit } from '@angular/core';
+import { PageComponent } from '@shared/components/page.component';
+import { HasDirtyFlag } from '@core/guards/confirm-on-exit.guard';
+import { Store } from '@ngrx/store';
+import { AppState } from '@core/core.state';
+import { ActivatedRoute } from '@angular/router';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
+import { AuthState } from '@core/auth/auth.models';
+import { AuthUser } from '@shared/models/user.model';
+import { MailTemplate, MailTemplatesSettings } from '@shared/models/settings.models';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
+import { EditorOptions } from 'hugerte';
+import * as i0 from "@angular/core";
+export declare class MailTemplatesComponent extends PageComponent implements OnInit, HasDirtyFlag {
+    protected store: Store<AppState>;
+    private route;
+    private wl;
+    private userPermissionsService;
+    authState: AuthState;
+    authUser: AuthUser;
+    mailTemplatesSettings: MailTemplatesSettings;
+    mailTemplateTypes: any[];
+    mailTemplateTranslationsMap: Map<MailTemplate, string>;
+    mailTemplate: MailTemplate;
+    useSystemMailSettings: boolean;
+    readonly: boolean;
+    isDirty: boolean;
+    hugeRteOptions: Partial<EditorOptions>;
+    constructor(store: Store<AppState>, route: ActivatedRoute, wl: WhiteLabelingService, userPermissionsService: UserPermissionsService);
+    ngOnInit(): void;
+    isTenantAdmin(): boolean;
+    save(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<MailTemplatesComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<MailTemplatesComponent, "tb-mail-templates", never, {}, {}, never, never, false, never>;
+}

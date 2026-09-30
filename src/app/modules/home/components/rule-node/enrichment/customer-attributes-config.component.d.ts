@@ -7,6 +7,8 @@ export declare class CustomerAttributesConfigComponent extends RuleNodeConfigura
     private fb;
     private translate;
     customerAttributesConfigForm: FormGroup;
+    dataToFetch: typeof DataToFetch;
+    dataToFetchTranslations: Map<DataToFetch, string>;
     fetchToData: any[];
     constructor(fb: FormBuilder, translate: TranslateService);
     protected configForm(): FormGroup;

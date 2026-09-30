@@ -14,6 +14,7 @@ export declare class GeneratorConfigComponent extends RuleNodeConfigurationCompo
     jsFuncComponent: JsFuncComponent;
     tbelFuncComponent: JsFuncComponent;
     generatorConfigForm: UntypedFormGroup;
+    entityGroupTypes: EntityType[];
     tbelEnabled: boolean;
     scriptLanguage: typeof ScriptLanguage;
     changeScript: EventEmitter<void>;
@@ -27,6 +28,7 @@ export declare class GeneratorConfigComponent extends RuleNodeConfigurationCompo
     constructor(fb: UntypedFormBuilder, nodeScriptTestService: NodeScriptTestService, translate: TranslateService);
     protected configForm(): UntypedFormGroup;
     protected onConfigurationSet(configuration: RuleNodeConfiguration): void;
+    private cleanKeys;
     protected validatorTriggers(): string[];
     protected updateValidators(emitEvent: boolean): void;
     protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration;

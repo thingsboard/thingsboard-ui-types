@@ -9,6 +9,7 @@ import { EntityId } from '@shared/models/id/entity-id';
 import { AlarmAssignee, AlarmInfo, AlarmsMode } from '@app/shared/models/alarm.models';
 import { AlarmService } from '@app/core/http/alarm.service';
 import { DialogService } from '@core/services/dialog.service';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { ChangeDetectorRef, ViewContainerRef } from '@angular/core';
@@ -20,6 +21,7 @@ export declare class AlarmTableConfig extends EntityTableConfig<AlarmInfo, TimeP
     private alarmService;
     private entityService;
     private dialogService;
+    private userPermissionsService;
     private translate;
     private datePipe;
     private dialog;
@@ -31,9 +33,11 @@ export declare class AlarmTableConfig extends EntityTableConfig<AlarmInfo, TimeP
     private overlay;
     private cd;
     private utilsService;
+    private writeEnabled;
+    private removeEnabled;
     private authUser;
     alarmFilterConfig: AlarmFilterConfig;
-    constructor(alarmService: AlarmService, entityService: EntityService, dialogService: DialogService, translate: TranslateService, datePipe: DatePipe, dialog: MatDialog, alarmsMode: AlarmsMode, entityId: EntityId, defaultAlarmFilterConfig: AlarmFilterConfig, store: Store<AppState>, viewContainerRef: ViewContainerRef, overlay: Overlay, cd: ChangeDetectorRef, utilsService: UtilsService, pageMode?: boolean);
+    constructor(alarmService: AlarmService, entityService: EntityService, dialogService: DialogService, userPermissionsService: UserPermissionsService, translate: TranslateService, datePipe: DatePipe, dialog: MatDialog, alarmsMode: AlarmsMode, entityId: EntityId, defaultAlarmFilterConfig: AlarmFilterConfig, store: Store<AppState>, viewContainerRef: ViewContainerRef, overlay: Overlay, cd: ChangeDetectorRef, utilsService: UtilsService, writeEnabled: any, removeEnabled: any, pageMode?: boolean);
     fetchAlarms(pageLink: TimePageLink): Observable<PageData<AlarmInfo>>;
     showAlarmDetails(entity: AlarmInfo): void;
     getAssigneeTemplate(entity: AlarmInfo): string;

@@ -1,3 +1,4 @@
+import { AiAssistantPanelConfig } from '@shared/models/ai-chat.models';
 import { BaseData, HasId } from '@shared/models/base-data';
 import { EntitiesDataSource, EntitiesFetchFunction } from '@home/models/datasource/entity-datasource';
 import { Observable } from 'rxjs';
@@ -12,8 +13,14 @@ import { PageLink } from '@shared/models/page/page-link';
 import { EntityTableHeaderComponent } from '@home/components/entity/entity-table-header.component';
 import { ActivatedRoute } from '@angular/router';
 import { EntityTabsComponent } from '../../components/entity/entity-tabs.component';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { IEntitiesTableComponent } from '@home/models/entity/entity-table-component.models';
 import { IEntityDetailsPageComponent } from '@home/models/entity/entity-details-page-component.models';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { EntityGroupParams } from '@shared/models/entity-group.models';
+import { GroupEntityComponent } from '@home/components/group/group-entity.component';
+import { GroupEntityTabsComponent } from '@home/components/group/group-entity-tabs.component';
+import { EntityInfoData } from '@shared/models/entity.models';
 export type EntityBooleanFunction<T extends BaseData<HasId>> = (entity: T) => boolean;
 export type EntityStringFunction<T extends BaseData<HasId>> = (entity: T) => string;
 export type EntityVoidFunction<T extends BaseData<HasId>> = (entity: T) => void;
@@ -26,6 +33,8 @@ export type EntityActionFunction<T extends BaseData<HasId>> = (action: EntityAct
 export type CreateEntityOperation<T extends BaseData<HasId>> = () => Observable<T>;
 export type EntityRowClickFunction<T extends BaseData<HasId>> = (event: Event, entity: T) => boolean;
 export type CellContentFunction<T extends BaseData<HasId>> = (entity: T, key: string) => string;
+export type CellProgressBarProgressFunction<T extends BaseData<HasId>> = (entity: T, key: string) => number;
+export type CellChartContentFunction<T extends BaseData<HasId>> = (entity: T, key: string) => number[];
 export type CellTooltipFunction<T extends BaseData<HasId>> = (entity: T, key: string) => string | undefined;
 export type HeaderCellStyleFunction<T extends BaseData<HasId>> = (key: string) => object;
 export type CellStyleFunction<T extends BaseData<HasId>> = (entity: T, key: string) => object;
@@ -54,9 +63,9 @@ export interface HeaderActionDescriptor {
     name: string;
     icon: string;
     isEnabled: () => boolean;
-    onAction: ($event: MouseEvent) => void;
+    onAction: ($event: MouseEvent, headerButton?: MatButton | MatIconButton) => void;
 }
-export type EntityTableColumnType = 'content' | 'action' | 'link' | 'entityChips';
+export type EntityTableColumnType = 'content' | 'action' | 'link' | 'chart' | 'progressBar' | 'entityChips';
 export declare class BaseEntityTableColumn<T extends BaseData<HasId>> {
     type: EntityTableColumnType;
     key: string;
@@ -103,6 +112,24 @@ export declare class EntityLinkTableColumn<T extends BaseData<HasId>> extends Ba
 export declare class DateEntityTableColumn<T extends BaseData<HasId>> extends EntityTableColumn<T> {
     constructor(key: string, title: string, datePipe: DatePipe, width?: string, dateFormat?: string, cellStyleFunction?: CellStyleFunction<T>);
 }
+export declare class ChartEntityTableColumn<T extends BaseData<HasId>> extends BaseEntityTableColumn<T> {
+    key: string;
+    title: string;
+    width: string;
+    cellContentFunction: CellChartContentFunction<T>;
+    chartStyleFunction: CellStyleFunction<T>;
+    cellStyleFunction: CellStyleFunction<T>;
+    constructor(key: string, title: string, width?: string, cellContentFunction?: CellChartContentFunction<T>, chartStyleFunction?: CellStyleFunction<T>, cellStyleFunction?: CellStyleFunction<T>);
+}
+export declare class ProgressBarEntityTableColumn<T extends BaseData<HasId>> extends BaseEntityTableColumn<T> {
+    key: string;
+    title: string;
+    width: string;
+    cellContentFunction: CellProgressBarProgressFunction<T>;
+    cellStyleFunction: CellStyleFunction<T>;
+    progressBarStyleFunction: CellStyleFunction<T>;
+    constructor(key: string, title: string, width?: string, cellContentFunction?: CellProgressBarProgressFunction<T>, cellStyleFunction?: CellStyleFunction<T>, progressBarStyleFunction?: CellStyleFunction<T>);
+}
 export declare class EntityChipsEntityTableColumn<T extends BaseData<HasId>> extends BaseEntityTableColumn<T> {
     key: string;
     title: string;
@@ -110,9 +137,17 @@ export declare class EntityChipsEntityTableColumn<T extends BaseData<HasId>> ext
     entityURL?: (entity: any) => string;
     constructor(key: string, title: string, width?: string, entityURL?: (entity: any) => string);
 }
-export type EntityColumn<T extends BaseData<HasId>> = EntityTableColumn<T> | EntityActionTableColumn<T> | EntityLinkTableColumn<T> | EntityChipsEntityTableColumn<T>;
+export type EntityColumn<T extends BaseData<HasId>> = EntityTableColumn<T> | EntityActionTableColumn<T> | EntityLinkTableColumn<T> | ChartEntityTableColumn<T> | ProgressBarEntityTableColumn<T> | EntityChipsEntityTableColumn<T>;
+export type EntityColumnType = Omit<Partial<EntityTableColumn<BaseData<HasId>> & EntityLinkTableColumn<BaseData<HasId>> & EntityChipsEntityTableColumn<BaseData<HasId>>>, 'cellContentFunction'> & {
+    cellContentFunction?: (entity: BaseData<HasId>, key: string) => any;
+};
+export type EntityColumnsType = Array<EntityColumnType>;
 export declare class EntityTableConfig<T extends BaseData<HasId>, P extends PageLink = PageLink, L extends BaseData<HasId> = T> {
-    constructor();
+    groupParams?: EntityGroupParams;
+    customerId: string;
+    backNavigationCommands?: any[];
+    constructor(groupParams?: EntityGroupParams);
+    displayBackButton(): boolean;
     private table;
     private entityDetailsPage;
     componentsData: any;
@@ -131,23 +166,28 @@ export declare class EntityTableConfig<T extends BaseData<HasId>, P extends Page
     detailsPanelEnabled: boolean;
     hideDetailsTabsOnEdit: boolean;
     rowPointer: boolean;
+    aiAssistantConfig: AiAssistantPanelConfig;
     actionsColumnTitle: any;
     entityTranslations: EntityTypeTranslation;
     entityResources: EntityTypeResource<T>;
-    entityComponent: Type<EntityComponent<T, P, L>>;
-    entityTabsComponent: Type<EntityTabsComponent<T, P, L>>;
+    entityComponent: Type<EntityComponent<T, P, L> | GroupEntityComponent<T>>;
+    entityTabsComponent: Type<EntityTabsComponent<T, P, L> | GroupEntityTabsComponent<T>>;
     addDialogStyle: {};
     defaultSortOrder: SortOrder;
     displayPagination: boolean;
     pageMode: boolean;
     defaultPageSize: number;
+    pageStepCount: number;
+    pageStepIncrement: number;
     columns: Array<EntityColumn<L>>;
     cellActionDescriptors: Array<CellActionDescriptor<L>>;
     groupActionDescriptors: Array<GroupActionDescriptor<L>>;
     headerActionDescriptors: Array<HeaderActionDescriptor>;
     addActionDescriptors: Array<HeaderActionDescriptor>;
+    headerButtonDescriptors: Array<HeaderActionDescriptor>;
     headerComponent: Type<EntityTableHeaderComponent<T, P, L>>;
     addEntity: CreateEntityOperation<T>;
+    addDialogOwnerAndGroupWizard: boolean;
     dataSource: (dataLoadedFunction: (col?: number, row?: number) => void) => EntitiesDataSource<L>;
     detailsReadonly: EntityBooleanFunction<T>;
     entitySelectionEnabled: EntityBooleanFunction<L>;
@@ -162,10 +202,12 @@ export declare class EntityTableConfig<T extends BaseData<HasId>, P extends Page
     entitiesFetchFunction: EntitiesFetchFunction<L, P>;
     onEntityAction: EntityActionFunction<T>;
     handleRowClick: EntityRowClickFunction<L>;
-    entityTitle: EntityStringFunction<T>;
+    entityTitle: EntityStringFunction<T | L>;
     entityAdded: EntityVoidFunction<T>;
     entityUpdated: EntityVoidFunction<T>;
     entitiesDeleted: EntityIdsVoidFunction<T>;
+    defaultEntity: () => T;
+    onDestroy: () => void;
     getTable(): IEntitiesTableComponent;
     setTable(table: IEntitiesTableComponent): void;
     getEntityDetailsPage(): IEntityDetailsPageComponent;
@@ -176,3 +218,5 @@ export declare class EntityTableConfig<T extends BaseData<HasId>, P extends Page
     getActivatedRoute(): ActivatedRoute;
 }
 export declare const checkBoxCell: (value: boolean) => string;
+export declare const groupsCell: (groups?: EntityInfoData[]) => string;
+export declare const defaultEntityTablePermissions: (userPermissionsService: UserPermissionsService, entitiesTableConfig: EntityTableConfig<BaseData<HasId>>) => void;

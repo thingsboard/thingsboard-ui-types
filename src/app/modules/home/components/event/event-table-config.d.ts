@@ -29,6 +29,7 @@ export declare class EventTableConfig extends EntityTableConfig<Event, TimePageL
     private viewContainerRef;
     private cd;
     private store;
+    private isReadOnly;
     testButtonLabel?: string;
     private debugEventSelected?;
     hideClearEventAction: boolean;
@@ -40,7 +41,7 @@ export declare class EventTableConfig extends EntityTableConfig<Event, TimePageL
     set eventType(eventType: EventType | DebugEventType);
     get eventType(): EventType | DebugEventType;
     eventTypes: Array<EventType | DebugEventType>;
-    constructor(eventService: EventService, dialogService: DialogService, translate: TranslateService, datePipe: DatePipe, dialog: MatDialog, entityId: EntityId, tenantId: string, defaultEventType: EventType | DebugEventType, disabledEventTypes: Array<EventType | DebugEventType>, debugEventTypes: Array<DebugEventType>, overlay: Overlay, viewContainerRef: ViewContainerRef, cd: ChangeDetectorRef, store: Store<AppState>, testButtonLabel?: string, debugEventSelected?: EventEmitter<EventBody>, hideClearEventAction?: boolean, disableDebugEventAction?: boolean);
+    constructor(eventService: EventService, dialogService: DialogService, translate: TranslateService, datePipe: DatePipe, dialog: MatDialog, entityId: EntityId, tenantId: string, defaultEventType: EventType | DebugEventType, disabledEventTypes: Array<EventType | DebugEventType>, debugEventTypes: Array<DebugEventType>, overlay: Overlay, viewContainerRef: ViewContainerRef, cd: ChangeDetectorRef, store: Store<AppState>, isReadOnly: boolean, testButtonLabel?: string, debugEventSelected?: EventEmitter<EventBody>, hideClearEventAction?: boolean, disableDebugEventAction?: boolean);
     clearEvents($event: any): void;
     fetchEvents(pageLink: TimePageLink): Observable<PageData<Event>>;
     updateColumns(updateTableColumns?: boolean): void;

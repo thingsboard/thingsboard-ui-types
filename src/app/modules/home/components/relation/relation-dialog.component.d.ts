@@ -9,11 +9,13 @@ import { EntityRelationService } from '@core/http/entity-relation.service';
 import { JsonObjectEditComponent } from '@shared/components/json-object-edit.component';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@shared/components/dialog.component';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export interface RelationDialogData {
     isAdd: boolean;
     direction: EntitySearchDirection;
     relation: EntityRelation;
+    readonly: boolean;
 }
 export declare class RelationDialogComponent extends DialogComponent<RelationDialogComponent, boolean> implements OnInit, ErrorStateMatcher {
     protected store: Store<AppState>;
@@ -24,6 +26,7 @@ export declare class RelationDialogComponent extends DialogComponent<RelationDia
     dialogRef: MatDialogRef<RelationDialogComponent, boolean>;
     fb: FormBuilder;
     private destroyRef;
+    private userPermissionService;
     relationFormGroup: FormGroup;
     additionEntityTypes: {
         [key in string]: string;
@@ -31,15 +34,16 @@ export declare class RelationDialogComponent extends DialogComponent<RelationDia
     isAdd: boolean;
     direction: EntitySearchDirection;
     entitySearchDirection: typeof EntitySearchDirection;
+    readonly: boolean;
     additionalInfo: FormControl;
     additionalInfoEdit: JsonObjectEditComponent;
     submitted: boolean;
     private authUser;
-    constructor(store: Store<AppState>, router: Router, data: RelationDialogData, entityRelationService: EntityRelationService, errorStateMatcher: ErrorStateMatcher, dialogRef: MatDialogRef<RelationDialogComponent, boolean>, fb: FormBuilder, destroyRef: DestroyRef);
+    constructor(store: Store<AppState>, router: Router, data: RelationDialogData, entityRelationService: EntityRelationService, errorStateMatcher: ErrorStateMatcher, dialogRef: MatDialogRef<RelationDialogComponent, boolean>, fb: FormBuilder, destroyRef: DestroyRef, userPermissionService: UserPermissionsService);
     ngOnInit(): void;
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean;
     cancel(): void;
     save(): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<RelationDialogComponent, [null, null, null, null, { skipSelf: true; }, null, null, null]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RelationDialogComponent, [null, null, null, null, { skipSelf: true; }, null, null, null, null]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<RelationDialogComponent, "tb-relation-dialog", never, {}, {}, never, never, false, never>;
 }

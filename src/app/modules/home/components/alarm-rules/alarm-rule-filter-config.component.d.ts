@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { EntityType } from '@shared/models/entity-type.models';
 import { UtilsService } from '@core/services/utils.service';
 import { AlarmRuleFilterConfig } from "@shared/models/alarm-rule.models";
+import { UserPermissionsService } from "@core/http/user-permissions.service";
 import * as i0 from "@angular/core";
 export declare const ALARM_FILTER_CONFIG_DATA: InjectionToken<any>;
 export interface AlarmRuleFilterConfigData {
@@ -23,6 +24,7 @@ export declare class AlarmRuleFilterConfigComponent implements OnInit, ControlVa
     private viewContainerRef;
     private utils;
     private destroyRef;
+    private userPermissionsService;
     alarmRuleFilterPanel: TemplateRef<any>;
     disabled: boolean;
     buttonMode: boolean;
@@ -38,7 +40,7 @@ export declare class AlarmRuleFilterConfigComponent implements OnInit, ControlVa
     private alarmRuleFilterConfig;
     private resizeWindows;
     private propagateChange;
-    constructor(data: AlarmRuleFilterConfigData | undefined, overlayRef: OverlayRef, fb: FormBuilder, translate: TranslateService, overlay: Overlay, nativeElement: ElementRef, viewContainerRef: ViewContainerRef, utils: UtilsService, destroyRef: DestroyRef);
+    constructor(data: AlarmRuleFilterConfigData | undefined, overlayRef: OverlayRef, fb: FormBuilder, translate: TranslateService, overlay: Overlay, nativeElement: ElementRef, viewContainerRef: ViewContainerRef, utils: UtilsService, destroyRef: DestroyRef, userPermissionsService: UserPermissionsService);
     ngOnInit(): void;
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
@@ -54,6 +56,6 @@ export declare class AlarmRuleFilterConfigComponent implements OnInit, ControlVa
     private alarmRuleFilterConfigFromFormValue;
     private updateButtonDisplayValue;
     private customTranslate;
-    static ɵfac: i0.ɵɵFactoryDeclaration<AlarmRuleFilterConfigComponent, [{ optional: true; }, { optional: true; }, null, null, null, null, null, null, null]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AlarmRuleFilterConfigComponent, [{ optional: true; }, { optional: true; }, null, null, null, null, null, null, null, null]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<AlarmRuleFilterConfigComponent, "tb-alarm-rule-filter-config", never, { "disabled": { "alias": "disabled"; "required": false; }; "buttonMode": { "alias": "buttonMode"; "required": false; }; "initialAlarmRuleFilterConfig": { "alias": "initialAlarmRuleFilterConfig"; "required": false; }; }, {}, never, never, false, never>;
 }

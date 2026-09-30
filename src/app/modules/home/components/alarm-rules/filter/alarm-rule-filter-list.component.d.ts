@@ -9,9 +9,9 @@ export declare class AlarmRuleFilterListComponent implements ControlValueAccesso
     private fb;
     private dialog;
     private destroyRef;
+    readonly: boolean;
     arguments: Record<string, CalculatedFieldArgument>;
     operation: ComplexOperation;
-    readonly: boolean;
     filterListFormGroup: import("@angular/forms").FormGroup<{
         filters: FormArray<import("@angular/forms").FormControl<unknown>>;
     }>;
@@ -35,5 +35,6 @@ export declare class AlarmRuleFilterListComponent implements ControlValueAccesso
     get getUsedArguments(): Array<string>;
     private updateModel;
     static ɵfac: i0.ɵɵFactoryDeclaration<AlarmRuleFilterListComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<AlarmRuleFilterListComponent, "tb-alarm-rule-filter-list", never, { "arguments": { "alias": "arguments"; "required": false; }; "operation": { "alias": "operation"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AlarmRuleFilterListComponent, "tb-alarm-rule-filter-list", never, { "readonly": { "alias": "readonly"; "required": false; }; "arguments": { "alias": "arguments"; "required": false; }; "operation": { "alias": "operation"; "required": false; }; }, {}, never, never, false, never>;
+    static ngAcceptInputType_readonly: unknown;
 }

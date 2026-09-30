@@ -12,6 +12,7 @@ import * as i0 from "@angular/core";
 export interface EntityLimitExceededDialogData {
     entityType: EntityType;
     limit: number;
+    subscriptionViolation: boolean;
 }
 export declare class EntityLimitExceededDialogComponent extends DialogComponent<EntityLimitExceededDialogComponent> {
     protected store: Store<AppState>;
@@ -23,6 +24,7 @@ export declare class EntityLimitExceededDialogComponent extends DialogComponent<
     private translate;
     private notificationService;
     limitReachedText: string;
+    isCustomerUser: boolean;
     constructor(store: Store<AppState>, router: Router, data: EntityLimitExceededDialogData, dialogRef: MatDialogRef<EntityLimitExceededDialogComponent>, authService: AuthService, dialogs: DialogService, translate: TranslateService, notificationService: NotificationService);
     cancel(): void;
     requestLimitIncrease($event: Event): void;

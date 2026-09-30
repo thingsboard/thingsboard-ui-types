@@ -24,6 +24,7 @@ export declare class TimeSeriesChartAxisSettingsComponent implements OnInit, Con
     advanced: boolean;
     hideUnits: boolean;
     hideDecimals: boolean;
+    reportMode: boolean;
     private modelValue;
     private propagateChange;
     axisSettingsFormGroup: UntypedFormGroup;
@@ -37,5 +38,5 @@ export declare class TimeSeriesChartAxisSettingsComponent implements OnInit, Con
     private updateValidators;
     private updateModel;
     static ɵfac: i0.ɵɵFactoryDeclaration<TimeSeriesChartAxisSettingsComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<TimeSeriesChartAxisSettingsComponent, "tb-time-series-chart-axis-settings", never, { "alwaysExpanded": { "alias": "alwaysExpanded"; "required": false; }; "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "axisType": { "alias": "axisType"; "required": false; }; "advanced": { "alias": "advanced"; "required": false; }; "hideUnits": { "alias": "hideUnits"; "required": false; }; "hideDecimals": { "alias": "hideDecimals"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<TimeSeriesChartAxisSettingsComponent, "tb-time-series-chart-axis-settings", never, { "alwaysExpanded": { "alias": "alwaysExpanded"; "required": false; }; "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "axisType": { "alias": "axisType"; "required": false; }; "advanced": { "alias": "advanced"; "required": false; }; "hideUnits": { "alias": "hideUnits"; "required": false; }; "hideDecimals": { "alias": "hideDecimals"; "required": false; }; "reportMode": { "alias": "reportMode"; "required": false; }; }, {}, never, never, false, never>;
 }

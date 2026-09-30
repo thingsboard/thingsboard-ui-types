@@ -24,6 +24,7 @@ export declare class EntityTypesVersionLoadComponent extends PageComponent imple
     entityTypes: typeof EntityType;
     entityTypesWithoutRelatedData: Set<EntityType | import("@shared/models/entity-type.models").AliasEntityType>;
     loading: boolean;
+    overrideEntityTypeTranslationsMap: Map<EntityType | import("@shared/models/entity-type.models").AliasEntityType, string>;
     readonly typesWithCalculatedFields: Set<EntityType | import("@shared/models/entity-type.models").AliasEntityType>;
     constructor(store: Store<AppState>, translate: TranslateService, popoverService: TbPopoverService, renderer: Renderer2, viewContainerRef: ViewContainerRef, fb: UntypedFormBuilder, destroyRef: DestroyRef);
     ngOnInit(): void;
@@ -50,6 +51,7 @@ export declare class EntityTypesVersionLoadComponent extends PageComponent imple
     entityTypeText(entityTypeControl: AbstractControl): string;
     allowedEntityTypes(entityTypeControl?: AbstractControl): Array<EntityType>;
     onRemoveOtherEntities(removeOtherEntitiesCheckbox: MatCheckbox, entityTypeControl: AbstractControl): void;
+    isGroupEntityType(entityType: EntityType): boolean;
     private updateModel;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityTypesVersionLoadComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<EntityTypesVersionLoadComponent, "tb-entity-types-version-load", never, { "disabled": { "alias": "disabled"; "required": false; }; }, {}, never, never, false, never>;

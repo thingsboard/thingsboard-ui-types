@@ -8,7 +8,12 @@ import { Observable } from 'rxjs';
 import { DialogService } from '@core/services/dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from '@core/services/utils.service';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
+import { SelfRegistrationService } from '@core/http/self-register.service';
+import { MenuService } from '@core/services/menu.service';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { MobileService } from '@core/services/mobile.service';
+import { DashboardReportService } from '@core/http/dashboard-report.service';
 import * as i0 from "@angular/core";
 export declare class AuthGuard {
     private store;
@@ -17,9 +22,14 @@ export declare class AuthGuard {
     private dialogService;
     private utils;
     private translate;
+    private whiteLabelingService;
+    private selfRegistrationService;
+    private userPermissionsService;
+    private menuService;
     private mobileService;
+    private reportService;
     private zone;
-    constructor(store: Store<AppState>, router: Router, authService: AuthService, dialogService: DialogService, utils: UtilsService, translate: TranslateService, mobileService: MobileService, zone: NgZone);
+    constructor(store: Store<AppState>, router: Router, authService: AuthService, dialogService: DialogService, utils: UtilsService, translate: TranslateService, whiteLabelingService: WhiteLabelingService, selfRegistrationService: SelfRegistrationService, userPermissionsService: UserPermissionsService, menuService: MenuService, mobileService: MobileService, reportService: DashboardReportService, zone: NgZone);
     getAuthState(): Observable<AuthState>;
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | import("@angular/router").UrlTree>;
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | import("@angular/router").UrlTree>;

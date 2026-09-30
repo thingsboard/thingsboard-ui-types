@@ -24,6 +24,8 @@ export declare enum ActionType {
     SUSPENDED = "SUSPENDED",
     CREDENTIALS_READ = "CREDENTIALS_READ",
     ATTRIBUTES_READ = "ATTRIBUTES_READ",
+    ADDED_TO_ENTITY_GROUP = "ADDED_TO_ENTITY_GROUP",
+    REMOVED_FROM_ENTITY_GROUP = "REMOVED_FROM_ENTITY_GROUP",
     RELATION_ADD_OR_UPDATE = "RELATION_ADD_OR_UPDATE",
     RELATION_DELETED = "RELATION_DELETED",
     RELATIONS_DELETED = "RELATIONS_DELETED",
@@ -35,6 +37,9 @@ export declare enum ActionType {
     ADDED_COMMENT = "ADDED_COMMENT",
     UPDATED_COMMENT = "UPDATED_COMMENT",
     DELETED_COMMENT = "DELETED_COMMENT",
+    REST_API_RULE_ENGINE_CALL = "REST_API_RULE_ENGINE_CALL",
+    MADE_PUBLIC = "MADE_PUBLIC",
+    MADE_PRIVATE = "MADE_PRIVATE",
     LOGIN = "LOGIN",
     LOGOUT = "LOGOUT",
     LOCKOUT = "LOCKOUT",
@@ -44,9 +49,11 @@ export declare enum ActionType {
     PROVISION_FAILURE = "PROVISION_FAILURE",
     TIMESERIES_UPDATED = "TIMESERIES_UPDATED",
     TIMESERIES_DELETED = "TIMESERIES_DELETED",
+    CHANGE_OWNER = "CHANGE_OWNER",
     ASSIGNED_TO_EDGE = "ASSIGNED_TO_EDGE",
     UNASSIGNED_FROM_EDGE = "UNASSIGNED_FROM_EDGE",
-    SMS_SENT = "SMS_SENT"
+    SMS_SENT = "SMS_SENT",
+    NON_PRODUCTION_CONFIRMED = "NON_PRODUCTION_CONFIRMED"
 }
 export declare enum ActionStatus {
     SUCCESS = "SUCCESS",
@@ -70,3 +77,29 @@ export interface AuditLogFilter {
     actionTypes: string[];
 }
 export declare const auditLogFilterEquals: (filter1?: AuditLogFilter, filter2?: AuditLogFilter) => boolean;
+export interface AIAuditLog {
+    tenantId: TenantId;
+    id: AuditLogId;
+    createdTime: number;
+    userId: string;
+    userName: string;
+    sourceType: AiAuditLogSourceType;
+    sourceId: string;
+    origin: string;
+    step?: string;
+    handler?: string;
+    action: string;
+    success: boolean;
+    data: any;
+    error: string;
+    timingMs: number;
+}
+export declare enum AiAuditLogSourceType {
+    SOLUTION = "SOLUTION",
+    CHAT = "CHAT"
+}
+export declare enum AiAuditLogStatus {
+    ALL = "ALL",
+    SUCCESS = "SUCCESS",
+    FAILURE = "FAILURE"
+}

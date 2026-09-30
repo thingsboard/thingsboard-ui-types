@@ -6,14 +6,20 @@ import { HasConfirmForm } from '@core/guards/confirm-on-exit.guard';
 import { MobileApplicationService } from '@core/http/mobile-application.service';
 import { BadgePosition } from '@shared/models/mobile-app.models';
 import { EntityType } from '@shared/models/entity-type.models';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 import * as i0 from "@angular/core";
 export declare class MobileQrCodeWidgetSettingsComponent extends PageComponent implements HasConfirmForm {
     protected store: Store<AppState>;
     private mobileAppService;
     private fb;
+    private userPermissionsService;
+    private wl;
     readonly badgePositionTranslationsMap: Map<BadgePosition, string>;
     readonly entityType: typeof EntityType;
+    setBaseURL: boolean;
     mobileAppSettingsForm: FormGroup<{
+        useSystemSettings: import("@angular/forms").FormControl<boolean>;
         useDefaultApp: import("@angular/forms").FormControl<boolean>;
         mobileAppBundleId: import("@angular/forms").FormControl<any>;
         androidEnabled: import("@angular/forms").FormControl<boolean>;
@@ -26,8 +32,11 @@ export declare class MobileQrCodeWidgetSettingsComponent extends PageComponent i
             qrCodeLabel: import("@angular/forms").FormControl<string>;
         }>;
     }>;
+    private authUser;
     private mobileAppSettings;
-    constructor(store: Store<AppState>, mobileAppService: MobileApplicationService, fb: FormBuilder);
+    readonly: boolean;
+    constructor(store: Store<AppState>, mobileAppService: MobileApplicationService, fb: FormBuilder, userPermissionsService: UserPermissionsService, wl: WhiteLabelingService);
+    isTenantAdmin(): boolean;
     private processMobileAppSettings;
     save(): void;
     confirmForm(): FormGroup;

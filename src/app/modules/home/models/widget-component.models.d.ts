@@ -1,7 +1,7 @@
 import { IDashboardComponent } from '@home/models/dashboard-component.models';
-import { DataSet, Datasource, DatasourceData, FormattedData, Widget, WidgetActionDescriptor, WidgetActionSource, WidgetConfig, WidgetControllerDescriptor, WidgetHeaderActionButtonType, WidgetType, widgetType, WidgetTypeDescriptor, WidgetTypeDetails, WidgetTypeParameters } from '@shared/models/widget.models';
+import { DataSet, Datasource, DatasourceData, ExportRow, FormattedData, Widget, WidgetActionDescriptor, WidgetActionSource, WidgetConfig, WidgetControllerDescriptor, WidgetExportType, WidgetHeaderActionButtonType, WidgetType, widgetType, WidgetTypeDescriptor, WidgetTypeDetails, WidgetTypeParameters } from '@shared/models/widget.models';
 import { Timewindow, WidgetTimewindow } from '@shared/models/time/time.models';
-import { IAliasController, IStateController, IWidgetSubscription, IWidgetUtils, RpcApi, StateParams, SubscriptionEntityInfo, TimewindowFunctions, WidgetActionsApi, WidgetSubscriptionApi } from '@core/api/widget-api.models';
+import { IAliasController, IStateController, IWidgetHttpUtils, IWidgetSubscription, IWidgetUtils, RpcApi, StateParams, SubscriptionEntityInfo, TimewindowFunctions, WidgetActionsApi, WidgetSubscriptionApi } from '@core/api/widget-api.models';
 import { ChangeDetectorRef, InjectionToken, Injector, NgZone, Renderer2, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { RafService } from '@core/services/raf.service';
@@ -28,6 +28,7 @@ import { ResourceService } from '@core/http/resource.service';
 import { TelemetryWebsocketService } from '@core/ws/telemetry-websocket.service';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { EntityGroupService } from '@core/http/entity-group.service';
 import { PageLink, TimePageLink } from '@shared/models/page/page-link';
 import { SortOrder } from '@shared/models/page/sort-order';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -38,12 +39,14 @@ import { Observable } from 'rxjs';
 import * as RxJSOperators from 'rxjs/operators';
 import { TbPopoverComponent } from '@shared/components/popover.component';
 import { EntityId } from '@shared/models/id/entity-id';
+import { DashboardReportService } from '@core/http/dashboard-report.service';
 import { AlarmQuery, AlarmSearchStatus, AlarmStatus } from '@app/shared/models/alarm.models';
 import { ImagePipe } from '@shared/pipe/image.pipe';
 import { MillisecondsToTimeStringPipe } from '@shared/pipe/milliseconds-to-time-string.pipe';
 import { SharedTelemetrySubscriber, TelemetrySubscriber } from '@shared/models/telemetry/telemetry.models';
 import { UserId } from '@shared/models/id/user-id';
 import { UserSettingsService } from '@core/http/user-settings.service';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 import { DataKeySettingsFunction } from '@home/components/widget/lib/settings/common/key/data-keys.component.models';
 import { UtilsService } from '@core/services/utils.service';
 import { CompiledTbFunction } from '@shared/models/js-function.models';
@@ -72,12 +75,13 @@ export interface WidgetHeaderAction extends IWidgetAction {
     showWidgetHeaderActionFunction: CompiledTbFunction<ShowWidgetHeaderActionFunction>;
 }
 export interface WidgetAction extends IWidgetAction {
-    show: boolean;
+    show: boolean | (() => boolean);
 }
 export interface IDashboardWidget {
     updateWidgetParams(): void;
     updateParamsFromData(detectChanges?: boolean): void;
 }
+export type WidgetDestroyCallback = () => void;
 export declare class WidgetContext {
     dashboard: IDashboardComponent;
     private dashboardWidget;
@@ -108,6 +112,7 @@ export declare class WidgetContext {
     attributeService: AttributeService;
     entityRelationService: EntityRelationService;
     entityService: EntityService;
+    entityGroupService: EntityGroupService;
     dialogs: DialogService;
     customDialog: CustomDialogService;
     resourceService: ResourceService;
@@ -125,6 +130,8 @@ export declare class WidgetContext {
     router: Router;
     renderer: Renderer2;
     widgetContentContainer: ViewContainerRef;
+    reportService: DashboardReportService;
+    wl: WhiteLabelingService;
     private changeDetectorValue;
     private containerChangeDetectorValue;
     inited: boolean;
@@ -137,6 +144,7 @@ export declare class WidgetContext {
     timewindowFunctions: TimewindowFunctions;
     controlApi: RpcApi;
     utils: IWidgetUtils;
+    httpUtils: IWidgetHttpUtils;
     $widgetElement: JQuery<HTMLElement>;
     $container: JQuery<HTMLElement>;
     $containerParent: JQuery<HTMLElement>;
@@ -152,6 +160,9 @@ export declare class WidgetContext {
     widgetCssClass?: string;
     actionsApi?: WidgetActionsApi;
     activeEntityInfo?: SubscriptionEntityInfo;
+    exportWidgetData: (widgetExportType: WidgetExportType) => void;
+    customDataExport?: () => ExportRow[] | RxJS.Observable<ExportRow[]>;
+    exportDateFormat?: string;
     datasources?: Array<Datasource>;
     data?: Array<DatasourceData>;
     latestData?: Array<DatasourceData>;
@@ -167,6 +178,7 @@ export declare class WidgetContext {
     widgetTitleTooltip?: string;
     customHeaderActions?: Array<WidgetHeaderAction>;
     widgetActions?: Array<WidgetAction>;
+    widgetHeaderActionsPanel?: TemplateRef<any>;
     servicesMap?: Map<string, Type<any>>;
     $injector?: Injector;
     ngZone?: NgZone;
@@ -347,11 +359,13 @@ export declare class WidgetContext {
         config: RxJS.GlobalConfig;
         onErrorResumeNextWith: typeof RxJS.onErrorResumeNextWith;
     };
+    private destroyCallbacks;
     registerPopoverComponent(popoverComponent: TbPopoverComponent): void;
     updatePopoverPositions(): void;
     setPopoversHidden(hidden: boolean): void;
     registerLabelPattern(label: string, label$: Observable<string>): Observable<string>;
     updateLabelPatterns(): void;
+    registerDestroyCallback(destroyCallback: WidgetDestroyCallback): void;
     showSuccessToast(message: string, duration?: number, verticalPosition?: NotificationVerticalPosition, horizontalPosition?: NotificationHorizontalPosition, target?: string, modern?: boolean): void;
     showInfoToast(message: string, verticalPosition?: NotificationVerticalPosition, horizontalPosition?: NotificationHorizontalPosition, target?: string, modern?: boolean): void;
     showWarnToast(message: string, verticalPosition?: NotificationVerticalPosition, horizontalPosition?: NotificationHorizontalPosition, target?: string, modern?: boolean): void;
@@ -384,6 +398,7 @@ export declare class LabelVariablePattern {
 export declare const widgetContextToken: InjectionToken<WidgetContext>;
 export declare const widgetErrorMessagesToken: InjectionToken<string[]>;
 export declare const widgetTitlePanelToken: InjectionToken<TemplateRef<any>>;
+export declare const widgetHeaderActionsPanelToken: InjectionToken<TemplateRef<any>>;
 export interface IDynamicWidgetComponent {
     readonly ctx: WidgetContext;
     readonly errorMessages: string[];
@@ -408,6 +423,10 @@ export interface WidgetInfo extends WidgetTypeDescriptor, WidgetControllerDescri
     tags?: string[];
     componentType?: Type<IDynamicWidgetComponent>;
 }
+export interface WidgetWithInfo extends Widget {
+    widgetInfo: WidgetInfo;
+}
+export declare const isWidgetWithInfo: (widget: Widget) => widget is WidgetWithInfo;
 export interface WidgetConfigComponentData {
     widgetName: string;
     config: WidgetConfig;

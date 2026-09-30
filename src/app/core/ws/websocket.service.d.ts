@@ -5,6 +5,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { NgZone } from '@angular/core';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { AuthWsCmd, CmdUpdateMsg, NotificationSubscriber, TelemetrySubscriber, WebsocketDataMsg } from '@shared/models/telemetry/telemetry.models';
+import { DashboardReportService } from '@core/http/dashboard-report.service';
 import Timeout = NodeJS.Timeout;
 export declare abstract class WebsocketService<T extends WsSubscriber> implements WsService<T> {
     protected store: Store<AppState>;
@@ -13,6 +14,7 @@ export declare abstract class WebsocketService<T extends WsSubscriber> implement
     protected apiEndpoint: string;
     protected cmdWrapper: CmdWrapper;
     protected window: Window;
+    protected reportService?: DashboardReportService;
     isActive: boolean;
     isOpening: boolean;
     isOpened: boolean;
@@ -26,11 +28,15 @@ export declare abstract class WebsocketService<T extends WsSubscriber> implement
     wsUri: string;
     dataStream: WebSocketSubject<CmdWrapper | CmdUpdateMsg | AuthWsCmd>;
     errorName: string;
-    protected constructor(store: Store<AppState>, authService: AuthService, ngZone: NgZone, apiEndpoint: string, cmdWrapper: CmdWrapper, window: Window);
-    abstract subscribe(subscriber: WsSubscriber): any;
+    private reconnectAttempts;
+    private lastShownCloseCode;
+    protected constructor(store: Store<AppState>, authService: AuthService, ngZone: NgZone, apiEndpoint: string, cmdWrapper: CmdWrapper, window: Window, reportService?: DashboardReportService);
+    abstract subscribe(subscriber: WsSubscriber, skipPublish?: boolean): any;
     abstract update(subscriber: T): any;
-    abstract unsubscribe(subscriber: T): any;
+    abstract unsubscribe(subscriber: T, skipPublish?: boolean): any;
     abstract processOnMessage(message: WebsocketDataMsg): any;
+    batchSubscribe(subscribers: T[]): void;
+    batchUnsubscribe(subscribers: T[]): void;
     protected nextCmdId(): number;
     protected publishCommands(): void;
     private checkToClose;

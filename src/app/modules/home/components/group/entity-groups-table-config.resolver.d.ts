@@ -1,0 +1,37 @@
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
+import { UtilsService } from '@core/services/utils.service';
+import { EntityGroupParams } from '@shared/models/entity-group.models';
+import { EntityGroupService } from '@core/http/entity-group.service';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
+import { Observable } from 'rxjs';
+import { HomeDialogsService } from '@home/dialogs/home-dialogs.service';
+import { CustomerService } from '@core/http/customer.service';
+import { EntityGroupsTableConfig } from './entity-groups-table-config';
+import { MatDialog } from '@angular/material/dialog';
+import { EdgeService } from '@core/http/edge.service';
+import { CustomTranslatePipe } from '@shared/pipe/custom-translate.pipe';
+import { Store } from '@ngrx/store';
+import { AppState } from '@core/core.state';
+import * as i0 from "@angular/core";
+export declare class EntityGroupsTableConfigResolver {
+    private entityGroupService;
+    private customerService;
+    private edgeService;
+    private userPermissionsService;
+    private translate;
+    private datePipe;
+    private utils;
+    private router;
+    private dialog;
+    private homeDialogs;
+    private customTranslate;
+    private store;
+    constructor(entityGroupService: EntityGroupService, customerService: CustomerService, edgeService: EdgeService, userPermissionsService: UserPermissionsService, translate: TranslateService, datePipe: DatePipe, utils: UtilsService, router: Router, dialog: MatDialog, homeDialogs: HomeDialogsService, customTranslate: CustomTranslatePipe, store: Store<AppState>);
+    resolve(route: ActivatedRouteSnapshot): Observable<EntityGroupsTableConfig> | EntityGroupsTableConfig;
+    resolveEntityGroupTableConfig(params: EntityGroupParams, resolveCustomer?: boolean, customerTitle?: string): Observable<EntityGroupsTableConfig> | EntityGroupsTableConfig;
+    private resolveEdgeInfo;
+    static ɵfac: i0.ɵɵFactoryDeclaration<EntityGroupsTableConfigResolver, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<EntityGroupsTableConfigResolver>;
+}

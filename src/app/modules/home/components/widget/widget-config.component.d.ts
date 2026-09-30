@@ -49,6 +49,7 @@ export declare class WidgetConfigComponent extends PageComponent implements OnIn
     disabled: boolean;
     widgetConfigMode: WidgetConfigMode;
     widgetType: widgetType;
+    widgetActionTypesList: import("@shared/models/widget.models").WidgetActionType[];
     widgetConfigCallbacks: WidgetConfigCallbacks;
     widgetEditMode: boolean;
     basicModeDirectiveError: string;
@@ -57,6 +58,7 @@ export declare class WidgetConfigComponent extends PageComponent implements OnIn
     headerOptions: ToggleHeaderOption[];
     selectedOption: string;
     predefinedValues: string[];
+    displayDataExport: boolean;
     dataSettings: UntypedFormGroup;
     targetDeviceSettings: UntypedFormGroup;
     widgetSettings: UntypedFormGroup;
@@ -113,6 +115,7 @@ export declare class WidgetConfigComponent extends PageComponent implements OnIn
     onlyHistoryTimewindow(): boolean;
     generateDataKey(chip: any, type: DataKeyType, dataKeySettingsForm: FormProperty[], isLatestDataKey: boolean, dataKeySettingsFunction: DataKeySettingsFunction): DataKey;
     private genNextColor;
+    private fetchEntityAliases;
     private createEntityAlias;
     private editEntityAlias;
     private createFilter;

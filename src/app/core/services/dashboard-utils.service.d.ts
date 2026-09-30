@@ -4,6 +4,8 @@ import { BreakpointId, BreakpointInfo, Dashboard, DashboardLayout, DashboardLayo
 import { Datasource, Widget, WidgetConfig, WidgetSize, widgetType, WidgetTypeDescriptor } from '@app/shared/models/widget.models';
 import { EntityAliasFilter } from '@app/shared/models/alias.models';
 import { EntityId } from '@app/shared/models/id/entity-id';
+import { EntityGroupService } from '@core/http/entity-group.service';
+import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { DashboardPageLayout } from '@home/components/dashboard-page/dashboard-page.models';
 import { WidgetModelDefinition } from '@shared/models/widget/widget-model.definition';
@@ -12,8 +14,9 @@ export declare class DashboardUtilsService {
     private utils;
     private timeService;
     private translate;
+    private entityGroupService;
     private systemBreakpoints;
-    constructor(utils: UtilsService, timeService: TimeService, translate: TranslateService);
+    constructor(utils: UtilsService, timeService: TimeService, translate: TranslateService, entityGroupService: EntityGroupService);
     validateAndUpdateDashboard(dashboard: Dashboard): Dashboard;
     createSingleWidgetDashboard(widget: Widget): Dashboard;
     validateAndUpdateWidget(widget: Widget): Widget;
@@ -29,7 +32,7 @@ export declare class DashboardUtilsService {
     private createDefaultGridSettings;
     createDefaultLayouts(): DashboardStateLayouts;
     createDefaultState(name: string, root: boolean): DashboardState;
-    createSingleEntityFilter(entityId: EntityId): EntityAliasFilter;
+    createSingleEntityFilter(entityId: EntityId): Observable<EntityAliasFilter>;
     widgetConfigFromWidgetType(widgetTypeDescriptor: WidgetTypeDescriptor): WidgetConfig;
     private convertDatasourcesFromWidgetType;
     private convertDatasourceFromWidgetType;

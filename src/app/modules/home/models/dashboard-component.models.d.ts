@@ -1,5 +1,5 @@
 import { GridsterComponent, GridsterConfig, GridsterItem, GridsterItemComponentInterface } from 'angular-gridster2';
-import { Widget, WidgetPosition } from '@app/shared/models/widget.models';
+import { Widget, WidgetExportType, WidgetPosition } from '@app/shared/models/widget.models';
 import { WidgetLayout, WidgetLayouts } from '@app/shared/models/dashboard.models';
 import { IDashboardWidget, WidgetAction, WidgetContext, WidgetHeaderAction } from './widget-component.models';
 import { Timewindow } from '@shared/models/time/time.models';
@@ -117,6 +117,7 @@ export declare class DashboardWidget implements GridsterItem, IDashboardWidget {
     titleIconStyle: ComponentStyle;
     dropShadow: boolean;
     enableFullscreen: boolean;
+    enableDataExport: boolean;
     hasTimewindow: boolean;
     hasAggregation: boolean;
     onlyQuickInterval: boolean;
@@ -151,6 +152,7 @@ export declare class DashboardWidget implements GridsterItem, IDashboardWidget {
     constructor(dashboard: IDashboardComponent, widget: Widget, widgetLayoutValue?: WidgetLayout, parentDashboard?: IDashboardComponent, popoverComponent?: TbPopoverComponent);
     gridsterItemComponent$(): Observable<GridsterItemComponentInterface>;
     updateWidgetParams(detectChanges?: boolean): void;
+    exportWidgetData($event: Event, widgetExportType: WidgetExportType): void;
     updateParamsFromData(detectChanges?: boolean): void;
     private updateCustomHeaderActions;
     private filterCustomHeaderAction;

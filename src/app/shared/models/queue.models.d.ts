@@ -1,7 +1,6 @@
 import { BaseData } from '@shared/models/base-data';
 import { TenantId } from '@shared/models/id/tenant-id';
 import { QueueId } from '@shared/models/id/queue-id';
-import { HasTenantId } from '@shared/models/entity.models';
 export declare enum ServiceType {
     TB_CORE = "TB_CORE",
     TB_RULE_ENGINE = "TB_RULE_ENGINE",
@@ -29,7 +28,7 @@ export declare enum QueueProcessingStrategyTypes {
     RETRY_TIMED_OUT = "RETRY_TIMED_OUT"
 }
 export declare const QueueProcessingStrategyTypesMap: Map<QueueProcessingStrategyTypes, QueueStrategyData>;
-export interface QueueInfo extends BaseData<QueueId>, HasTenantId {
+export interface QueueInfo extends BaseData<QueueId> {
     generatedId?: string;
     name: string;
     packProcessingTimeout: number;
@@ -55,7 +54,8 @@ export interface QueueInfo extends BaseData<QueueId>, HasTenantId {
         duplicateMsgToAllPartitions?: boolean;
     };
 }
-export interface QueueStatisticsInfo extends Omit<BaseData<QueueId>, 'label'>, HasTenantId {
+export interface QueueStatisticsInfo extends Omit<BaseData<QueueId>, 'label'> {
     queueName: string;
     serviceId: string;
+    tenantId?: TenantId;
 }

@@ -18,9 +18,16 @@ export interface DefaultTenantProfileConfiguration {
     maxDashboards: number;
     maxRuleChains: number;
     maxEdges: number;
+    maxIntegrations: number;
+    maxConverters: number;
+    maxSchedulerEvents: number;
+    maxAgents: number;
+    maxAgentApplications: number;
+    maxGeneratedReports: number;
     maxResourcesInBytes: number;
     maxOtaPackagesInBytes: number;
     maxResourceSize: number;
+    maxReportSizeInBytes: number;
     transportTenantMsgRateLimit?: string;
     transportTenantTelemetryMsgRateLimit?: string;
     transportTenantTelemetryDataPointsRateLimit?: string;
@@ -33,6 +40,9 @@ export interface DefaultTenantProfileConfiguration {
     transportGatewayDeviceMsgRateLimit?: string;
     transportGatewayDeviceTelemetryMsgRateLimit?: string;
     transportGatewayDeviceTelemetryDataPointsRateLimit?: string;
+    integrationMsgsPerTenantRateLimit?: string;
+    integrationMsgsPerDeviceRateLimit?: string;
+    integrationMsgsPerAssetRateLimit?: string;
     tenantEntityExportRateLimit?: string;
     tenantEntityImportRateLimit?: string;
     tenantNotificationRequestsRateLimit?: string;
@@ -48,6 +58,7 @@ export interface DefaultTenantProfileConfiguration {
     maxSms: number;
     smsEnabled: boolean;
     maxCreatedAlarms: number;
+    maxAiCredits: number;
     maxDebugModeDurationMinutes: number;
     tenantServerRestLimitsConfiguration: string;
     customerServerRestLimitsConfiguration: string;
@@ -69,11 +80,17 @@ export interface DefaultTenantProfileConfiguration {
     edgeEventRateLimitsPerEdge?: string;
     edgeUplinkMessagesRateLimits?: string;
     edgeUplinkMessagesRateLimitsPerEdge?: string;
+    agentEventRateLimits?: string;
+    agentEventRateLimitsPerAgent?: string;
+    agentLogChunkRateLimits?: string;
+    agentLogChunkRateLimitsPerAgent?: string;
     defaultStorageTtlDays: number;
     alarmsTtlDays: number;
     rpcTtlDays: number;
     queueStatsTtlDays: number;
     ruleEngineExceptionsTtlDays: number;
+    blobEntityTtlDays: number;
+    reportTtlDays: number;
     maxCalculatedFieldsPerEntity: number;
     maxArgumentsPerCF: number;
     maxRelationLevelPerCfArgument: number;
@@ -88,6 +105,7 @@ export interface DefaultTenantProfileConfiguration {
     maxStateSizeInKBytes: number;
     maxSingleValueArgumentSizeInKBytes: number;
     calculatedFieldDebugEventsRateLimit: string;
+    aiChatRequestsPerTenantRateLimit: string;
 }
 export type TenantProfileConfigurations = DefaultTenantProfileConfiguration;
 export interface TenantProfileConfiguration extends TenantProfileConfigurations {

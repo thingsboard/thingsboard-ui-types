@@ -1,0 +1,31 @@
+import { OnInit } from '@angular/core';
+import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validator } from '@angular/forms';
+import { ChipStackIntegration } from '@shared/models/integration.models';
+import { Store } from '@ngrx/store';
+import { AppState } from '@core/core.state';
+import { TranslateService } from '@ngx-translate/core';
+import { IntegrationForm } from '@home/components/integration/configuration/integration-form';
+import * as i0 from "@angular/core";
+export declare class ChirpStackIntegrationFormComponent extends IntegrationForm implements ControlValueAccessor, Validator, OnInit {
+    private fb;
+    private store;
+    private translate;
+    chirpStackIntegrationConfigForm: UntypedFormGroup;
+    routingKey: string;
+    private propagateChange;
+    private propagateChangePending;
+    constructor(fb: UntypedFormBuilder, store: Store<AppState>, translate: TranslateService);
+    ngOnInit(): void;
+    writeValue(value: ChipStackIntegration): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    setDisabledState(isDisabled: boolean): void;
+    private endPointUrl;
+    private updateModels;
+    validate(): ValidationErrors | null;
+    onHttpEndpointCopied(): void;
+    updatedValidationPrivateNetwork(): void;
+    updateDownlinkControlsState(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ChirpStackIntegrationFormComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ChirpStackIntegrationFormComponent, "tb-chirp-stack-integration-form", never, { "routingKey": { "alias": "routingKey"; "required": false; }; }, {}, never, never, false, never>;
+}

@@ -9,11 +9,13 @@ import { GettingStarted } from '@shared/models/user-settings.models';
 import { CdkStep, StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import { Authority } from '@shared/models/authority.enum';
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 import * as i0 from "@angular/core";
 export declare class GettingStartedWidgetComponent extends PageComponent implements OnInit, OnDestroy {
     protected store: Store<AppState>;
     private cd;
     private userSettingsService;
+    private wl;
     private dialog;
     matStepper: MatStepper;
     ctx: WidgetContext;
@@ -21,8 +23,9 @@ export declare class GettingStartedWidgetComponent extends PageComponent impleme
     authUser: import("../../../../../../shared/public-api").AuthUser;
     gettingStarted: GettingStarted;
     allCompleted: boolean;
+    docsLink: string;
     baseUrl: string;
-    constructor(store: Store<AppState>, cd: ChangeDetectorRef, userSettingsService: UserSettingsService, dialog: MatDialog);
+    constructor(store: Store<AppState>, cd: ChangeDetectorRef, userSettingsService: UserSettingsService, wl: WhiteLabelingService, dialog: MatDialog);
     ngOnInit(): void;
     ngOnDestroy(): void;
     isSelected(step: CdkStep): boolean;

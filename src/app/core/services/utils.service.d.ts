@@ -20,6 +20,7 @@ export declare class UtilsService {
     iframeMode: boolean;
     widgetEditMode: boolean;
     editWidgetInfo: WidgetInfo;
+    stateSelectView: boolean;
     defaultDataKey: DataKey;
     defaultDatasource: Datasource;
     defaultAlarmDataKeys: Array<DataKey>;
@@ -53,6 +54,7 @@ export declare class UtilsService {
     isDefined(value: any): boolean;
     isDefinedAndNotNull(value: any): boolean;
     defaultValue(value: any, defaultValue: any): any;
+    translateText(text: string): string;
     private getEntityIdFromDatasource;
     subscribeToEntityTelemetry(ctx: WidgetContext, entityId?: EntityId, type?: TelemetryType, keys?: string[]): Observable<Array<AttributeData>>;
     objToBase64(obj: any): string;

@@ -1,10 +1,10 @@
 import * as CanvasGauges from 'canvas-gauges';
 import { FontSettings } from '@home/components/widget/lib/settings.models';
 import { WidgetContext } from '@home/models/widget-component.models';
+import { ValueFormatProcessor } from '@shared/models/widget-settings.models';
 import Highlight = CanvasGauges.Highlight;
 import BaseGauge = CanvasGauges.BaseGauge;
 import GenericOptions = CanvasGauges.GenericOptions;
-import { ValueFormatProcessor } from '@shared/models/widget-settings.models';
 export type AnimationRule = 'linear' | 'quad' | 'quint' | 'cycle' | 'bounce' | 'elastic' | 'dequad' | 'dequint' | 'decycle' | 'debounce' | 'delastic';
 export type AnimationTarget = 'needle' | 'plate';
 export interface AnalogueGaugeSettings {

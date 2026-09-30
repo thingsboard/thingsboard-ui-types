@@ -15,6 +15,7 @@ export declare class TimeSeriesChartAxisSettingsPanelComponent implements OnInit
     panelTitle: string;
     axisSettings: TimeSeriesChartAxisSettings;
     advanced: boolean;
+    reportMode: boolean;
     popover: TbPopoverComponent<TimeSeriesChartAxisSettingsPanelComponent>;
     axisSettingsApplied: EventEmitter<TimeSeriesChartAxisSettings>;
     axisSettingsFormGroup: UntypedFormGroup;
@@ -23,5 +24,5 @@ export declare class TimeSeriesChartAxisSettingsPanelComponent implements OnInit
     cancel(): void;
     applyAxisSettings(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<TimeSeriesChartAxisSettingsPanelComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<TimeSeriesChartAxisSettingsPanelComponent, "tb-time-series-chart-axis-settings-panel", never, { "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "axisType": { "alias": "axisType"; "required": false; }; "panelTitle": { "alias": "panelTitle"; "required": false; }; "axisSettings": { "alias": "axisSettings"; "required": false; }; "advanced": { "alias": "advanced"; "required": false; }; "popover": { "alias": "popover"; "required": false; }; }, { "axisSettingsApplied": "axisSettingsApplied"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<TimeSeriesChartAxisSettingsPanelComponent, "tb-time-series-chart-axis-settings-panel", never, { "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeyCallbacks": { "alias": "dataKeyCallbacks"; "required": false; }; "datasource": { "alias": "datasource"; "required": false; }; "axisType": { "alias": "axisType"; "required": false; }; "panelTitle": { "alias": "panelTitle"; "required": false; }; "axisSettings": { "alias": "axisSettings"; "required": false; }; "advanced": { "alias": "advanced"; "required": false; }; "reportMode": { "alias": "reportMode"; "required": false; }; "popover": { "alias": "popover"; "required": false; }; }, { "axisSettingsApplied": "axisSettingsApplied"; }, never, never, false, never>;
 }

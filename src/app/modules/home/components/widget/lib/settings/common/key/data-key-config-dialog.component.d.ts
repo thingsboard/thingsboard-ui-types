@@ -6,7 +6,7 @@ import { AppState } from '@core/core.state';
 import { FormGroupDirective, NgForm, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@shared/components/dialog.component';
-import { DataKey, DataKeyConfigMode, Widget, widgetType } from '@shared/models/widget.models';
+import { DataKey, DataKeyConfigMode, Datasource, Widget, widgetType } from '@shared/models/widget.models';
 import { DataKeyConfigComponent } from './data-key-config.component';
 import { Dashboard } from '@shared/models/dashboard.models';
 import { IAliasController } from '@core/api/widget-api.models';
@@ -14,11 +14,14 @@ import { ToggleHeaderOption } from '@shared/components/toggle-header.component';
 import { TranslateService } from '@ngx-translate/core';
 import { WidgetConfigCallbacks } from '@home/components/widget/config/widget-config.component.models';
 import { FormProperty } from '@shared/models/dynamic-form.models';
+import { DataKeySettingsFormFunction } from '@home/components/widget/lib/settings/common/key/data-keys.component.models';
 import * as i0 from "@angular/core";
 export interface DataKeyConfigDialogData {
     dataKey: DataKey;
     dataKeyConfigMode?: DataKeyConfigMode;
     dataKeySettingsForm: FormProperty[];
+    dataKeySettingsFormFunction?: DataKeySettingsFormFunction;
+    dataKeySettingsFormTrimDefaults?: boolean;
     dataKeySettingsDirective: string;
     dashboard: Dashboard;
     aliasController: IAliasController;
@@ -27,6 +30,7 @@ export interface DataKeyConfigDialogData {
     deviceId?: string;
     entityAliasId?: string;
     showPostProcessing?: boolean;
+    reportMode?: boolean;
     callbacks?: WidgetConfigCallbacks;
     hideDataKeyName?: boolean;
     hideDataKeyLabel?: boolean;
@@ -34,6 +38,7 @@ export interface DataKeyConfigDialogData {
     hideDataKeyUnits?: boolean;
     hideDataKeyDecimals?: boolean;
     hideDataKeyAggregation?: boolean;
+    datasources?: Datasource[];
     supportsUnitConversion?: boolean;
 }
 export declare class DataKeyConfigDialogComponent extends DialogComponent<DataKeyConfigDialogComponent, DataKey> implements OnInit, ErrorStateMatcher {

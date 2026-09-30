@@ -12,9 +12,13 @@ export declare class EntityFilterComponent implements ControlValueAccessor, OnIn
     allowedEntityTypes: Array<EntityType | AliasEntityType>;
     resolveMultiple: boolean;
     resolveMultipleChanged: EventEmitter<boolean>;
+    disableResolveMultiple: boolean;
+    reportMode: boolean;
+    subReport: boolean;
     entityFilterFormGroup: FormGroup;
     filterFormGroup: FormGroup;
     aliasFilterTypes: Array<AliasFilterType>;
+    entityGroupTypes: Array<EntityType>;
     listEntityTypes: Array<EntityType | AliasEntityType>;
     aliasFilterType: typeof AliasFilterType;
     aliasFilterTypeTranslations: Map<AliasFilterType, string>;
@@ -22,6 +26,9 @@ export declare class EntityFilterComponent implements ControlValueAccessor, OnIn
     directionTypes: string[];
     directionTypeTranslations: Map<EntitySearchDirection, string>;
     directionTypeEnum: typeof EntitySearchDirection;
+    schedulerEventConfigTypes: {
+        [eventType: string]: import("@home/components/scheduler/scheduler-event-config.models").SchedulerEventConfigType;
+    };
     private propagateChange;
     private destroy$;
     private subscriptions;
@@ -36,5 +43,5 @@ export declare class EntityFilterComponent implements ControlValueAccessor, OnIn
     private filterTypeChanged;
     private updateModel;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityFilterComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityFilterComponent, "tb-entity-filter", never, { "disabled": { "alias": "disabled"; "required": false; }; "allowedEntityTypes": { "alias": "allowedEntityTypes"; "required": false; }; "resolveMultiple": { "alias": "resolveMultiple"; "required": false; }; }, { "resolveMultipleChanged": "resolveMultipleChanged"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityFilterComponent, "tb-entity-filter", never, { "disabled": { "alias": "disabled"; "required": false; }; "allowedEntityTypes": { "alias": "allowedEntityTypes"; "required": false; }; "resolveMultiple": { "alias": "resolveMultiple"; "required": false; }; "disableResolveMultiple": { "alias": "disableResolveMultiple"; "required": false; }; "reportMode": { "alias": "reportMode"; "required": false; }; "subReport": { "alias": "subReport"; "required": false; }; }, { "resolveMultipleChanged": "resolveMultipleChanged"; }, never, never, false, never>;
 }

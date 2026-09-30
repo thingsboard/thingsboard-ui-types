@@ -15,6 +15,7 @@ export declare class EntityAggregationComponentComponent implements ControlValue
     entityName: string;
     testScript: (expression?: string) => Observable<string>;
     isEditValue: boolean;
+    readonly: boolean;
     readonly minAllowedAggregationIntervalInSecForCF: number;
     readonly intermediateAggregationIntervalInSecForCF: number;
     readonly DayInSec: number;
@@ -60,6 +61,7 @@ export declare class EntityAggregationComponentComponent implements ControlValue
     private formatNextInterval;
     private buildStandardIntervalString;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityAggregationComponentComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityAggregationComponentComponent, "tb-entity-aggregation-component", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "testScript": { "alias": "testScript"; "required": false; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityAggregationComponentComponent, "tb-entity-aggregation-component", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "testScript": { "alias": "testScript"; "required": false; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
     static ngAcceptInputType_isEditValue: unknown;
+    static ngAcceptInputType_readonly: unknown;
 }

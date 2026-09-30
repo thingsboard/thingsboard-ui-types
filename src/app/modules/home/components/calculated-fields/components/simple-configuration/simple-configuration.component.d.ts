@@ -15,6 +15,7 @@ export declare class SimpleConfigurationComponent implements ControlValueAccesso
     ownerId: EntityId;
     testScript: () => Observable<string>;
     isEditValue: boolean;
+    readonly: boolean;
     simpleConfiguration: import("@angular/forms").FormGroup<{
         arguments: import("@angular/forms").FormControl<{}>;
         expressionSIMPLE: import("@angular/forms").FormControl<string>;
@@ -41,7 +42,8 @@ export declare class SimpleConfigurationComponent implements ControlValueAccesso
     private updatedFormWithScript;
     private toggleScopeByOutputType;
     static ɵfac: i0.ɵɵFactoryDeclaration<SimpleConfigurationComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SimpleConfigurationComponent, "tb-simple-configuration", never, { "isScript": { "alias": "isScript"; "required": false; }; "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "testScript": { "alias": "testScript"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SimpleConfigurationComponent, "tb-simple-configuration", never, { "isScript": { "alias": "isScript"; "required": false; }; "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "testScript": { "alias": "testScript"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
     static ngAcceptInputType_isEditValue: unknown;
+    static ngAcceptInputType_readonly: unknown;
 }
 export {};

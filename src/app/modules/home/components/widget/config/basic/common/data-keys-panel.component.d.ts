@@ -1,15 +1,31 @@
 import { ChangeDetectorRef, DestroyRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validator } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validator } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { WidgetConfigComponent } from '@home/components/widget/widget-config.component';
-import { DataKey, DatasourceType, widgetType } from '@shared/models/widget.models';
+import { DataKey, DatasourceType, Widget, widgetType } from '@shared/models/widget.models';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { DataKeyType } from '@shared/models/telemetry/telemetry.models';
 import { UtilsService } from '@core/services/utils.service';
-import { DataKeysCallbacks, DataKeySettingsFunction } from '@home/components/widget/lib/settings/common/key/data-keys.component.models';
+import { DataKeySettingsFormFunction, DataKeySettingsFunction } from '@home/components/widget/lib/settings/common/key/data-keys.component.models';
 import { TimeSeriesChartYAxisId } from '@home/components/widget/lib/chart/time-series-chart.models';
 import { FormProperty } from '@shared/models/dynamic-form.models';
+import { WidgetConfigCallbacks } from '@home/components/widget/config/widget-config.component.models';
+import { IAliasController } from '@core/api/widget-api.models';
 import * as i0 from "@angular/core";
+export interface DataKeysPanelOptions {
+    widgetType?: widgetType;
+    callbacks?: WidgetConfigCallbacks;
+    settingsForm?: FormProperty[];
+    settingsFormFunction?: DataKeySettingsFormFunction;
+    settingsFormTrimDefaults?: boolean;
+    settingsDirective?: string;
+    settingsFunction?: DataKeySettingsFunction;
+    latestSettingsForm?: FormProperty[];
+    latestSettingsFormFunction?: DataKeySettingsFormFunction;
+    latestSettingsFormTrimDefaults?: boolean;
+    hasAdditionalLatestDataKeys?: boolean;
+    widget?: Widget;
+}
 export declare class DataKeysPanelComponent implements ControlValueAccessor, OnInit, OnChanges, Validator {
     private fb;
     private dialog;
@@ -18,6 +34,7 @@ export declare class DataKeysPanelComponent implements ControlValueAccessor, OnI
     private widgetConfigComponent;
     private destroyRef;
     disabled: boolean;
+    stroked: boolean;
     panelTitle: string;
     addKeyTitle: string;
     keySettingsTitle: string;
@@ -27,6 +44,7 @@ export declare class DataKeysPanelComponent implements ControlValueAccessor, OnI
     datasourceType: DatasourceType;
     entityAliasId: string;
     deviceId: string;
+    reportMode: boolean;
     hidePanel: boolean;
     hideDataKeyColor: boolean;
     hideUnits: boolean;
@@ -37,13 +55,22 @@ export declare class DataKeysPanelComponent implements ControlValueAccessor, OnI
     timeSeriesChart: boolean;
     showTimeSeriesType: boolean;
     yAxisIds: TimeSeriesChartYAxisId[];
+    aliasController: IAliasController;
+    dataKeysPanelOptions: DataKeysPanelOptions;
     dataKeyType: DataKeyType;
     keysListFormGroup: UntypedFormGroup;
     errorText: string;
     get widgetType(): widgetType;
-    get callbacks(): DataKeysCallbacks;
+    get callbacks(): WidgetConfigCallbacks;
+    get widget(): Widget;
     get hasAdditionalLatestDataKeys(): boolean;
     get dataKeySettingsForm(): FormProperty[];
+    get dataKeySettingsFormFunction(): DataKeySettingsFormFunction;
+    get dataKeySettingsFormTrimDefaults(): boolean;
+    get dataKeySettingsDirective(): string;
+    get latestDataKeySettingsForm(): FormProperty[];
+    get latestDataKeySettingsFormFunction(): DataKeySettingsFormFunction;
+    get latestDataKeySettingsFormTrimDefaults(): boolean;
     get dataKeySettingsFunction(): DataKeySettingsFunction;
     get dragEnabled(): boolean;
     get noKeys(): boolean;
@@ -63,10 +90,11 @@ export declare class DataKeysPanelComponent implements ControlValueAccessor, OnI
     };
     keyDrop(event: CdkDragDrop<string[]>): void;
     keysFormArray(): UntypedFormArray;
-    trackByKey(index: number, keyControl: AbstractControl): any;
     removeKey(index: number): void;
     addKey(): void;
     private prepareKeysFormArray;
-    static ɵfac: i0.ɵɵFactoryDeclaration<DataKeysPanelComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<DataKeysPanelComponent, "tb-data-keys-panel", never, { "disabled": { "alias": "disabled"; "required": false; }; "panelTitle": { "alias": "panelTitle"; "required": false; }; "addKeyTitle": { "alias": "addKeyTitle"; "required": false; }; "keySettingsTitle": { "alias": "keySettingsTitle"; "required": false; }; "removeKeyTitle": { "alias": "removeKeyTitle"; "required": false; }; "noKeysText": { "alias": "noKeysText"; "required": false; }; "requiredKeysText": { "alias": "requiredKeysText"; "required": false; }; "datasourceType": { "alias": "datasourceType"; "required": false; }; "entityAliasId": { "alias": "entityAliasId"; "required": false; }; "deviceId": { "alias": "deviceId"; "required": false; }; "hidePanel": { "alias": "hidePanel"; "required": false; }; "hideDataKeyColor": { "alias": "hideDataKeyColor"; "required": false; }; "hideUnits": { "alias": "hideUnits"; "required": false; }; "hideDecimals": { "alias": "hideDecimals"; "required": false; }; "hideDataKeyUnits": { "alias": "hideDataKeyUnits"; "required": false; }; "hideDataKeyDecimals": { "alias": "hideDataKeyDecimals"; "required": false; }; "hideSourceSelection": { "alias": "hideSourceSelection"; "required": false; }; "timeSeriesChart": { "alias": "timeSeriesChart"; "required": false; }; "showTimeSeriesType": { "alias": "showTimeSeriesType"; "required": false; }; "yAxisIds": { "alias": "yAxisIds"; "required": false; }; }, {}, never, never, false, never>;
+    private hasDataKeysPanelOptions;
+    private getDataKeysPanelOption;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DataKeysPanelComponent, [null, null, null, null, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DataKeysPanelComponent, "tb-data-keys-panel", never, { "disabled": { "alias": "disabled"; "required": false; }; "stroked": { "alias": "stroked"; "required": false; }; "panelTitle": { "alias": "panelTitle"; "required": false; }; "addKeyTitle": { "alias": "addKeyTitle"; "required": false; }; "keySettingsTitle": { "alias": "keySettingsTitle"; "required": false; }; "removeKeyTitle": { "alias": "removeKeyTitle"; "required": false; }; "noKeysText": { "alias": "noKeysText"; "required": false; }; "requiredKeysText": { "alias": "requiredKeysText"; "required": false; }; "datasourceType": { "alias": "datasourceType"; "required": false; }; "entityAliasId": { "alias": "entityAliasId"; "required": false; }; "deviceId": { "alias": "deviceId"; "required": false; }; "reportMode": { "alias": "reportMode"; "required": false; }; "hidePanel": { "alias": "hidePanel"; "required": false; }; "hideDataKeyColor": { "alias": "hideDataKeyColor"; "required": false; }; "hideUnits": { "alias": "hideUnits"; "required": false; }; "hideDecimals": { "alias": "hideDecimals"; "required": false; }; "hideDataKeyUnits": { "alias": "hideDataKeyUnits"; "required": false; }; "hideDataKeyDecimals": { "alias": "hideDataKeyDecimals"; "required": false; }; "hideSourceSelection": { "alias": "hideSourceSelection"; "required": false; }; "timeSeriesChart": { "alias": "timeSeriesChart"; "required": false; }; "showTimeSeriesType": { "alias": "showTimeSeriesType"; "required": false; }; "yAxisIds": { "alias": "yAxisIds"; "required": false; }; "aliasController": { "alias": "aliasController"; "required": false; }; "dataKeysPanelOptions": { "alias": "dataKeysPanelOptions"; "required": false; }; }, {}, never, ["*"], false, never>;
 }

@@ -6,9 +6,13 @@ import * as i3 from "@angular/platform-browser";
 import * as i4 from "@angular/platform-browser/animations";
 import * as i5 from "./app-routing.module";
 import * as i6 from "@core/core.module";
-import * as i7 from "@modules/login/login.module";
-import * as i8 from "@home/home.module";
-import * as i9 from "@modules/dashboard/dashboard-routing.module";
+import * as i7 from "@modules/setup/setup.module";
+import * as i8 from "@modules/login/login.module";
+import * as i9 from "@modules/signup/signup.module";
+import * as i10 from "@home/home.module";
+import * as i11 from "@modules/dashboard/dashboard-routing.module";
+import * as i12 from "@modules/empty-page/empty-page.module";
+import * as i13 from "@modules/action/action.module";
 export default class TbUrlSerializer implements UrlSerializer {
     private _defaultUrlSerializer;
     parse(url: string): UrlTree;
@@ -21,6 +25,6 @@ export declare class PageNotFoundRoutingModule {
 }
 export declare class AppModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<AppModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<AppModule, [typeof i2.AppComponent], [typeof i3.BrowserModule, typeof i4.BrowserAnimationsModule, typeof i5.AppRoutingModule, typeof i6.CoreModule, typeof i7.LoginModule, typeof i8.HomeModule, typeof i9.DashboardRoutingModule, typeof PageNotFoundRoutingModule], never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<AppModule, [typeof i2.AppComponent], [typeof i3.BrowserModule, typeof i4.BrowserAnimationsModule, typeof i5.AppRoutingModule, typeof i6.CoreModule, typeof i7.SetupModule, typeof i8.LoginModule, typeof i9.SignupModule, typeof i10.HomeModule, typeof i11.DashboardRoutingModule, typeof i12.EmptyPageModule, typeof i13.ActionModule, typeof PageNotFoundRoutingModule], never>;
     static ɵinj: i0.ɵɵInjectorDeclaration<AppModule>;
 }

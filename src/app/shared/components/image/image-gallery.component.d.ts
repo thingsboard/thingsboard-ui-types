@@ -76,6 +76,7 @@ export declare class ImageGalleryComponent extends PageComponent implements OnIn
     includeSystemImagesChanged(value: boolean): void;
     setMode(targetMode: 'list' | 'grid'): void;
     get isSysAdmin(): boolean;
+    get isTenantAdmin(): boolean;
     private computeDisplayedColumns;
     private updateMode;
     private initListMode;

@@ -16,7 +16,6 @@ export declare class DeviceProfileService {
     private lwm2mBootstrapSecurityInfoInMemoryCache;
     constructor(http: HttpClient, otaPackageService: OtaPackageService);
     getDeviceProfiles(pageLink: PageLink, config?: RequestConfig): Observable<PageData<DeviceProfile>>;
-    getDeviceProfilesByIds(deviceProfileIds: Array<string>, config?: RequestConfig): Observable<Array<DeviceProfileInfo>>;
     getDeviceProfile(deviceProfileId: string, config?: RequestConfig): Observable<DeviceProfile>;
     exportDeviceProfile(deviceProfileId: string, config?: RequestConfig): Observable<DeviceProfile>;
     getLwm2mObjects(sortOrder: SortOrder, objectIds?: string[], searchText?: string, config?: RequestConfig): Observable<Array<ObjectLwM2M>>;
@@ -30,6 +29,7 @@ export declare class DeviceProfileService {
     getDefaultDeviceProfileInfo(config?: RequestConfig): Observable<DeviceProfileInfo>;
     getDeviceProfileInfo(deviceProfileId: string, config?: RequestConfig): Observable<DeviceProfileInfo>;
     getDeviceProfileInfos(pageLink: PageLink, transportType?: DeviceTransportType, config?: RequestConfig): Observable<PageData<DeviceProfileInfo>>;
+    getDeviceProfilesByIds(deviceProfileIds: Array<string>, config?: RequestConfig): Observable<Array<DeviceProfileInfo>>;
     getDeviceProfileDevicesAttributesKeys(deviceProfileId?: string, config?: RequestConfig): Observable<Array<string>>;
     getDeviceProfileDevicesTimeseriesKeys(deviceProfileId?: string, config?: RequestConfig): Observable<Array<string>>;
     getDeviceProfileNames(activeOnly?: boolean, config?: RequestConfig): Observable<Array<EntityInfoData>>;

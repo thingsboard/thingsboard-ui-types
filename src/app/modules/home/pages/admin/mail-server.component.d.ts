@@ -7,21 +7,27 @@ import { AdminSettings, MailConfigTemplate, MailServerOauth2Provider, MailServer
 import { AdminService } from '@core/http/admin.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HasConfirmForm } from '@core/guards/confirm-on-exit.guard';
+import { AuthState } from '@core/auth/auth.models';
+import { AuthUser } from '@shared/models/user.model';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import { DomainSchema } from '@shared/models/oauth2.models';
 import * as i0 from "@angular/core";
 export declare class MailServerComponent extends PageComponent implements OnInit, OnDestroy, HasConfirmForm {
     protected store: Store<AppState>;
     private adminService;
     private translate;
+    private userPermissionsService;
     fb: FormBuilder;
     private window;
+    authState: AuthState;
+    authUser: AuthUser;
     adminSettings: AdminSettings<MailServerSettings>;
     smtpProtocols: SmtpProtocol[];
-    showChangePassword: boolean;
     protocols: DomainSchema[];
     domainSchemaTranslations: Map<DomainSchema, string>;
     mailServerOauth2Provider: typeof MailServerOauth2Provider;
     tlsVersions: string[];
+    readonly: boolean;
     helpLink: string;
     templates: Map<string, MailConfigTemplate>;
     templateProvider: string[];
@@ -30,6 +36,7 @@ export declare class MailServerComponent extends PageComponent implements OnInit
     private URL_REGEXP;
     private loginProcessingUrl;
     mailSettings: FormGroup<{
+        useSystemMailSettings: import("@angular/forms").FormControl<boolean>;
         mailFrom: import("@angular/forms").FormControl<string>;
         smtpProtocol: import("@angular/forms").FormControl<SmtpProtocol>;
         smtpHost: import("@angular/forms").FormControl<string>;
@@ -43,7 +50,6 @@ export declare class MailServerComponent extends PageComponent implements OnInit
         proxyUser: import("@angular/forms").FormControl<string>;
         proxyPassword: import("@angular/forms").FormControl<string>;
         username: import("@angular/forms").FormControl<string>;
-        changePassword: import("@angular/forms").FormControl<boolean>;
         password: import("@angular/forms").FormControl<string>;
         enableOauth2: import("@angular/forms").FormControl<boolean>;
         providerId: import("@angular/forms").FormControl<string>;
@@ -60,16 +66,17 @@ export declare class MailServerComponent extends PageComponent implements OnInit
         name: import("@angular/forms").FormControl<string>;
         scheme: import("@angular/forms").FormControl<DomainSchema>;
     }>;
-    constructor(store: Store<AppState>, adminService: AdminService, translate: TranslateService, fb: FormBuilder, window: Window);
+    constructor(store: Store<AppState>, adminService: AdminService, translate: TranslateService, userPermissionsService: UserPermissionsService, fb: FormBuilder, window: Window);
     ngOnInit(): void;
     ngOnDestroy(): void;
     private initTemplates;
-    private mailServerSettingsForm;
+    isTenantAdmin(): boolean;
+    buildMailServerSettingsForm(): void;
     private domainFormConfiguration;
     private enableOauth2;
     private enableProviderTenantIdChanged;
+    private updateValidators;
     private enableProxyChanged;
-    private enableMailPassword;
     private enableTls;
     sendTestMail(): void;
     save(): void;

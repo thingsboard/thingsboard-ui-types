@@ -4,6 +4,7 @@ import { EntityType } from '@shared/models/entity-type.models';
 import { MatDialog } from '@angular/material/dialog';
 import { AiModel, ResponseFormat } from '@shared/models/ai-model.models';
 import { TranslateService } from '@ngx-translate/core';
+import { Operation, Resource } from '@shared/models/security.models';
 import { ResourceType } from "@shared/models/resource.models";
 import * as i0 from "@angular/core";
 export declare class AiConfigComponent extends RuleNodeConfigurationComponent {
@@ -13,8 +14,11 @@ export declare class AiConfigComponent extends RuleNodeConfigurationComponent {
     aiConfigForm: UntypedFormGroup;
     entityType: typeof EntityType;
     responseFormat: typeof ResponseFormat;
+    allowedResponseFormats: ResponseFormat[];
     EntityType: typeof EntityType;
     ResourceType: typeof ResourceType;
+    readonly operation: typeof Operation;
+    readonly resource: typeof Resource;
     constructor(fb: UntypedFormBuilder, translate: TranslateService, dialog: MatDialog);
     protected configForm(): UntypedFormGroup;
     protected onConfigurationSet(configuration: RuleNodeConfiguration): void;

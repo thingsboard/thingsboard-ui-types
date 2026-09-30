@@ -5,6 +5,7 @@ import { EntityType } from '@shared/models/entity-type.models';
 import { CalculatedFieldsQuery } from '@shared/models/calculated-field.models';
 import { StringItemsOption } from '@shared/components/string-items-list.component';
 import { TranslateService } from '@ngx-translate/core';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
 export declare const CALCULATED_FIELDS_CONFIG_DATA: InjectionToken<any>;
 export interface CalculatedFieldsFilterConfigData {
@@ -22,6 +23,7 @@ export declare class CalculatedFieldsFilterConfigComponent implements OnInit, Co
     private viewContainerRef;
     private destroyRef;
     private translate;
+    private userPermissionsService;
     calculatedFieldsFilterPanel: TemplateRef<any>;
     disabled: boolean;
     buttonMode: boolean;
@@ -38,7 +40,7 @@ export declare class CalculatedFieldsFilterConfigComponent implements OnInit, Co
     private cfFilterConfig;
     private resizeWindows;
     private propagateChange;
-    constructor(data: CalculatedFieldsFilterConfigData | undefined, overlayRef: OverlayRef, fb: FormBuilder, overlay: Overlay, nativeElement: ElementRef, viewContainerRef: ViewContainerRef, destroyRef: DestroyRef, translate: TranslateService);
+    constructor(data: CalculatedFieldsFilterConfigData | undefined, overlayRef: OverlayRef, fb: FormBuilder, overlay: Overlay, nativeElement: ElementRef, viewContainerRef: ViewContainerRef, destroyRef: DestroyRef, translate: TranslateService, userPermissionsService: UserPermissionsService);
     ngOnInit(): void;
     registerOnChange(fn: any): void;
     registerOnTouched(_fn: any): void;
@@ -53,6 +55,6 @@ export declare class CalculatedFieldsFilterConfigComponent implements OnInit, Co
     private cfConfigUpdated;
     private updateButtonDisplayValue;
     private cfFilterFromFormValue;
-    static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldsFilterConfigComponent, [{ optional: true; }, { optional: true; }, null, null, null, null, null, null]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldsFilterConfigComponent, [{ optional: true; }, { optional: true; }, null, null, null, null, null, null, null]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldsFilterConfigComponent, "tb-calculated-fields-filter-config", never, { "disabled": { "alias": "disabled"; "required": false; }; "buttonMode": { "alias": "buttonMode"; "required": false; }; "initialCfFilterConfig": { "alias": "initialCfFilterConfig"; "required": false; }; }, {}, never, never, false, never>;
 }

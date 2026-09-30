@@ -14,6 +14,7 @@ export declare class GeofencingConfigurationComponent implements ControlValueAcc
     tenantId: string;
     entityName: string;
     ownerId: EntityId;
+    readonly: boolean;
     isEditValue: boolean;
     readonly minAllowedScheduledUpdateIntervalInSecForCF: number;
     readonly DataKeyType: typeof DataKeyType;
@@ -41,6 +42,7 @@ export declare class GeofencingConfigurationComponent implements ControlValueAcc
     private checkScheduledUpdateEnabled;
     private checkRelatedEntity;
     static ɵfac: i0.ɵɵFactoryDeclaration<GeofencingConfigurationComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<GeofencingConfigurationComponent, "tb-geofencing-configuration", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<GeofencingConfigurationComponent, "tb-geofencing-configuration", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "readonly": { "alias": "readonly"; "required": false; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ngAcceptInputType_readonly: unknown;
     static ngAcceptInputType_isEditValue: unknown;
 }

@@ -1,10 +1,12 @@
-import { HasTenantId } from '@shared/models/entity.models';
 import { BaseData } from '@shared/models/base-data';
 import { MobileAppId } from '@shared/models/id/mobile-app-id';
 import { OAuth2ClientInfo, PlatformType } from '@shared/models/oauth2.models';
 import { MobileAppBundleId } from '@shared/models/id/mobile-app-bundle-id';
+import { HasTenantId } from '@shared/models/entity.models';
+import { MobileSelfRegistrationParams } from '@shared/models/self-register.models';
 export declare const WEB_URL_REGEX: RegExp;
 export interface QrCodeSettings extends HasTenantId {
+    useSystemSettings: boolean;
     useDefaultApp: boolean;
     mobileAppBundleId: MobileAppBundleId;
     androidEnabled: boolean;
@@ -65,7 +67,8 @@ declare enum MobileMenuPath {
     DASHBOARD = "DASHBOARD",
     AUDIT_LOGS = "AUDIT_LOGS",
     CUSTOMERS = "CUSTOMERS",
-    NOTIFICATIONS = "NOTIFICATIONS"
+    NOTIFICATIONS = "NOTIFICATIONS",
+    LIVE_LOCATION_TRACKING = "LIVE_LOCATION_TRACKING"
 }
 export declare enum MobilePageType {
     DEFAULT = "DEFAULT",
@@ -97,6 +100,7 @@ export interface MobileAppBundle extends Omit<BaseData<MobileAppBundleId>, 'labe
     androidAppId?: MobileAppId;
     iosAppId?: MobileAppId;
     layoutConfig?: MobileLayoutConfig;
+    selfRegistrationParams?: MobileSelfRegistrationParams;
     oauth2Enabled: boolean;
 }
 export interface MobileAppBundleInfo extends MobileAppBundle {
@@ -116,6 +120,7 @@ export interface MobileAppBundleInfo extends MobileAppBundle {
 export declare const hideDefaultMenuItems: MobileMenuPath[];
 export declare const getDefaultMobileMenuItem: () => DefaultMobilePage[];
 export declare const isDefaultMobileMenuItem: (item: MobilePage) => item is DefaultMobilePage;
+export declare const mergeMissingDefaultMobilePages: (pages: MobilePage[]) => MobilePage[];
 export declare const isDefaultMobilePagesConfig: (items: MobilePage[]) => boolean;
 export declare const mobileMenuDividers: Map<number, string>;
 export declare const defaultMobilePageMap: Map<MobileMenuPath, Omit<DefaultMobilePage, "type" | "visible">>;

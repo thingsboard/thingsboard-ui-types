@@ -9,6 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import * as i0 from "@angular/core";
 export interface ManageWidgetActionsDialogData {
+    widgetName: string;
     widgetTitle: string;
     actionsData: WidgetActionsData;
     callbacks: WidgetActionCallbacks;
@@ -22,6 +23,7 @@ export declare class ManageWidgetActionsDialogComponent extends DialogComponent<
     data: ManageWidgetActionsDialogData;
     private fb;
     dialogRef: MatDialogRef<ManageWidgetActionsDialogComponent, WidgetActionsData>;
+    widgetActionTypesList: WidgetActionType[];
     actionSources: {
         [actionSourceId: string]: import("@shared/models/widget.models").WidgetActionSource;
     };

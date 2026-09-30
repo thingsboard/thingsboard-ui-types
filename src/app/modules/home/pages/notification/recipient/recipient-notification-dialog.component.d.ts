@@ -12,6 +12,8 @@ import * as i0 from "@angular/core";
 export interface RecipientNotificationDialogData {
     target?: NotificationTarget;
     isAdd?: boolean;
+    readonly?: boolean;
+    name?: string;
 }
 export declare class RecipientNotificationDialogComponent extends DialogComponent<RecipientNotificationDialogComponent, NotificationTarget> implements OnDestroy {
     protected store: Store<AppState>;
@@ -33,6 +35,7 @@ export declare class RecipientNotificationDialogComponent extends DialogComponen
     slackChanelTypesTranslateMap: Map<SlackChanelType, string>;
     entityType: typeof EntityType;
     isAdd: boolean;
+    dialogTitle: string;
     private readonly destroy$;
     private userFilterFormControls;
     constructor(store: Store<AppState>, router: Router, dialogRef: MatDialogRef<RecipientNotificationDialogComponent, NotificationTarget>, data: RecipientNotificationDialogData, fb: FormBuilder, notificationService: NotificationService);

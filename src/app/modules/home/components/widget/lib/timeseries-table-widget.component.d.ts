@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CellContentInfo, CellStyleInfo, TableCellButtonActionDescriptor, TableWidgetSettings } from '@home/components/widget/lib/table-widget.models';
+import { CellContentInfo, CellStyleInfo, columnExportOptions, TableCellButtonActionDescriptor, TableWidgetSettings } from '@home/components/widget/lib/table-widget.models';
 import { Overlay } from '@angular/cdk/overlay';
 import { DatePipe } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
@@ -24,6 +24,7 @@ export interface TimeseriesTableWidgetSettings extends TableWidgetSettings {
     showMilliseconds: boolean;
     hideEmptyLines: boolean;
     dateFormat: DateFormatSettings;
+    timestampExportOption: columnExportOptions;
     sortOrder: SortOrder;
 }
 interface TimeseriesRow {
@@ -104,6 +105,7 @@ export declare class TimeseriesTableWidgetComponent extends PageComponent implem
     showTimestamp: boolean;
     private useEntityLabel;
     private dateFormatFilter;
+    private exportTimestampColumn;
     private displayedColumns;
     private rowStylesInfo;
     private subscriptions;
@@ -132,10 +134,7 @@ export declare class TimeseriesTableWidgetComponent extends PageComponent implem
     private enterFilterMode;
     exitFilterMode(): void;
     private updateData;
-    trackByColumnIndex(index: any, header: TimeseriesHeader): number;
     trackByRowTimestamp(index: number): number;
-    trackByActionCellDescriptionId(index: number, action: WidgetActionDescriptor): string;
-    trackBySourcesIndex(index: number, source: TimeseriesTableSource): string;
     rowStyle(source: TimeseriesTableSource, row: TimeseriesRow, index: number): Observable<any>;
     cellStyle(source: TimeseriesTableSource, header: TimeseriesHeader, index: number, row: TimeseriesRow, value: any, rowIndex: number): Observable<any>;
     cellContent(source: TimeseriesTableSource, header: TimeseriesHeader, index: number, row: TimeseriesRow, value: any, rowIndex: number): Observable<SafeHtml>;
@@ -147,6 +146,9 @@ export declare class TimeseriesTableWidgetComponent extends PageComponent implem
     private updateCurrentSourceLatestData;
     private loadCurrentSourceRow;
     private clearCache;
+    private includeColumnInExport;
+    customDataExport(): Observable<Map<string, any>[]>;
+    private checkProperty;
     static ɵfac: i0.ɵɵFactoryDeclaration<TimeseriesTableWidgetComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<TimeseriesTableWidgetComponent, "tb-timeseries-table-widget", never, { "ctx": { "alias": "ctx"; "required": false; }; }, {}, never, never, false, never>;
 }

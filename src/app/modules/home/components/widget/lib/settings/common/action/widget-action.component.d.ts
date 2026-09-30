@@ -22,9 +22,12 @@ export declare class WidgetActionComponent implements ControlValueAccessor, OnIn
     disabled: boolean;
     widgetType: widgetType;
     callbacks: WidgetActionCallbacks;
+    customFunctionArgs: string[];
+    customFunctionHelpId: string;
     withName: boolean;
     actionNames: string[];
     additionalWidgetActionTypes: import("@angular/core").InputSignal<WidgetActionType[]>;
+    widgetActionTypes: import("@angular/core").InputSignal<WidgetActionType[]>;
     actionTypes: import("@angular/core").Signal<WidgetActionType[]>;
     widgetActionTypeTranslations: Map<WidgetActionType, string>;
     widgetActionType: typeof WidgetActionType;
@@ -72,6 +75,6 @@ export declare class WidgetActionComponent implements ControlValueAccessor, OnIn
     private checkActionName;
     private widgetActionUpdated;
     static ɵfac: i0.ɵɵFactoryDeclaration<WidgetActionComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<WidgetActionComponent, "tb-widget-action", never, { "disabled": { "alias": "disabled"; "required": false; }; "widgetType": { "alias": "widgetType"; "required": false; }; "callbacks": { "alias": "callbacks"; "required": false; }; "withName": { "alias": "withName"; "required": false; }; "actionNames": { "alias": "actionNames"; "required": false; }; "additionalWidgetActionTypes": { "alias": "additionalWidgetActionTypes"; "required": false; "isSignal": true; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<WidgetActionComponent, "tb-widget-action", never, { "disabled": { "alias": "disabled"; "required": false; }; "widgetType": { "alias": "widgetType"; "required": false; }; "callbacks": { "alias": "callbacks"; "required": false; }; "customFunctionArgs": { "alias": "customFunctionArgs"; "required": false; }; "customFunctionHelpId": { "alias": "customFunctionHelpId"; "required": false; }; "withName": { "alias": "withName"; "required": false; }; "actionNames": { "alias": "actionNames"; "required": false; }; "additionalWidgetActionTypes": { "alias": "additionalWidgetActionTypes"; "required": false; "isSignal": true; }; "widgetActionTypes": { "alias": "widgetActionTypes"; "required": false; "isSignal": true; }; }, {}, never, never, false, never>;
 }
 export {};

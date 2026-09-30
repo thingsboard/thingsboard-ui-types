@@ -6,6 +6,7 @@ import { TbEditorCompletion, TbEditorCompletions } from '@shared/models/ace/comp
 import { CustomTranslatePipe } from '@shared/pipe/custom-translate.pipe';
 import { AceHighlightRules } from '@shared/models/ace/ace.models';
 import ITooltipsterInstance = JQueryTooltipster.ITooltipsterInstance;
+import { WhiteLabelingService } from '@core/http/white-labeling.service';
 export interface ScadaSymbolData {
     imageResource: ImageResourceInfo;
     scadaSymbolContent: string;
@@ -131,4 +132,4 @@ export declare const scadaSymbolClickActionHighlightRules: AceHighlightRules;
 export declare const generalStateRenderFunctionCompletions: (ctxCompletion: TbEditorCompletion) => TbEditorCompletions;
 export declare const elementStateRenderFunctionCompletions: (ctxCompletion: TbEditorCompletion) => TbEditorCompletions;
 export declare const clickActionFunctionCompletions: (ctxCompletion: TbEditorCompletion) => TbEditorCompletions;
-export declare const scadaSymbolContextCompletion: (metadata: ScadaSymbolMetadata, tags: string[], customTranslate: CustomTranslatePipe) => TbEditorCompletion;
+export declare const scadaSymbolContextCompletion: (metadata: ScadaSymbolMetadata, tags: string[], customTranslate: CustomTranslatePipe, wl: WhiteLabelingService) => TbEditorCompletion;

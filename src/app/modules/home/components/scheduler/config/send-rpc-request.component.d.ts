@@ -1,0 +1,32 @@
+import { AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, Validator, ValidationErrors } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/core/core.state';
+import { SchedulerEventConfiguration } from '@shared/models/scheduler-event.models';
+import { EntityType } from '@shared/models/entity-type.models';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class SendRpcRequestComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, Validator {
+    private store;
+    private fb;
+    private translate;
+    modelValue: SchedulerEventConfiguration | null;
+    sendRpcRequestFormGroup: UntypedFormGroup;
+    entityType: typeof EntityType;
+    private destroy$;
+    disabled: boolean;
+    private propagateChange;
+    constructor(store: Store<AppState>, fb: UntypedFormBuilder, translate: TranslateService);
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    setDisabledState(isDisabled: boolean): void;
+    writeValue(value: SchedulerEventConfiguration | null): void;
+    validate(): ValidationErrors | null;
+    private updateModel;
+    getMethodValidationText(): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SendRpcRequestComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SendRpcRequestComponent, "tb-send-rpc-request-event-config", never, { "disabled": { "alias": "disabled"; "required": false; }; }, {}, never, never, false, never>;
+}

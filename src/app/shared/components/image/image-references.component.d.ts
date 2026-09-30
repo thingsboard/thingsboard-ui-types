@@ -5,20 +5,26 @@ import { ResourceReferences } from '@shared/models/resource.models';
 import { TranslateService } from '@ngx-translate/core';
 import { EntityService } from '@core/http/entity.service';
 import { BaseData, HasId } from '@shared/models/base-data';
-import { HasTenantId } from '@shared/models/entity.models';
 import { TbPopoverComponent } from '@shared/components/popover.component';
+import { WhiteLabeling } from '@shared/models/white-labeling.models';
+import { EntityId } from '@shared/models/id/entity-id';
 import * as i0 from "@angular/core";
 interface ReferencedEntityInfo {
-    entity: BaseData<HasId> & HasTenantId;
+    entity: BaseData<HasId> | WhiteLabeling;
     typeName: string;
     detailsUrl: string;
+    queryParams?: {
+        [key: string]: string;
+    };
+    isWl: boolean;
 }
-interface TenantReferencedEntities {
-    tenantName?: string;
-    tenantDetailsUrl?: string;
+interface HolderReferencedEntities {
+    name?: string;
+    detailsUrl?: string;
+    currentHolder: boolean;
     entities: ReferencedEntityInfo[];
 }
-type ReferencedEntitiesEntry = [string, TenantReferencedEntities];
+type ReferencedEntitiesEntry = [EntityId, HolderReferencedEntities];
 export declare class ImageReferencesComponent implements OnInit {
     protected store: Store<AppState>;
     private entityService;
@@ -33,8 +39,11 @@ export declare class ImageReferencesComponent implements OnInit {
     referencedEntitiesEntries: ReferencedEntitiesEntry[];
     constructor(store: Store<AppState>, entityService: EntityService, cd: ChangeDetectorRef, translate: TranslateService);
     ngOnInit(): void;
-    isSystem(tenantId: string): boolean;
-    private hasNonSystemEntities;
+    isSystem(id: EntityId): boolean;
+    holderName(id: EntityId): string;
+    private hasNotSameAuthLevelEntities;
+    private getAdminSettingsPageURL;
+    getAdminSettingsName(entity: BaseData<EntityId>): any;
     private toReferencedEntitiesList;
     private toReferencedEntitiesEntries;
     static ɵfac: i0.ɵɵFactoryDeclaration<ImageReferencesComponent, never>;

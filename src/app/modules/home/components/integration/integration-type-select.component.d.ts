@@ -1,0 +1,47 @@
+import { ElementRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, FormGroup } from '@angular/forms';
+import { IntegrationType, IntegrationTypeInfo } from '@shared/models/integration.models';
+import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-field';
+import * as i0 from "@angular/core";
+type IntegrationInfo = IntegrationTypeInfo & {
+    type: IntegrationType;
+};
+export declare class IntegrationTypeSelectComponent implements ControlValueAccessor, OnInit {
+    private fb;
+    private translate;
+    integrationTypeFormGroup: FormGroup;
+    searchText: string;
+    filteredIntegrationTypes: Observable<Array<IntegrationInfo>>;
+    modelValue: IntegrationInfo;
+    private pristine;
+    private integrationTypesInfo;
+    integrationTypeInput: ElementRef;
+    autocomplete: MatAutocompleteTrigger;
+    private requiredValue;
+    get required(): boolean;
+    set required(value: boolean);
+    disabled: boolean;
+    floatLabel: FloatLabelType;
+    placeholder: any;
+    appearance: MatFormFieldAppearance;
+    private propagateChange;
+    constructor(fb: FormBuilder, translate: TranslateService);
+    ngOnInit(): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(_fn: any): void;
+    setDisabledState(isDisabled: boolean): void;
+    writeValue(value: IntegrationType): void;
+    onFocus(): void;
+    selectedType(): void;
+    clear(): void;
+    displayIntegrationTypeFn(integration?: IntegrationInfo): string;
+    private updateView;
+    private fetchIntegrationTypes;
+    private filterIntegrationType;
+    static ɵfac: i0.ɵɵFactoryDeclaration<IntegrationTypeSelectComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<IntegrationTypeSelectComponent, "tb-integration-type-select", never, { "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "floatLabel": { "alias": "floatLabel"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; }, {}, never, never, false, never>;
+}
+export {};

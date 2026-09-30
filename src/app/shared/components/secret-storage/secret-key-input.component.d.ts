@@ -1,0 +1,51 @@
+import { DestroyRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { PageComponent } from '@shared/components/page.component';
+import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { SecretStorageService } from '@core/http/secret-storage.service';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { Store } from '@ngrx/store';
+import { AppState } from '@core/core.state';
+import * as i0 from "@angular/core";
+export declare class SecretKeyInputComponent extends PageComponent implements OnInit, ControlValueAccessor, OnChanges {
+    protected store: Store<AppState>;
+    private secretStorageService;
+    private userPermissionsService;
+    private dialog;
+    private fb;
+    private destroyRef;
+    label: string;
+    requiredText: string;
+    hint: string;
+    required: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    maxLength: number;
+    maxLengthErrorText: string;
+    appearance: MatFormFieldAppearance;
+    /** Native input type. Defaults to 'password' (masked + toggle-visibility button). Set to 'text'
+     *  for fields that are sensitive only in the sense that they may be backed by a Secret reference,
+     *  but whose plaintext form is not actually a secret (e.g. Application ID). */
+    inputType: 'text' | 'password';
+    secretStorageKey: string;
+    allowSecret: boolean;
+    private modelValue;
+    private propagateChange;
+    secretKeyFormGroup: UntypedFormGroup;
+    constructor(store: Store<AppState>, secretStorageService: SecretStorageService, userPermissionsService: UserPermissionsService, dialog: MatDialog, fb: UntypedFormBuilder, destroyRef: DestroyRef);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    private updateValidators;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    setDisabledState(isDisabled: boolean): void;
+    writeValue(value: string): void;
+    private updateModel;
+    remove($event: Event): void;
+    openSecretKeyDialog($event: Event): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SecretKeyInputComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SecretKeyInputComponent, "tb-secret-key-input", never, { "label": { "alias": "label"; "required": false; }; "requiredText": { "alias": "requiredText"; "required": false; }; "hint": { "alias": "hint"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "maxLength": { "alias": "maxLength"; "required": false; }; "maxLengthErrorText": { "alias": "maxLengthErrorText"; "required": false; }; "appearance": { "alias": "appearance"; "required": false; }; "inputType": { "alias": "inputType"; "required": false; }; }, {}, never, never, false, never>;
+    static ngAcceptInputType_required: unknown;
+    static ngAcceptInputType_readonly: unknown;
+}

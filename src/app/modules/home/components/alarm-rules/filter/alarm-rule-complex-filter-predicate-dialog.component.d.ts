@@ -13,8 +13,8 @@ export interface AlarmRuleComplexFilterPredicateDialogData {
     isAdd: boolean;
     valueType: EntityKeyValueType;
     arguments: Record<string, CalculatedFieldArgument>;
-    argumentInUse: string;
     readonly: boolean;
+    argumentInUse: string;
 }
 export declare class AlarmRuleComplexFilterPredicateDialogComponent extends DialogComponent<AlarmRuleComplexFilterPredicateDialogComponent, ComplexAlarmRuleFilterPredicate> {
     protected store: Store<AppState>;

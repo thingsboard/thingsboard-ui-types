@@ -12,6 +12,7 @@ import { AliasEntityType, EntityType } from '@shared/models/entity-type.models';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@core/services/dialog.service';
 import { DashboardUtilsService } from '@core/services/dashboard-utils.service';
+import { ReportComponentConfig } from '@shared/models/report-component.models';
 import * as i0 from "@angular/core";
 export interface EntityAliasesDialogData {
     entityAliases: EntityAliases;
@@ -22,6 +23,10 @@ export interface EntityAliasesDialogData {
     disableAdd?: boolean;
     singleEntityAlias?: EntityAlias;
     customTitle?: string;
+    disableResolveMultiple?: boolean;
+    reportMode?: boolean;
+    subReport?: boolean;
+    reportComponents?: ReportComponentConfig[];
 }
 export declare class EntityAliasesDialogComponent extends DialogComponent<EntityAliasesDialogComponent, EntityAliases> implements ErrorStateMatcher {
     protected store: Store<AppState>;
@@ -37,10 +42,13 @@ export declare class EntityAliasesDialogComponent extends DialogComponent<Entity
     private destroyRef;
     title: string;
     disableAdd: boolean;
+    disableResolveMultiple: boolean;
     allowedEntityTypes: Array<EntityType | AliasEntityType>;
     aliasToWidgetsMap: {
         [aliasId: string]: Array<string>;
     };
+    reportMode: boolean;
+    subReport: boolean;
     entityAliasesFormGroup: UntypedFormGroup;
     submitted: boolean;
     constructor(store: Store<AppState>, router: Router, data: EntityAliasesDialogData, errorStateMatcher: ErrorStateMatcher, dialogRef: MatDialogRef<EntityAliasesDialogComponent, EntityAliases>, fb: UntypedFormBuilder, dashboardUtils: DashboardUtilsService, translate: TranslateService, dialogs: DialogService, dialog: MatDialog, destroyRef: DestroyRef);

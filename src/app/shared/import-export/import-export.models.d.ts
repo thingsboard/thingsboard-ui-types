@@ -1,6 +1,7 @@
 import { Widget, WidgetTypeDetails } from '@app/shared/models/widget.models';
 import { DashboardLayoutId } from '@shared/models/dashboard.models';
 import { WidgetsBundle } from '@shared/models/widgets-bundle.model';
+import { CustomerId } from '@shared/models/id/customer-id';
 export interface ImportWidgetResult {
     widget: Widget;
     layoutId: DashboardLayoutId;
@@ -49,6 +50,8 @@ export declare enum ImportEntityColumnType {
     snmpCommunityString = "SNMP_COMMUNITY_STRING",
     isGateway = "IS_GATEWAY",
     description = "DESCRIPTION",
+    edgeLicenseKey = "EDGE_LICENSE_KEY",
+    cloudEndpoint = "CLOUD_ENDPOINT",
     routingKey = "ROUTING_KEY",
     secret = "SECRET"
 }
@@ -64,6 +67,8 @@ export interface ColumnMapping {
 }
 export interface BulkImportRequest {
     file: string;
+    customerId?: CustomerId;
+    entityGroupId: string;
     mapping: {
         columns: Array<ColumnMapping>;
         delimiter: CSVDelimiter;
@@ -83,6 +88,9 @@ export interface FileType {
 }
 export declare const TEXT_TYPE: FileType;
 export declare const JSON_TYPE: FileType;
-export declare const ZIP_TYPE: FileType;
 export declare const CSV_TYPE: FileType;
+export declare const XLS_TYPE: FileType;
+export declare const XLSX_TYPE: FileType;
+export declare const ZIP_TYPE: FileType;
+export declare const TEMPLATE_XLS = "\n  <html xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:x=\"urn:schemas-microsoft-com:office:excel\" xmlns=\"http://www.w3.org/TR/REC-html40\">\n  <meta http-equiv=\"content-type\" content=\"application/vnd.ms-excel; charset=UTF-8\"/>\n  <head><!--[if gte mso 9]><xml>\n  <x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{title}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml>\n  <![endif]--></head>\n  <body>{table}</body></html>";
 export declare function convertCSVToJson(csvdata: string, config: CsvToJsonConfig, onError: (messageId: string, params?: any) => void): CsvToJsonResult | number;

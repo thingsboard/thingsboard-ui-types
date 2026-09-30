@@ -1,0 +1,24 @@
+import { DestroyRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { DataKey, DatasourceType } from '@shared/models/widget.models';
+import * as i0 from "@angular/core";
+export declare class ComparisonKeysTableComponent implements ControlValueAccessor, OnInit {
+    private fb;
+    private destroyRef;
+    disabled: boolean;
+    datasourceType: DatasourceType;
+    reportMode: boolean;
+    keysListFormGroup: UntypedFormGroup;
+    get noKeys(): boolean;
+    private propagateChange;
+    constructor(fb: UntypedFormBuilder, destroyRef: DestroyRef);
+    ngOnInit(): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(_fn: any): void;
+    setDisabledState(isDisabled: boolean): void;
+    writeValue(value: DataKey[] | undefined): void;
+    keysFormArray(): UntypedFormArray;
+    private prepareKeysFormArray;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ComparisonKeysTableComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ComparisonKeysTableComponent, "tb-comparison-keys-table", never, { "disabled": { "alias": "disabled"; "required": false; }; "datasourceType": { "alias": "datasourceType"; "required": false; }; "reportMode": { "alias": "reportMode"; "required": false; }; }, {}, never, never, false, never>;
+}

@@ -1,6 +1,6 @@
 import { ComparisonResultType, DatasourceType, widgetType } from '@shared/models/widget.models';
 import { AggregationType, ComparisonDuration, SubscriptionTimewindow } from '@shared/models/time/time.models';
-import { AlarmFilter, EntityDataPageLink, EntityFilter, KeyFilter } from '@shared/models/query/query.models';
+import { AlarmFilter, ComplexOperation, EntityDataPageLink, EntityFilter, KeyFilter } from '@shared/models/query/query.models';
 import { DataKeyType } from '@shared/models/telemetry/telemetry.models';
 import { UtilsService } from '@core/services/utils.service';
 import { EntityDataListener, EntityDataLoadResult } from '@core/api/entity-data.service';
@@ -19,6 +19,7 @@ export interface SubscriptionDataKey {
     comparisonCustomIntervalValue?: number;
     comparisonResultType?: ComparisonResultType;
     funcBody: TbFunction;
+    builtInFunc?: DataKeyFunction;
     func?: CompiledTbFunction<DataKeyFunction>;
     postFuncBody: TbFunction;
     postFunc?: CompiledTbFunction<DataKeyPostFunction>;
@@ -39,6 +40,7 @@ export interface EntityDataSubscriptionOptions {
     pageLink?: EntityDataPageLink;
     keyFilters?: Array<KeyFilter>;
     additionalKeyFilters?: Array<KeyFilter>;
+    keyFiltersOperation?: ComplexOperation;
     subscriptionTimewindow?: SubscriptionTimewindow;
     latestTsOffset?: number;
 }
@@ -49,6 +51,7 @@ export declare class EntityDataSubscription {
     private http;
     constructor(listener: EntityDataListener, telemetryService: TelemetryWebsocketService, utils: UtilsService, http: HttpClient);
     private entityDataSubscriptionOptions;
+    private dataGenerationOptions;
     private datasourceType;
     private history;
     private isFloatingTimewindow;

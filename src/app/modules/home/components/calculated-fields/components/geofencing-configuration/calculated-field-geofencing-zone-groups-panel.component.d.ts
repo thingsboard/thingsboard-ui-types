@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, OnInit } from '@angular/core';
 import { TbPopoverComponent } from '@shared/components/popover.component';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, UntypedFormArray } from '@angular/forms';
-import { ArgumentEntityType, CalculatedFieldGeofencing, CalculatedFieldGeofencingValue, GeofencingReportStrategy } from '@shared/models/calculated-field.models';
+import { FormBuilder, FormControl, FormGroup, UntypedFormArray } from '@angular/forms';
+import { ArgumentEntityType, CalculatedFieldGeofencing, CalculatedFieldGeofencingValue, CalculatedFieldType, GeofencingReportStrategy } from '@shared/models/calculated-field.models';
 import { AttributeScope, DataKeyType } from '@shared/models/telemetry/telemetry.models';
 import { EntityId } from '@shared/models/id/entity-id';
 import { EntityFilter } from '@shared/models/query/query.models';
@@ -23,6 +23,7 @@ export declare class CalculatedFieldGeofencingZoneGroupsPanelComponent implement
     tenantId: string;
     entityName: string;
     ownerId: EntityId;
+    calculatedFieldType: CalculatedFieldType;
     usedNames: string[];
     readonly: boolean;
     entityAutocomplete: EntityAutocompleteComponent;
@@ -76,11 +77,10 @@ export declare class CalculatedFieldGeofencingZoneGroupsPanelComponent implement
     private observeEntityTypeChanges;
     private levelsRequired;
     levelsFormArray(): UntypedFormArray;
-    trackByKey(_index: number, keyControl: AbstractControl): any;
     removeKey(index: number): void;
     addKey(): void;
     keyDrop(event: CdkDragDrop<string[]>): void;
     get dragEnabled(): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldGeofencingZoneGroupsPanelComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldGeofencingZoneGroupsPanelComponent, "tb-calculated-field-geofencing-zone-groups-panel", never, { "buttonTitle": { "alias": "buttonTitle"; "required": false; }; "zone": { "alias": "zone"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "tenantId": { "alias": "tenantId"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; "ownerId": { "alias": "ownerId"; "required": false; }; "usedNames": { "alias": "usedNames"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, { "geofencingDataApplied": "geofencingDataApplied"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldGeofencingZoneGroupsPanelComponent, "tb-calculated-field-geofencing-zone-groups-panel", never, { "buttonTitle": { "alias": "buttonTitle"; "required": false; }; "zone": { "alias": "zone"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "tenantId": { "alias": "tenantId"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; "ownerId": { "alias": "ownerId"; "required": false; }; "calculatedFieldType": { "alias": "calculatedFieldType"; "required": false; }; "usedNames": { "alias": "usedNames"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, { "geofencingDataApplied": "geofencingDataApplied"; }, never, never, false, never>;
 }

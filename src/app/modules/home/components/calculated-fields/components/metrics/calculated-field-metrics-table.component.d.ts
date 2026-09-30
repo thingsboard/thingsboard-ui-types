@@ -24,6 +24,7 @@ export declare class CalculatedFieldMetricsTableComponent implements OnInit, Con
     highlightRules: AceHighlightRules;
     simpleMode: boolean;
     testScript: (expression?: string) => Observable<string>;
+    readonly: boolean;
     sort: MatSort;
     errorText: string;
     metricsFormArray: import("@angular/forms").FormArray<import("@angular/forms").FormControl<CalculatedFieldAggMetricValue>>;
@@ -56,8 +57,9 @@ export declare class CalculatedFieldMetricsTableComponent implements OnInit, Con
     private getSortValue;
     private sortData;
     static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldMetricsTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldMetricsTableComponent, "tb-calculated-field-metrics-table", never, { "arguments": { "alias": "arguments"; "required": false; }; "editorCompleter": { "alias": "editorCompleter"; "required": false; }; "highlightRules": { "alias": "highlightRules"; "required": false; }; "simpleMode": { "alias": "simpleMode"; "required": false; }; "testScript": { "alias": "testScript"; "required": true; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldMetricsTableComponent, "tb-calculated-field-metrics-table", never, { "arguments": { "alias": "arguments"; "required": false; }; "editorCompleter": { "alias": "editorCompleter"; "required": false; }; "highlightRules": { "alias": "highlightRules"; "required": false; }; "simpleMode": { "alias": "simpleMode"; "required": false; }; "testScript": { "alias": "testScript"; "required": true; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
     static ngAcceptInputType_simpleMode: unknown;
+    static ngAcceptInputType_readonly: unknown;
 }
 declare class CalculatedFieldMetricsDatasource extends TbTableDatasource<CalculatedFieldAggMetricValue> {
     constructor();

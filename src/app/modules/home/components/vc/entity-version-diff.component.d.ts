@@ -7,6 +7,7 @@ import { EntityId } from '@shared/models/id/entity-id';
 import { TbPopoverComponent } from '@shared/components/popover.component';
 import { MatButton } from '@angular/material/button';
 import { TbPopoverService } from '@shared/components/popover.service';
+import { EntityType } from '@shared/models/entity-type.models';
 import * as i0 from "@angular/core";
 export declare class EntityVersionDiffComponent extends PageComponent implements OnInit, OnDestroy {
     protected store: Store<AppState>;
@@ -19,8 +20,10 @@ export declare class EntityVersionDiffComponent extends PageComponent implements
     diffViewerElmRef: ElementRef<HTMLElement>;
     versionName: string;
     versionId: string;
+    groupType: EntityType;
     entityId: EntityId;
     externalEntityId: EntityId;
+    readonly: boolean;
     versionRestored: EventEmitter<void>;
     onClose: () => void;
     popoverComponent: TbPopoverComponent;
@@ -50,5 +53,5 @@ export declare class EntityVersionDiffComponent extends PageComponent implements
     close(): void;
     toggleRestoreEntityVersion($event: Event, restoreVersionButton: MatButton): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityVersionDiffComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionDiffComponent, "tb-entity-version-diff", never, { "versionName": { "alias": "versionName"; "required": false; }; "versionId": { "alias": "versionId"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "externalEntityId": { "alias": "externalEntityId"; "required": false; }; "onClose": { "alias": "onClose"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, { "versionRestored": "versionRestored"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EntityVersionDiffComponent, "tb-entity-version-diff", never, { "versionName": { "alias": "versionName"; "required": false; }; "versionId": { "alias": "versionId"; "required": false; }; "groupType": { "alias": "groupType"; "required": false; }; "entityId": { "alias": "entityId"; "required": false; }; "externalEntityId": { "alias": "externalEntityId"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "onClose": { "alias": "onClose"; "required": false; }; "popoverComponent": { "alias": "popoverComponent"; "required": false; }; }, { "versionRestored": "versionRestored"; }, never, never, false, never>;
 }

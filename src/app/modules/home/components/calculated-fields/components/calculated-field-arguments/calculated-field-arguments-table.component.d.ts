@@ -26,6 +26,7 @@ export declare class CalculatedFieldArgumentsTableComponent implements ControlVa
     ownerId: EntityId;
     isScript: boolean;
     disable: boolean;
+    readonly: boolean;
     isEditValue: boolean;
     watchKeyChange: boolean;
     sort: MatSort;
@@ -72,8 +73,9 @@ export declare class CalculatedFieldArgumentsTableComponent implements ControlVa
     private getSortValue;
     private sortData;
     static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldArgumentsTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldArgumentsTableComponent, "tb-calculated-field-arguments-table", never, { "entityId": { "alias": "entityId"; "required": false; }; "tenantId": { "alias": "tenantId"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; "ownerId": { "alias": "ownerId"; "required": false; }; "isScript": { "alias": "isScript"; "required": false; }; "disable": { "alias": "disable"; "required": false; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; "watchKeyChange": { "alias": "watchKeyChange"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldArgumentsTableComponent, "tb-calculated-field-arguments-table", never, { "entityId": { "alias": "entityId"; "required": false; }; "tenantId": { "alias": "tenantId"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; "ownerId": { "alias": "ownerId"; "required": false; }; "isScript": { "alias": "isScript"; "required": false; }; "disable": { "alias": "disable"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; "watchKeyChange": { "alias": "watchKeyChange"; "required": false; }; }, {}, never, never, false, never>;
     static ngAcceptInputType_disable: unknown;
+    static ngAcceptInputType_readonly: unknown;
     static ngAcceptInputType_isEditValue: unknown;
 }
 declare class CalculatedFieldArgumentDatasource extends TbTableDatasource<CalculatedFieldArgumentValue> {

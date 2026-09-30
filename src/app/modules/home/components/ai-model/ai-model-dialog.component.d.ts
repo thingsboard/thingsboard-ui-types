@@ -14,6 +14,7 @@ import * as i0 from "@angular/core";
 export interface AIModelDialogData {
     AIModel?: AiModel;
     isAdd?: boolean;
+    readonly?: boolean;
     name?: string;
 }
 export declare class AIModelDialogComponent extends DialogComponent<AIModelDialogComponent, AiModel> {
@@ -36,6 +37,7 @@ export declare class AIModelDialogComponent extends DialogComponent<AIModelDialo
     provider: AiProvider;
     aiModelForms: FormGroup;
     isAdd: boolean;
+    readonly: boolean;
     authenticationHint: string;
     apiKeyRequired: boolean;
     private readonly openAiDefaultBaseUrl;

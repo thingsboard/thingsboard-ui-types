@@ -17,12 +17,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatButton } from '@angular/material/button';
 import { ApiFeature, ApiUsageStateValue } from '@shared/models/api-usage.models';
 import { StringItemsOption } from '@shared/components/string-items-list.component';
+import { IntegrationType } from '@shared/models/integration.models';
 import { EdgeConnectionEvent } from '@shared/models/edge.models';
 import * as i0 from "@angular/core";
 export interface RuleNotificationDialogData {
     rule?: NotificationRule;
     isAdd?: boolean;
     isCopy?: boolean;
+    readonly?: boolean;
 }
 export declare class RuleNotificationDialogComponent extends DialogComponent<RuleNotificationDialogComponent, NotificationRule> implements OnDestroy {
     protected store: Store<AppState>;
@@ -45,6 +47,7 @@ export declare class RuleNotificationDialogComponent extends DialogComponent<Rul
     ruleEngineEventsTemplateForm: FormGroup;
     entitiesLimitTemplateForm: FormGroup;
     apiUsageLimitTemplateForm: FormGroup;
+    integrationEventsTemplateForm: FormGroup;
     newPlatformVersionTemplateForm: FormGroup;
     rateLimitsTemplateForm: FormGroup;
     edgeCommunicationFailureTemplateForm: FormGroup;
@@ -73,6 +76,8 @@ export declare class RuleNotificationDialogComponent extends DialogComponent<Rul
     edgeConnectionEvents: EdgeConnectionEvent[];
     edgeConnectionEventTranslationMap: Map<EdgeConnectionEvent, string>;
     limitedApis: StringItemsOption[];
+    integrationTypes: IntegrationType[];
+    integrationTypeInfoMap: Map<IntegrationType, import("@shared/models/integration.models").IntegrationTypeInfo>;
     entityType: typeof EntityType;
     isAdd: boolean;
     allowEntityTypeForEntitiesLimit: EntityType[];
@@ -90,7 +95,7 @@ export declare class RuleNotificationDialogComponent extends DialogComponent<Rul
     backStep(): void;
     nextStep(): void;
     nextStepLabel(): string;
-    private get maxStepperIndex();
+    get maxStepperIndex(): number;
     private add;
     private allValid;
     cancel(): void;

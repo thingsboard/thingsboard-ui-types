@@ -93,6 +93,8 @@ export interface OAuth2BasicMapperConfig {
     customerNamePattern?: string;
     defaultDashboardName?: string;
     alwaysFullScreen?: boolean;
+    parentCustomerNamePattern?: string;
+    userGroupsNamePattern?: string[];
 }
 export declare enum TenantNameStrategyType {
     DOMAIN = "DOMAIN",

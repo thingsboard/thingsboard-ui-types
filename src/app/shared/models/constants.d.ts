@@ -13,6 +13,7 @@ export declare const Constants: {
         itemNotFound: number;
         tooManyRequests: number;
         tooManyUpdates: number;
+        subscriptionViolation: number;
         entitiesLimitExceeded: number;
         passwordViolation: number;
     };
@@ -23,6 +24,7 @@ export declare const Constants: {
     };
 };
 export declare const serverErrorCodesTranslations: Map<number, string>;
+export declare const httpStatusMessageMap: Map<number, string>;
 export declare const MediaBreakpoints: {
     xs: string;
     sm: string;
@@ -32,20 +34,25 @@ export declare const MediaBreakpoints: {
     'lt-sm': string;
     'lt-md': string;
     'lt-lg': string;
+    'lt-xmd': string;
     'lt-xl': string;
     'gt-xs': string;
     'gt-sm': string;
     'gt-md': string;
+    'gt-xmd': string;
     'gt-lg': string;
+    'gt-xxl': string;
     'gt-xl': string;
     'md-lg': string;
 };
 export declare const resolveBreakpoint: (breakpoint: string) => string;
 export declare const helpBaseUrl = "https://thingsboard.io";
-export declare const docPlatformPrefix = "";
+export declare const docPlatformPrefix = "/pe";
 export declare const HelpLinks: {
     linksMap: {
+        docs: string;
         outgoingMailSettings: string;
+        mailTemplates: string;
         smsProviderSettings: string;
         slackSettings: string;
         securitySettings: string;
@@ -126,10 +133,26 @@ export declare const HelpLinks: {
         ruleNodePushToCloud: string;
         ruleNodePushToEdge: string;
         ruleNodeDeviceProfile: string;
+        ruleNodeIntegrationDownlink: string;
+        ruleNodeAddToGroup: string;
+        ruleNodeRemoveFromGroup: string;
+        ruleNodeDuplicateToGroup: string;
+        ruleNodeDuplicateToGroupByName: string;
+        ruleNodeDuplicateToRelated: string;
+        ruleNodeChangeOwner: string;
+        ruleNodeGenerateReport: string;
+        ruleNodeGenerateDashboardReport: string;
+        ruleNodeAggregateLatest: string;
+        ruleNodeAggregateLatestDeprecated: string;
+        ruleNodeAggregateStream: string;
+        ruleNodeAlarmsCount: string;
+        ruleNodeAlarmsCountDeprecated: string;
         ruleNodeAcknowledge: string;
         ruleNodeCheckpoint: string;
         ruleNodeSendNotification: string;
         ruleNodeSendSlack: string;
+        ruleNodeTwilioSms: string;
+        ruleNodeTwilioVoice: string;
         tenants: string;
         tenantProfiles: string;
         customers: string;
@@ -138,6 +161,27 @@ export declare const HelpLinks: {
         deviceProfiles: string;
         assetProfiles: string;
         edges: string;
+        agents: string;
+        agentInstall: string;
+        agentSelfUpgrade: string;
+        agentProfiles: string;
+        agentProfileAutoProvision: string;
+        agentProfileAssignAppProfiles: string;
+        agentProfileProvisionCommand: string;
+        agentApplications: string;
+        agentAppInstall: string;
+        agentAppEvents: string;
+        agentAppLogs: string;
+        agentAppProfiles: string;
+        agentAppProfileUse: string;
+        agentAppProfileVersions: string;
+        agentAppUpdate: string;
+        agentAppUpgrade: string;
+        agentAppDelete: string;
+        agentBulkActions: string;
+        agentBulkActionExecutions: string;
+        agentEdgeInstall: string;
+        agentGatewayInstall: string;
         assets: string;
         entityViews: string;
         entitiesImport: string;
@@ -176,7 +220,51 @@ export declare const HelpLinks: {
         aiModels: string;
         apiKeys: string;
         timewindowSettings: string;
+        converters: string;
+        uplinkConverters: string;
+        downlinkConverters: string;
+        integrations: string;
+        integrationHttp: string;
+        integrationOceanConnect: string;
+        integrationSigFox: string;
+        integrationThingPark: string;
+        integrationThingParkEnterprise: string;
+        integrationTMobileIotCdp: string;
+        integrationLoriot: string;
+        integrationParticle: string;
+        integrationMqtt: string;
+        integrationAwsIoT: string;
+        integrationAwsSQS: string;
+        integrationAwsKinesis: string;
+        integrationTheThingsNetwork: string;
+        integrationTheThingsIndustries: string;
+        integrationChirpStack: string;
+        integrationAzureEventHub: string;
+        integrationAzureIoTHub: string;
+        integrationAzureServiceBus: string;
+        integrationOpcUa: string;
+        integrationUdp: string;
+        integrationTcp: string;
+        integrationKafka: string;
+        integrationRabbitmq: string;
+        integrationApachePulsar: string;
+        integrationPubsub: string;
+        integrationCoAP: string;
+        integrationKpn: string;
+        integrationCustom: string;
+        integrationTuya: string;
+        whiteLabeling: string;
+        entityGroups: string;
+        customTranslation: string;
+        customMenu: string;
+        roles: string;
+        selfRegistration: string;
+        scheduler: string;
+        reportTemplates: string;
+        scheduledReports: string;
+        reports: string;
         trendzSettings: string;
+        secretStorage: string;
         alarmRules: string;
     };
 };
@@ -207,7 +295,8 @@ export interface ContentTypeData {
 export declare enum ContentType {
     JSON = "JSON",
     TEXT = "TEXT",
-    BINARY = "BINARY"
+    BINARY = "BINARY",
+    HEX = "HEX"
 }
 export declare const contentTypesMap: Map<ContentType, ContentTypeData>;
 export declare const hidePageSizePixelValue = 550;

@@ -2,7 +2,7 @@ import { BaseData } from '@shared/models/base-data';
 import { RuleChainId } from '@shared/models/id/rule-chain-id';
 import { RuleNodeId } from '@shared/models/id/rule-node-id';
 import { ComponentDescriptor } from '@shared/models/component-descriptor.models';
-import { FcEdge, FcNode } from 'ngx-flowchart';
+import { FcEdge, FcNode, FcNote } from 'ngx-flowchart';
 import { Observable } from 'rxjs';
 import { PageComponent } from '@shared/components/page.component';
 import { AfterViewInit, DestroyRef, EventEmitter, OnInit } from '@angular/core';
@@ -98,6 +98,7 @@ export declare enum RuleNodeType {
     ENRICHMENT = "ENRICHMENT",
     TRANSFORMATION = "TRANSFORMATION",
     ACTION = "ACTION",
+    ANALYTICS = "ANALYTICS",
     EXTERNAL = "EXTERNAL",
     FLOW = "FLOW",
     UNKNOWN = "UNKNOWN",
@@ -137,6 +138,17 @@ export interface FcRuleNode extends FcRuleNodeType {
 }
 export interface FcRuleEdge extends FcEdge {
     labels?: string[];
+}
+export declare const FC_RULE_NOTE_DEFAULT_BACKGROUND_COLOR = "#FFF9C4";
+export declare const FC_RULE_NOTE_DEFAULT_BORDER_WIDTH = 1;
+export declare const FC_RULE_NOTE_DEFAULT_APPLY_MARKDOWN_STYLE = true;
+export interface FcRuleNote extends FcNote {
+    content?: string;
+    backgroundColor?: string;
+    borderColor?: string;
+    borderWidth?: number;
+    applyDefaultMarkdownStyle?: boolean;
+    markdownCss?: string;
 }
 export declare enum ScriptLanguage {
     JS = "JS",
@@ -183,10 +195,20 @@ export declare enum MessageType {
     ALARM_UNASSIGNED = "ALARM_UNASSIGNED",
     COMMENT_CREATED = "COMMENT_CREATED",
     COMMENT_UPDATED = "COMMENT_UPDATED",
+    ADDED_TO_GROUP = "ADDED_TO_GROUP",
+    REMOVED_FROM_GROUP = "REMOVED_FROM_GROUP",
     ENTITY_ASSIGNED_FROM_TENANT = "ENTITY_ASSIGNED_FROM_TENANT",
     ENTITY_ASSIGNED_TO_TENANT = "ENTITY_ASSIGNED_TO_TENANT",
     TIMESERIES_UPDATED = "TIMESERIES_UPDATED",
-    TIMESERIES_DELETED = "TIMESERIES_DELETED"
+    TIMESERIES_DELETED = "TIMESERIES_DELETED",
+    ADDED_TO_ENTITY_GROUP = "ADDED_TO_ENTITY_GROUP",
+    REMOVED_FROM_ENTITY_GROUP = "REMOVED_FROM_ENTITY_GROUP",
+    REST_API_REQUEST = "REST_API_REQUEST",
+    FIRMWARE_UPDATED = "FIRMWARE_UPDATED",
+    SOFTWARE_UPDATED = "SOFTWARE_UPDATED",
+    generateReport = "generateReport",
+    generateDashboardReport = "generateDashboardReport",
+    OWNER_CHANGED = "OWNER_CHANGED"
 }
 export declare const messageTypeNames: Map<MessageType, string>;
 export declare const ruleChainNodeClazz = "org.thingsboard.rule.engine.flow.TbRuleChainInputNode";

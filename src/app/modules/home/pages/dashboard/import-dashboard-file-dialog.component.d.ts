@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DashboardService } from '@core/http/dashboard.service';
-import { Dashboard } from '@app/shared/models/dashboard.models';
+import { DashboardInfo } from '@app/shared/models/dashboard.models';
 import { DialogComponent } from '@shared/components/dialog.component';
 import { Router } from '@angular/router';
 import * as i0 from "@angular/core";
 export interface DashboardInfoDialogData {
-    dashboard: Dashboard;
+    dashboard: DashboardInfo;
 }
 export declare class ImportDashboardFileDialogComponent extends DialogComponent<ImportDashboardFileDialogComponent> implements OnInit {
     protected store: Store<AppState>;

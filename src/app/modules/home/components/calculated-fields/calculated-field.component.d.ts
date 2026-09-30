@@ -10,7 +10,6 @@ import { EntityId } from '@shared/models/id/entity-id';
 import { BaseData } from '@shared/models/base-data';
 import { Observable } from 'rxjs';
 import { CalculatedFieldsTableConfig, CalculatedFieldsTableEntity } from '@home/components/calculated-fields/calculated-fields-table-config';
-import { TenantId } from '@shared/models/id/tenant-id';
 import { EntityService } from '@core/http/entity.service';
 import * as i0 from "@angular/core";
 export declare class CalculatedFieldComponent extends EntityComponent<CalculatedFieldsTableEntity> {
@@ -24,7 +23,7 @@ export declare class CalculatedFieldComponent extends EntityComponent<Calculated
     standalone: boolean;
     entityName: string;
     disabledConfiguration: boolean;
-    ownerId: TenantId;
+    ownerId: EntityId;
     readonly tenantId: string;
     readonly EntityType: typeof EntityType;
     readonly calculatedFieldsEntityTypeList: EntityType[];
@@ -47,7 +46,6 @@ export declare class CalculatedFieldComponent extends EntityComponent<Calculated
     onTestScript(expression?: string): Observable<string>;
     updateFormState(): void;
     getOwnerId(entityId: EntityId): void;
-    private isAssignedToCustomer;
     static ɵfac: i0.ɵɵFactoryDeclaration<CalculatedFieldComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<CalculatedFieldComponent, "tb-calculated-field", never, { "standalone": { "alias": "standalone"; "required": false; }; "entityName": { "alias": "entityName"; "required": false; }; }, {}, never, never, false, never>;
 }

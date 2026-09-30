@@ -1,0 +1,31 @@
+import { AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validator } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/core/core.state';
+import { PageComponent } from '@shared/components/page.component';
+import { EmailConfig } from '@home/components/scheduler/config/config.models';
+import * as i0 from "@angular/core";
+export declare class EmailConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, Validator {
+    protected store: Store<AppState>;
+    private fb;
+    modelValue: EmailConfig | null;
+    emailConfigFormGroup: UntypedFormGroup;
+    disabled: boolean;
+    authUser: import("../../../../../shared/public-api").AuthUser;
+    private destroy$;
+    private propagateChange;
+    constructor(store: Store<AppState>, fb: UntypedFormBuilder);
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    setDisabledState(isDisabled: boolean): void;
+    private checkModel;
+    writeValue(value: EmailConfig | null): void;
+    validate(): ValidationErrors | null;
+    private createDefaultEmailConfig;
+    private updateModel;
+    static ɵfac: i0.ɵɵFactoryDeclaration<EmailConfigComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EmailConfigComponent, "tb-email-config", never, { "disabled": { "alias": "disabled"; "required": false; }; }, {}, never, never, false, never>;
+}

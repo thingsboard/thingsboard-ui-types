@@ -2,7 +2,6 @@ import { Action } from '@ngrx/store';
 import { AuthUser, User } from '@shared/models/user.model';
 import { AuthPayload } from '@core/auth/auth.models';
 import { UserSettings } from '@shared/models/user-settings.models';
-import { TrendzSettings } from "@shared/models/trendz-settings.models";
 export declare enum AuthActionTypes {
     AUTHENTICATED = "[Auth] Authenticated",
     UNAUTHENTICATED = "[Auth] Unauthenticated",
@@ -15,7 +14,7 @@ export declare enum AuthActionTypes {
     UPDATE_OPENED_MENU_SECTION = "[Preferences] Update Opened Menu Section",
     PUT_USER_SETTINGS = "[Preferences] Put user settings",
     DELETE_USER_SETTINGS = "[Preferences] Delete user settings",
-    UPDATE_TRENDZ_SETTINGS = "[Auth] Update Trendz Settings"
+    UPDATE_LICENSE_PARAMS = "[Auth] Update License Parameters"
 }
 export declare class ActionAuthAuthenticated implements Action {
     readonly payload: AuthPayload;
@@ -96,9 +95,17 @@ export declare class ActionPreferencesDeleteUserSettings implements Action {
     readonly type = AuthActionTypes.DELETE_USER_SETTINGS;
     constructor(payload: Array<NestedKeyOf<UserSettings>>);
 }
-export declare class ActionAuthUpdateTrendzSettings implements Action {
-    readonly payload: TrendzSettings;
-    readonly type = AuthActionTypes.UPDATE_TRENDZ_SETTINGS;
-    constructor(payload: TrendzSettings);
+export declare class ActionUpdateLicenseParams implements Action {
+    readonly payload: {
+        edgeEnabled: boolean;
+        trendzEnabled: boolean;
+        communityGrantLicense: boolean;
+    };
+    readonly type = AuthActionTypes.UPDATE_LICENSE_PARAMS;
+    constructor(payload: {
+        edgeEnabled: boolean;
+        trendzEnabled: boolean;
+        communityGrantLicense: boolean;
+    });
 }
-export type AuthActions = ActionAuthAuthenticated | ActionAuthUnauthenticated | ActionAuthLoadUser | ActionAuthUpdateUserDetails | ActionAuthUpdateLastPublicDashboardId | ActionAuthUpdateHasRepository | ActionPreferencesUpdateOpenedMenuSection | ActionPreferencesPutUserSettings | ActionPreferencesDeleteUserSettings | ActionAuthUpdateAuthUser | ActionUpdateMobileQrCodeEnabled | ActionAuthUpdateTrendzSettings;
+export type AuthActions = ActionAuthAuthenticated | ActionAuthUnauthenticated | ActionAuthLoadUser | ActionAuthUpdateUserDetails | ActionAuthUpdateLastPublicDashboardId | ActionAuthUpdateHasRepository | ActionPreferencesUpdateOpenedMenuSection | ActionPreferencesPutUserSettings | ActionPreferencesDeleteUserSettings | ActionAuthUpdateAuthUser | ActionUpdateMobileQrCodeEnabled | ActionUpdateLicenseParams;

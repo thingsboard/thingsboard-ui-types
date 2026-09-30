@@ -15,6 +15,7 @@ export declare class RelatedEntitiesAggregationComponentComponent implements Con
     entityName: string;
     testScript: (expression?: string) => Observable<string>;
     isEditValue: boolean;
+    readonly: boolean;
     readonly ScriptLanguage: typeof ScriptLanguage;
     readonly CalculatedFieldType: typeof CalculatedFieldType;
     readonly OutputType: typeof OutputType;
@@ -48,6 +49,7 @@ export declare class RelatedEntitiesAggregationComponentComponent implements Con
     private updatedModel;
     private toggleScopeByOutputType;
     static ɵfac: i0.ɵɵFactoryDeclaration<RelatedEntitiesAggregationComponentComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<RelatedEntitiesAggregationComponentComponent, "tb-related-entities-aggregation-component", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "testScript": { "alias": "testScript"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RelatedEntitiesAggregationComponentComponent, "tb-related-entities-aggregation-component", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "testScript": { "alias": "testScript"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; }, {}, never, never, false, never>;
     static ngAcceptInputType_isEditValue: unknown;
+    static ngAcceptInputType_readonly: unknown;
 }

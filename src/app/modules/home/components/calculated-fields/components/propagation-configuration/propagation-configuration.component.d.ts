@@ -14,6 +14,7 @@ export declare class PropagationConfigurationComponent implements ControlValueAc
     tenantId: string;
     entityName: string;
     ownerId: EntityId;
+    readonly: boolean;
     testScript: () => Observable<string>;
     isEditValue: boolean;
     readonly maxRelatedEntitiesToReturnPerCfArgument: number;
@@ -48,6 +49,7 @@ export declare class PropagationConfigurationComponent implements ControlValueAc
     private updatedModel;
     private updatedFormWithScript;
     static ɵfac: i0.ɵɵFactoryDeclaration<PropagationConfigurationComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PropagationConfigurationComponent, "tb-propagation-configuration", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "testScript": { "alias": "testScript"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PropagationConfigurationComponent, "tb-propagation-configuration", never, { "entityId": { "alias": "entityId"; "required": true; }; "tenantId": { "alias": "tenantId"; "required": true; }; "entityName": { "alias": "entityName"; "required": true; }; "ownerId": { "alias": "ownerId"; "required": true; }; "readonly": { "alias": "readonly"; "required": false; }; "testScript": { "alias": "testScript"; "required": true; }; "isEditValue": { "alias": "isEditValue"; "required": false; }; }, {}, never, never, false, never>;
+    static ngAcceptInputType_readonly: unknown;
     static ngAcceptInputType_isEditValue: unknown;
 }

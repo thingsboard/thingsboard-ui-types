@@ -1,26 +1,28 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
-import { EntityComponent } from '../../components/entity/entity.component';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { EntityType } from '@shared/models/entity-type.models';
 import { TranslateService } from '@ngx-translate/core';
-import { AssetInfo } from '@app/shared/models/asset.models';
+import { AssetInfo } from '@shared/models/asset.models';
+import { GroupEntityComponent } from '@home/components/group/group-entity.component';
+import { GroupEntityTableConfig } from '@home/models/group/group-entities-table-config.models';
 import { EntityTableConfig } from '@home/models/entity/entities-table-config.models';
+import { UserPermissionsService } from '@core/http/user-permissions.service';
 import * as i0 from "@angular/core";
-export declare class AssetComponent extends EntityComponent<AssetInfo> {
+export declare class AssetComponent extends GroupEntityComponent<AssetInfo> {
     protected store: Store<AppState>;
     protected translate: TranslateService;
     protected entityValue: AssetInfo;
-    protected entitiesTableConfigValue: EntityTableConfig<AssetInfo>;
-    fb: UntypedFormBuilder;
+    protected entitiesTableConfigValue: EntityTableConfig<AssetInfo> | GroupEntityTableConfig<AssetInfo>;
+    protected fb: UntypedFormBuilder;
     protected cd: ChangeDetectorRef;
+    protected userPermissionsService: UserPermissionsService;
     entityType: typeof EntityType;
-    assetScope: 'tenant' | 'customer' | 'customer_user' | 'edge';
-    constructor(store: Store<AppState>, translate: TranslateService, entityValue: AssetInfo, entitiesTableConfigValue: EntityTableConfig<AssetInfo>, fb: UntypedFormBuilder, cd: ChangeDetectorRef);
+    readonly isTenantAdmin: boolean;
+    constructor(store: Store<AppState>, translate: TranslateService, entityValue: AssetInfo, entitiesTableConfigValue: EntityTableConfig<AssetInfo> | GroupEntityTableConfig<AssetInfo>, fb: UntypedFormBuilder, cd: ChangeDetectorRef, userPermissionsService: UserPermissionsService);
     ngOnInit(): void;
     hideDelete(): boolean;
-    isAssignedToCustomer(entity: AssetInfo): boolean;
     buildForm(entity: AssetInfo): UntypedFormGroup;
     updateForm(entity: AssetInfo): void;
     onAssetIdCopied($event: any): void;
